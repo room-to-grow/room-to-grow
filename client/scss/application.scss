@@ -1,3 +1,17 @@
 .initial{
     color: blue;
 }
+
+.map-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.us-map {
+    flex-basis: 4;
+}
+
+.plant-list {
+    flex-basis: 1;
+    background-color: black;
+}

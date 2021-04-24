@@ -1,6 +1,7 @@
 // Normally these would be "import" statements, but this is a simple demo and
 // is needed to render in the browser.
 import React, { useEffect, useState } from 'react';
+import { Button } from '@material-ui/core';
 
 // Functional component for the SVG map. Take in the map JSON data as a prop and
 // return SVG.
@@ -12,17 +13,17 @@ const USMap = (props) => {
       {statesData.map((stateData, index) =>
         <path
           className="someCSSClass"
-          style={{cursor: "pointer", fill: "orange"}}
+          style={{cursor: "pointer", fill: "springgreen"}}
           key={index}
           stroke="#fff"
           strokeWidth="6px"
           d={stateData.shape}
           onMouseOver={(event) => {
-            event.target.style.fill = 'red';
+            event.target.style.fill = 'forestgreen';
           }}
           onClick={() => console.log(stateData.id)}
           onMouseOut={(event) => {
-            event.target.style.fill = 'orange';
+            event.target.style.fill = 'springgreen';
           }}
         >
         </path>
@@ -55,7 +56,11 @@ const App = () => {
   }
 
   return (
-    <USMap statesData={statesData} />
+    <div id="map-container">
+        <Button color="primary">Hello World</Button>
+        <USMap id="us-map" statesData={statesData} />
+        <div id="plant-list"></div>
+    </div>
   );
 };
 
