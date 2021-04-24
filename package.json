@@ -1,0 +1,51 @@
+{
+  "name": "room-to-grow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=production nodemon server/server.js",
+    "build": "NODE_ENV=production webpack",
+    "dev": "NODE_ENV=development webpack serve --open & NODE_ENV=development nodemon server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/v-za/room-to-grow.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/v-za/room-to-grow/issues"
+  },
+  "homepage": "https://github.com/v-za/room-to-grow#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "css-loader": "^5.2.4",
+    "express": "^4.17.1",
+    "fetch": "^1.1.0",
+    "file-loader": "^6.2.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-hot-loader": "^4.13.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "sass": "^1.32.11",
+    "sass-loader": "^11.0.1",
+    "scss-loader": "0.0.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.32.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.16",
+    "@babel/preset-env": "^7.13.15",
+    "@babel/preset-react": "^7.13.13",
+    "babel-loader": "^8.2.2",
+    "concurrently": "^6.0.2",
+    "cross-env": "^7.0.3",
+    "isomorphic-fetch": "^3.0.0",
+    "nodemon": "^2.0.7",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
