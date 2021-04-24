@@ -20,7 +20,7 @@ function App() {
     // const [count, setCounter] = useState(0);
 
     return (
-        <div className = "initial"> hi this is hooks</div> 
+        <div className = "initial"> hi this is hooks.  and this is some test text! </div> 
     )
 }
 
