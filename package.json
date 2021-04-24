@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/v-za/room-to-grow#readme",
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "babel-polyfill": "^6.26.0",
     "body-parser": "^1.19.0",
     "css-loader": "^5.2.4",
     "express": "^4.17.1",

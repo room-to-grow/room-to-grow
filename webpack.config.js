@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
 
-    entry: './client/index.js',
+    entry: ['babel-polyfill', './client/index.js'],
     output: {
       path: path.join(__dirname, '/build'),
       filename: 'bundle.js',
@@ -10,10 +10,11 @@ module.exports = {
 
     mode: process.env.NODE_ENV,
     devServer: {
-        proxy: {
-            publicPath : '/build',
-            port: 8080,
-        },
+      publicPath : '/build',
+      proxy: {
+        // publicPath : '/build',
+         '/location/': 'http://localhost:3000'
+      },
     },
     module: {
         rules: [

@@ -52,6 +52,7 @@ const fetchDistro = async (input) => {
 app.get('/location/:locName', (req,res)=>{
   // send from getFamilyNames
   console.log("testing")
+
   const familyNames = Promise.resolve((fetchDistro(req.params.locName)))
     .then(data => res.json(data));
 
