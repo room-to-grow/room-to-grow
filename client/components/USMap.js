@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import helpers from '../../helpers';
 
-const getPlantFamilies = (stateName) => {
-  //console.log("STATE :", stateName)
-    fetch(`/location/${stateName}`)
-        .then(response => response.json())
-        .then(data => console.log(data));
-}
+// const getPlantFamilies = (stateName) => {
+//   //console.log("STATE :", stateName)
+//     fetch(`/location/${stateName}`)
+//         .then(response => response.json())
+//         .then(data => console.log(data));
+// }
 
 const USMap = (props) => {
   const { statesData } = props;
@@ -14,7 +15,7 @@ const USMap = (props) => {
     <svg viewBox="0 0 960 600">
       {statesData.map((stateData, index) =>
         <path
-          className="someCSSClass"
+          className="renederedMap"
           style={{cursor: "pointer", fill: "springgreen"}}
           key={index}
           stroke="#fff"
@@ -23,7 +24,7 @@ const USMap = (props) => {
           onMouseOver={(event) => {
             event.target.style.fill = 'forestgreen';
           }}
-          onClick={() => getPlantFamilies(stateData.name)}
+          onClick={() => helpers.getPlantFamilies(stateData.name)}
           onMouseOut={(event) => {
             event.target.style.fill = 'springgreen';
           }}
