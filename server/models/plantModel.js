@@ -1,5 +1,5 @@
-// must npm install pg!!!!!
-// const { Pool } = require("pg");
+
+const { Pool } = require("pg");
 
 /*Schema set up as below - used CREATE TABLE in ElephantSQL to make the schema. Syntax used listed below:
 CREATE TABLE faves (
@@ -16,9 +16,9 @@ notes TEXT
 const PG_URI = "postgres://sdwuwgqm:Q9JX9BZljzycURlyiyGYSwU6xX0O1tXz@queenie.db.elephantsql.com:5432/sdwuwgqm";
 
 //create a new pool here using the connection string above
-// const pool = new Pool({
-//     connectionString: PG_URI,
-// })
+const pool = new Pool({
+    connectionString: PG_URI,
+})
 
 // We export an object that contains a property called query,
 // which is a function that returns the invocation of pool.query() after logging the query

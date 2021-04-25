@@ -4,12 +4,6 @@ const path = require('path');
 const PORT = 3000;
 
 
-// Connection URLs:
-const TOKEN = '9dp4rcwCMuudpX55TiiVU0HDQCh3OmOcRJXePNUW2_w'
-const TREFLE = 'https://trefle.io'
-const TREFLE_DIST = 'https://trefle.io/api/v1/distributions'
-
-
 // QUERY BUILDING by Aki
 // Trefle uses the q parameter on the 'v1/distributions/search' endpoint to search through distributions
 // the q parameter goes on the end of the url when fetching and looks like this:
@@ -31,8 +25,8 @@ app.get('/', (req, res) => {
 const location = require('./routes/locationRouter')
 app.use('/location', location);
 
-const faves = require('./routes/dbRouter')
-app.use('/user', faves);
+// const faves = require('./routes/dbRouter')
+// app.use('/user', faves);
 
 
 
@@ -55,4 +49,4 @@ app.use((err, req, res, next) => {
 });
 
 // listener:
-app.listen(PORT, () => {console.log(`Connected, listening on port ${PORT}`)}); 
+app.listen(PORT, () => {console.log(`Connected, listening on port ${PORT}`)});

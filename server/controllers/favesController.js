@@ -16,3 +16,4 @@ favesController.getFaves = (req, res, next) => {
 
 
 
+module.exports = favesController;
