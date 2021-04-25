@@ -2,7 +2,7 @@
 import React from 'react';
 
 const FamilyList = props => {
-  // const { selectedGeoState } = props;
+  const { selectedGeoState } = props;
   const { familiesData } = props;
   const { setSelectedFamily } = props;
   const { setSelectedPlant } = props;
@@ -11,7 +11,8 @@ const FamilyList = props => {
   // and then only update once the state is selected
   // and re-render every time the family changes
   // is this an effect????
-  return (
+  if (selectedGeoState === null) return (<div></div>)
+  else return (
     <ul>
       {familiesData.map(family => {
         <li>

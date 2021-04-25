@@ -1,5 +1,6 @@
 import React from 'react';
-import { getPlantDetails } from '../../helpers';
+// import { getPlantDetails } from '../../helpers';
+import helpers from '../../helpers';
 
 const PlantDetails = props => {
 
@@ -7,14 +8,14 @@ const PlantDetails = props => {
   const { plantDetails } = props;
   const { setPlantDetails } = props;
 
-  setPlantDetails(getPlantDetails(selectedPlant));
+  setPlantDetails(helpers.getPlantDetails(selectedPlant));
 
   // this is wrong- have to render nothing at first
   // and then only update every time the selectedPlant is reset
   // and re-render every time the selectedPlant changes
   // is this an effect????
-
-  return (
+  if (selectedPlant === null) return (<div></div>)
+  else return (
     <ul>
       <li>
         {plantDetails.detail1};

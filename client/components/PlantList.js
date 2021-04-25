@@ -1,21 +1,23 @@
 import React from 'react';
-import { getPlantsData } from '../../helpers';
+import helpers from '../../helpers';
 
 const PlantList = props => {
   const { selectedGeoState } = props;
   const { selectedFamily } = props;
   const { plantsData } = props;
   const { setSelectedPlant } = props;
+  const { setPlantsData } = props;
 
   // set the plantsData using the selected geo state
   // make sure just passing string names to getPlantsData
-  setPlantsData(getPlantsData(selectedGeoState, selectedFamily));
+  setPlantsData(helpers.getPlantsData(selectedGeoState, selectedFamily));
 
   // this is wrong- have to render nothing at first
   // and then only update once the family is not null
   // re-render every time the US fmaily changes
   // is this an effect????
-  return (
+  if (selectedFamily === null) return (<div></div>)
+  else return (
     <ul>
       {plantsData.map(
         <li>

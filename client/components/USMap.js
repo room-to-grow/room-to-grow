@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { getPlantFamilies } from '../../helpers';
-import { useBetween } from 'use-between';
+import helpers from '../../helpers';
+// import { useBetween } from 'use-between';
 
 const USMap = (props) => {
   const { statesData } = props;
@@ -13,7 +13,6 @@ const USMap = (props) => {
   // this is where the new state has to go
   // then can pass down to listscotnainer and down from there
   
-
   return (
     <svg viewBox="0 0 960 600">
       {statesData.map((stateData, index) =>
@@ -32,7 +31,7 @@ const USMap = (props) => {
             // set the selected geoState
             // and null out family and plant
             setSelectedGeoState(stateData.name);
-            setFamiliesData(getPlantFamilies(stateData.name));
+            setFamiliesData(helpers.getPlantFamilies(stateData.name));
             setSelectedFamily(null);
             setSelectedPlant(null);
           }}
