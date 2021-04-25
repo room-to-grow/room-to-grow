@@ -42,7 +42,7 @@ const ListsContainer = (props) => {
       }
       <FamilyList 
         id="familyList" 
-        // selectedGeoState={selectedGeoState}
+        selectedGeoState={selectedGeoState}
         familiesData={familiesData}
         setSelectedPlant={setSelectedPlant}
         setSelectedFamily={setSelectedFamily}
@@ -60,6 +60,7 @@ const ListsContainer = (props) => {
         selectedFamily={selectedFamily}
         plantsData={plantsData}
         setSelectedPlant={setSelectedPlant}
+        setPlantsData={setPlantsData}
         // setPlantDetails={setPlantDetails}
       />
 
