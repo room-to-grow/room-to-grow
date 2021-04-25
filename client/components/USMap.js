@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
-import helpers from '../../helpers';
+import { getPlantFamilies } from '../../helpers';
+import { useBetween } from 'use-between';
 
 const USMap = (props) => {
   const { statesData } = props;
+  const { setSelectedGeoState } = props;
+  const { setFamiliesData } = props;
+  const { setSelectedFamily } = props;
+  const { setSelectedPlant } = props;
+
+  // const {render}
   // this is where the new state has to go
   // then can pass down to listscotnainer and down from there
-  const [familyList, setFamilyList] = useState(null);
+  
 
   return (
     <svg viewBox="0 0 960 600">
@@ -20,8 +27,15 @@ const USMap = (props) => {
           onMouseOver={(event) => {
             event.target.style.fill = 'forestgreen';
           }}
-          onClick={() => 
-            setFamilyList(helpers.getPlantFamilies(stateData.name))}
+          onClick={() => {
+            // when a state is clicked,
+            // set the selected geoState
+            // and null out family and plant
+            setSelectedGeoState(stateData.name);
+            setFamiliesData(getPlantFamilies(stateData.name));
+            setSelectedFamily(null);
+            setSelectedPlant(null);
+          }}
           onMouseOut={(event) => {
             event.target.style.fill = 'springgreen';
           }}
@@ -31,6 +45,5 @@ const USMap = (props) => {
     </svg>
   )
 }
-
 
 export default USMap

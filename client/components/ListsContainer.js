@@ -1,23 +1,83 @@
-import { Divider } from '@material-ui/core';
+// import { Divider } from '@material-ui/core';
 import React, { useState } from 'react';
+import FamilyList from './FamilyList';
+import PlantList from './PlantList';
+import PlantDetails from './PlantDetails';
 
-// initial state of all 3 child components is null
-// any time a component's state changes, the state of the next list is reset to null
-// when a user clicks on an appropriate link in the existing state, 
-// then that inforamtion feeds to the state of the next box
-
-// will pass both the name of the US state and 
-// and the list of plant families that was fetched before
-// then display the list of plant families
-// and onClick going to update the state property that we're creating here locally, which is the family selected
+// this component will use the selected Geo state
+// and the familiesData
+// to populate its child components
 const ListsContainer = (props) => {
-  // have the location as props
-  // but how doo we pass over the data from the USMap sibling component?? a sibling??
-  // want to use the value of the familyList state from
+  const { selectedGeoState } = props;
+  const { familiesData } = props;
+  const { selectedFamily } = props;
+  const { setSelectedFamily } = props;
+  const { setSelectedPlant } = props;
+  const { plantsData } = props;
+  const { setPlantDetails } = props;
+  const { plantDetails } = props;
+  const { selectedPlant } = props;
+  const { setPlantsData } = props;
+
+  // // the list of plants provided from backend
+  // // that correspond to the geographic state and the family chosen by the user
+  // const [plantsData, setPlantsData] = useState(null);
+
+  // // the plant selected by the user
+  // const [selectedPlant, setSelectedPlant] = useState(null);
+
+  // // the plant details provided from backend
+  // // that correspond to the plant selected by the user
+  // // const [plantDetails, setPlantDetails] = useState(null);
+
 
   return (
-    <div statesData={} familyName={}>
-      This is a lists container
+    <div id="ListsContainer">
+      {
+      /**
+       * familyList will display the familiesData
+       * and provide functioanlity to select the family for display
+       * in teh adjacent FamilyList component
+       */
+      }
+      <FamilyList 
+        id="familyList" 
+        // selectedGeoState={selectedGeoState}
+        familiesData={familiesData}
+        setSelectedPlant={setSelectedPlant}
+        setSelectedFamily={setSelectedFamily}
+      />
+
+      {
+      /**
+       * plantList will use the selected family
+       * to display the plantsData (list of plants from that family and geographic state)
+       */
+      }
+      <PlantList 
+        id="plantList"
+        selectedGeoState={selectedGeoState}
+        selectedFamily={selectedFamily}
+        plantsData={plantsData}
+        setSelectedPlant={setSelectedPlant}
+        // setPlantDetails={setPlantDetails}
+      />
+
+      {
+      /**
+       * plantDetails will use the selected plant
+       * to get and display the details of that plant
+       */
+      }
+      <PlantDetails 
+        id="plantDetails"
+        selectedPlant={selectedPlant}
+        setPlantsData={setPlantsData}
+        plantDetails={plantDetails}
+        setPlantDetails={setPlantDetails}
+      />
     </div>
   )
 }
+
+export default ListsContainer;
