@@ -33,11 +33,58 @@ import USMap from './USMap';
 //     )
 //   }
 
+const Family = (props) => {
+  
+    const { name } = props
+    console.log("props passed down to Family: ", props)
+
+    return (
+
+      <div class = "family-container">
+        
+        <Button style={{
+          color: "#7dc882",
+          fontSize: "1.2em"
+        }}> {name} 
+        </Button>
+      </div> 
+    )
+}
+const FamilyList = (props) => {
+  console.log('PROPS PASSED DOWN TO FAMILYLIST: ', props);
+  const { familiesData } = props;
+  console.log(typeof familiesData)
+
+  // if(!familiesData) return (
+  //   <div>
+  //     <h1> NO! </h1>
+  //   </div>
+
+  // )
+  
+
+  return (
+    <div>
+    {console.log(familiesData[0])}
+    {/* {<Family name = {familiesData[0]} />} */}
+    {familiesData.map((familyData, index) => <Family name={familyData} key={index} />)}
+      {/* {familiesData.forEach(el => {
+        <Family name={el} />
+      })
+       
+      } */}
+      {/* {"this is something"} */}
+    </div>
+  )
+}
+
 // Functional component for the app. This handles loading the data and showing
 // some sort of loading UI while waiting for the data.
 const App = () => {
   // The statesData is null by default until we set it.
   const [statesData, setStatesData] = useState(null);
+  const [familiesData, setFamiliesData] = useState(["family list"]);
+  // but for plantsData, the function will be passed into the familylist component
 
   // This should only run once due to the [] arg for the dependencies.
   useEffect(() => {
@@ -57,8 +104,13 @@ const App = () => {
   }
 
   return (
-    <div id="map-container">
-        <USMap id="us-map" statesData={statesData} />
+    <div>
+      <div id="map-container">
+        <USMap id="us-map" statesData={statesData} setFamiliesData={setFamiliesData} />
+      </div>
+      <div id="family-list">
+        <FamilyList familiesData={familiesData} />
+      </div>
         {/* <ListsContainer /> */}
     </div>
   );

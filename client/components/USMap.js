@@ -9,23 +9,29 @@ const getPlantFamilies = (stateName) => {
 
 const USMap = (props) => {
   const { statesData } = props;
+  const { setFamiliesData } = props;
 
   return (
-    <svg viewBox="0 0 960 600">
+    <svg id="map-svg" viewBox="0 0 960 600" width="60%">
       {statesData.map((stateData, index) =>
         <path
           className="someCSSClass"
-          style={{cursor: "pointer", fill: "springgreen"}}
+          style={{cursor: "pointer", fill: "#373737"}}
           key={index}
-          stroke="#fff"
-          strokeWidth="6px"
+          stroke="#5DBB63"
+          strokeWidth="3px"
           d={stateData.shape}
           onMouseOver={(event) => {
-            event.target.style.fill = 'forestgreen';
+            event.target.style.fill = '#7dc882';
           }}
-          onClick={() => getPlantFamilies(stateData.name)}
+          // onClick={() => getPlantFamilies(stateData.name)}
+          onClick={() => {
+            fetch(`/location/${stateData.name}`)
+              .then(response => response.json())
+              .then(data => setFamiliesData(data));
+          }}
           onMouseOut={(event) => {
-            event.target.style.fill = 'springgreen';
+            event.target.style.fill = '#373737';
           }}
         >
         </path>
