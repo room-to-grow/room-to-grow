@@ -31,9 +31,14 @@ const USMap = (props) => {
             // set the selected geoState
             // and null out family and plant
             setSelectedGeoState(stateData.name);
-            setFamiliesData(helpers.getPlantFamilies(stateData.name));
-            setSelectedFamily(null);
-            setSelectedPlant(null);
+            fetch(`/location/${stateData.name}`)
+              .then(response => response.json())
+              .then(data => {
+                setFamiliesData(data);
+                setSelectedFamily(null);
+                setSelectedPlant(null);
+                // setSelectedGeoState(stateData.name)
+              });  
           }}
           onMouseOut={(event) => {
             event.target.style.fill = 'springgreen';

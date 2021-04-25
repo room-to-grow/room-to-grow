@@ -19,11 +19,11 @@ const FamilyList = props => {
       {familiesData.map(family => {
         <li>
           <Button onClick={() => {
-            setSelectedFamily(family.name);
+            setSelectedFamily(family);
             setPlantsData(helpers.getPlantsData(selectedGeoState, selectedFamily));
             setSelectedPlant(null);
           }}>
-            family.name
+            {family}
           </Button>
         </li>
       })}

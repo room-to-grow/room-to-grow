@@ -4,17 +4,15 @@ const helpers = {};
 
 helpers.getPlantFamilies = (stateName) => {
   //console.log("STATE :", stateName)
-    fetch(`/location/${stateName}`)
-        .then(response => response.json())
-        .then(data => console.log(data));
-  
+  let familyList;
+
+  fetch(`/location/${stateName}`)
+    .then(response => response.json())
+    .then(data => console.log(data));  
+
   return ([
-    {
-      name: 'something'
-    },
-    {
-      name: 'somethingElse'
-    }
+    'family1', 
+    'family2'
   ])
 }
 
