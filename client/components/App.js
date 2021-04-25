@@ -2,43 +2,36 @@
 // is needed to render in the browser.
 import React, { useEffect, useState } from 'react';
 import { Button } from '@material-ui/core';
-// import USMap from './USMap';
+import USMap from './USMap';
 
 // Functional component for the SVG map. Take in the map JSON data as a prop and
 // return SVG.
-const USMap = (props) => {
-    const { statesData } = props;
+// const USMap = (props) => {
+//     const { statesData } = props;
   
-    return (
-      <svg viewBox="0 0 960 600">
-        {statesData.map((stateData, index) =>
-          <path
-            className="someCSSClass"
-            style={{cursor: "pointer", fill: "springgreen"}}
-            key={index}
-            stroke="#fff"
-            strokeWidth="6px"
-            d={stateData.shape}
-            onMouseOver={(event) => {
-              event.target.style.fill = 'forestgreen';
-            }}
-            onClick={() => getPlantFamilies(stateData.name)}
-            onMouseOut={(event) => {
-              event.target.style.fill = 'springgreen';
-            }}
-          >
-          </path>
-        )}
-      </svg>
-    )
-  }
-
-const getPlantFamilies = (stateName) => {
-  //console.log("STATE :", stateName)
-    fetch(`/location/${stateName}`)
-        .then(response => response.json())
-        .then(data => console.log(data));
-}
+//     return (
+//       <svg viewBox="0 0 960 600">
+//         {statesData.map((stateData, index) =>
+//           <path
+//             className="someCSSClass"
+//             style={{cursor: "pointer", fill: "springgreen"}}
+//             key={index}
+//             stroke="#fff"
+//             strokeWidth="6px"
+//             d={stateData.shape}
+//             onMouseOver={(event) => {
+//               event.target.style.fill = 'forestgreen';
+//             }}
+//             onClick={() => getPlantFamilies(stateData.name)}
+//             onMouseOut={(event) => {
+//               event.target.style.fill = 'springgreen';
+//             }}
+//           >
+//           </path>
+//         )}
+//       </svg>
+//     )
+//   }
 
 // Functional component for the app. This handles loading the data and showing
 // some sort of loading UI while waiting for the data.

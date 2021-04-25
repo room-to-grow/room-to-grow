@@ -1,30 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
-// Functional component for the SVG map. Take in the map JSON data as a prop and
-// return SVG.
+const getPlantFamilies = (stateName) => {
+  //console.log("STATE :", stateName)
+    fetch(`/location/${stateName}`)
+        .then(response => response.json())
+        .then(data => console.log(data));
+}
+
 const USMap = (props) => {
-
   const { statesData } = props;
-
-    // The statesData is null by default until we set it.
-    const [statesData, setStatesData] = useState(null);
-
-    // This should only run once due to the [] arg for the dependencies.
-    useEffect(() => {
-      (async () => {
-        const res = await fetch('https://willhaley.com/assets/united-states-map-react/states.json');
-        const statesData = await res.json();
-        // Set the statesData with the data received from fetch().
-        setStatesData(statesData);
-      })();
-    }, []);
-  
-    // If there is no statesData yet, show a loading indicator.
-    if (!statesData) {
-      return (
-        <div>Loading...</div>
-      );
-    }
 
   return (
     <svg viewBox="0 0 960 600">
@@ -50,4 +34,5 @@ const USMap = (props) => {
   )
 }
 
-export default USMap;
+
+export default USMap
