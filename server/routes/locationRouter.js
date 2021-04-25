@@ -6,7 +6,7 @@ const locationController = require('../controllers/locationController');
 
 // fires when clicking on a US state
 // sends get request to Trefle API to fetch array of plant family names
-router.get('/:locName', locationController.familyNames, locationController.getPlants, (req, res, next) => {
+router.get('/:locName', locationController.familyNames, (req, res, next) => {
    console.log('Router preparing to fetch plant family names')
    res.status(200).send(res.locals.families);
 })
@@ -16,8 +16,8 @@ router.get('/:locName/:famName', locationController.getPlants, (req, res, next) 
     res.status(200).send(res.locals.plants);
  })
  
-//  router.get('/:locName/:famName/:plantName', locationController.getDetails, (req, res, next) => {
-//     res.sendStatus(200).json(res.locals.plantInfo);
-//  })
+ router.get('/:locName/:famName/:plantName', locationController.getDetails, (req, res, next) => {
+    res.status(200).send(res.locals.plantInfo);
+ })
 
  module.exports = router;
