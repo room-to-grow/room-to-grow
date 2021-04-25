@@ -1,5 +1,5 @@
 // import { Divider } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FamilyList from './FamilyList';
 import PlantList from './PlantList';
 import PlantDetails from './PlantDetails';
@@ -8,16 +8,25 @@ import PlantDetails from './PlantDetails';
 // and the familiesData
 // to populate its child components
 const ListsContainer = (props) => {
+
+  // the list of plants provided from backend
+  // that correspond to the geographic state and the family chosen by the user
+  const [plantsData, setPlantsData] = useState(null);
+
+    // the plant details provided from backend
+  // that correspond to the plant selected by the user
+  const [plantDetails, setPlantDetails] = useState(null);
+
   const { selectedGeoState } = props;
   const { familiesData } = props;
+  const { selectedPlant } = props;
+  const { setSelectedPlant } = props;
   const { selectedFamily } = props;
   const { setSelectedFamily } = props;
-  const { setSelectedPlant } = props;
-  const { plantsData } = props;
-  const { setPlantDetails } = props;
-  const { plantDetails } = props;
-  const { selectedPlant } = props;
-  const { setPlantsData } = props;
+  // const { plantsData } = props;
+  // const { setPlantDetails } = props;
+  // const { plantDetails } = props;
+  // const { setPlantsData } = props;
 
   // // the list of plants provided from backend
   // // that correspond to the geographic state and the family chosen by the user
@@ -59,6 +68,7 @@ const ListsContainer = (props) => {
         selectedGeoState={selectedGeoState}
         selectedFamily={selectedFamily}
         plantsData={plantsData}
+        selectedPlant={selectedPlant}
         setSelectedPlant={setSelectedPlant}
         setPlantsData={setPlantsData}
         // setPlantDetails={setPlantDetails}

@@ -1,6 +1,7 @@
 // import React, { useState } from 'react';
 import React from 'react';
 import Button from "@material-ui/core/Grid";
+import helpers from '../../helpers';
 
 const FamilyList = props => {
   const { selectedGeoState } = props;
@@ -18,10 +19,11 @@ const FamilyList = props => {
       {familiesData.map(family => {
         <li>
           <Button onClick={() => {
-            setSelectedFamily(family.name)
+            setSelectedFamily(family.name);
+            setPlantsData(helpers.getPlantsData(selectedGeoState, selectedFamily));
             setSelectedPlant(null);
           }}>
-            familiesData.name
+            family.name
           </Button>
         </li>
       })}

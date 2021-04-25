@@ -8,7 +8,8 @@ import ListsContainer from './ListsContainer';
 // Functional component for the app. This handles loading the data and showing
 // some sort of loading UI while waiting for the data.
 const App = () => {
-  // The statesData is null by default until we set it.
+    // the family selected by the user (on a click)
+    const [selectedFamily, setSelectedFamily] = useState(null);
 
   // the collection of all of the states
   const [statesData, setStatesData] = useState(null);
@@ -20,19 +21,8 @@ const App = () => {
   // that correspond to the selected US State
   const [familiesData, setFamiliesData] = useState(null);
 
-  // the family selected by the user (on a click)
-  const [selectedFamily, setSelectedFamily] = useState(null);
-
-  // the list of plants provided from backend
-  // that correspond to the geographic state and the family chosen by the user
-  const [plantsData, setPlantsData] = useState(null);
-
   // the plant selected by the user
   const [selectedPlant, setSelectedPlant] = useState(null);
-
-  // the plant details provided from backend
-  // that correspond to the plant selected by the user
-  const [plantDetails, setPlantDetails] = useState(null);
 
   // This should only run once due to the [] arg for the dependencies.
   useEffect(() => {
@@ -63,17 +53,17 @@ const App = () => {
         />
         <ListsContainer 
             selectedGeoState={selectedGeoState}
-            // setSelectedGeoState={setSelectedGeoState}
             familiesData={familiesData}
-            // setFamiliesData={setFamiliesData}
+            selectedPlant={selectedPlant}
+            setSelectedPlant={setSelectedPlant}
             selectedFamily={selectedFamily}
             setSelectedFamily={setSelectedFamily}
-            setSelectedPlant={setSelectedPlant}
-            plantsData={plantsData}
-            setPlantDetails={setPlantDetails}
-            plantDetails={plantDetails}
-            setPlantsData={setPlantsData}
-            selectedPlant={selectedPlant}
+            // selectedFamily={selectedFamily}
+            // setSelectedFamily={setSelectedFamily}
+            // plantsData={plantsData}           
+            // plantDetails={plantDetails}
+            // setPlantDetails={setPlantDetails}
+            // setPlantsData={setPlantsData}
         />
     </div>
   );

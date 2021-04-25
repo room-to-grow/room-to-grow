@@ -19,7 +19,9 @@ const PlantList = props => {
   // and then only update once the family is not null
   // re-render every time the US fmaily changes
   // is this an effect????
-  if (selectedFamily === null) return (<div></div>)
+  console.log('plantsData', plantsData);
+  if (selectedFamily === null) return (<div></div>);
+  else if (plantsData === undefined || plantsData.length === 0) return (<div></div>);
   else return (
     <ul>
       {plantsData.map(
