@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
 import helpers from '../../helpers';
 
-// const getPlantFamilies = (stateName) => {
-//   //console.log("STATE :", stateName)
-//     fetch(`/location/${stateName}`)
-//         .then(response => response.json())
-//         .then(data => console.log(data));
-// }
-
 const USMap = (props) => {
   const { statesData } = props;
+  // this is where the new state has to go
+  // then can pass down to listscotnainer and down from there
+  const [familyList, setFamilyList] = useState(null);
 
   return (
     <svg viewBox="0 0 960 600">
@@ -24,7 +20,8 @@ const USMap = (props) => {
           onMouseOver={(event) => {
             event.target.style.fill = 'forestgreen';
           }}
-          onClick={() => helpers.getPlantFamilies(stateData.name)}
+          onClick={() => 
+            setFamilyList(helpers.getPlantFamilies(stateData.name))}
           onMouseOut={(event) => {
             event.target.style.fill = 'springgreen';
           }}

@@ -30,18 +30,9 @@ const App = () => {
   return (
     <div id="map-container">
         <USMap id="us-map" statesData={statesData} />
-        {/* <ListsContainer /> */}
+        <ListsContainer />
     </div>
   );
 };
-
-  
-// function App() { 
-//     // const [count, setCounter] = useState(0);
-
-//     return (
-//         <div className = "initial"> hi this is hooks.  and this is some test text! </div> 
-//     )
-// }
 
 export default App;
