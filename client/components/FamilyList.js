@@ -1,6 +1,6 @@
 // import React, { useState } from 'react';
 import React, {useEffect, useState} from 'react';
-import Button from '@material-ui/core/Grid';
+import { Button } from '@material-ui/core';
 // import helpers from '../../helpers';
 
 const FamilyList = props => {
@@ -33,11 +33,11 @@ const FamilyList = props => {
 
   // else return (<div>hello heloo</div>)
   else return (
-    <div>
+    <ul>
       {familiesData.map((family, index) => {
         console.log(family);
         return (
-          // <li key={index}>
+          <li key={index}>
             <Button 
               onClick={
                 () => {
@@ -45,13 +45,13 @@ const FamilyList = props => {
                   setPlant(null);
                 }
               }
-              key={index}
-              >
-                {family}
+            >
+              {family}
             </Button>
+          </li>
         )
       })}
-    </div>
+    </ul>
   );
 }
 

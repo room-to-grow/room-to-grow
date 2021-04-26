@@ -1,32 +1,58 @@
 import React, {useEffect, useState} from 'react';
-import Button from "@material-ui/core/Grid";
-// import helpers from '../../helpers';
-import Button from "@material-ui/core/Grid";
+import { Button } from '@material-ui/core';
 
-useEffect(
-  () => {
-    console.log('fetching family list', gState);
-    fetch(`/location/${gState}/${family}`)
-      .then(response => response.json())
-      .then(data => {
-        console.log('fetched data:', data);
-        setPlantList(data);
-      })
-      .catch(() => console.log('oops'))
-  },
-  [family]
-)
 
 const PlantList = props => {
   const [plantList, setPlantList] = useState(null);
 
   const { family } = props;
   const { gState } = props;
+  // const { setPlantDetails } = props;
+  const { setPlant } = props;
 
-  if (plantList === null) return (<div></div>);
-
+  useEffect(
+    // () => {
+    //   console.log('fetching plant list', gState);
+    //   fetch(`/location/${gState}/${family}`)
+    //     .then(response => response.json())
+    //     .then(data => {
+    //       console.log('fetched data:', data);
+    //       setPlantList(data);
+    //       setPlantDetails(null);
+    //     })
+    //     .catch(() => console.log('oops'))
+    // },
+    // [family]
+    () => {
+      setPlantList(['rose', 'grass', 'amarillys']);
+      // setPlantDetails(null);
+    },
+    [family]
+  )
+  
+  if (family === null) return (<div></div>);
+  // else return (<div>heloo hello</div>)
   else return (
-    
+    <ul>
+    {plantList.map((plant, index) => {
+      console.log('plant:', plant);
+      return (
+        <li key={index}>
+          <Button 
+            onClick={
+              () => {
+                setPlant(plant);
+                // setPlantDetails(null);
+              }
+            }
+          >
+            {plant}
+          </Button>
+        </li>
+      )
+    })}
+  </ul>
+
   );
 }
 

@@ -1,9 +1,10 @@
 // Normally these would be "import" statements, but this is a simple demo and
 // is needed to render in the browser.
 import React, { useEffect, useState } from 'react';
-// import { Button } from '@material-ui/core';
 import USMap from './USMap';
 import FamilyList from './FamilyList'
+import PlantList from './PlantList';
+import PlantDetails from './PlantDetails';
 // import ListsContainer from './ListsContainer';
 
 // Functional component for the app. This handles loading the data and showing
@@ -14,6 +15,7 @@ const App = () => {
   const [gState, setGState] = useState(null);
   const [family, setFamily] = useState(null);
   const [plant, setPlant] = useState(null);
+  const [plantDetails, setPlantDetails] = useState(null);
 
   // This should only run once due to the [] arg for the dependencies.
   useEffect(() => {
@@ -41,17 +43,26 @@ const App = () => {
             setFamily={setFamily}
             setPlant={setPlant}
         />
-        <div id="ListsContainer">
+        <div id="listsContainer">
           <FamilyList 
             gState={gState}
             // family={family}
             setFamily={setFamily}
             setPlant={setPlant}
-          />
-          {/* <PlantList
+            />
+          <PlantList
             family={family}
             gState={gState}
-          /> */}
+            // setPlantDetails={setPlantDetails}
+            setPlant={setPlant}
+          />
+          <PlantDetails
+            family={family}
+            plant={plant}
+            plantDetails={plantDetails}
+            setPlantDetails={setPlantDetails}
+            gState={gState}
+          />
         </div>
         {/* <ListsContainer 
         
