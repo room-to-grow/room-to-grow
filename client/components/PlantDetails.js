@@ -50,10 +50,25 @@ const PlantDetails = props => {
           {`edible: ${plantDetails.edible}`}
         </li>
         <li>
-        <form>
-        <input type="text" name="notes"></input>
-        <input type="submit" value="Favorite" ></input>
-      </form>
+          <form>
+            <input type="text" name="notes"></input>
+            <input type="submit" onClick = {() => {
+              console.log('posting to db...');
+              fetch(`/db`, {
+                // method
+                method: 'POST',
+                // headers
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+            
+                // body
+                body: {plantDetails}
+              }
+              )
+            }}
+          value="Favorite" ></input>
+        </form>
         </li>
       </ul>
       
