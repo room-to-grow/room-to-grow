@@ -89,7 +89,7 @@ const PlantDetails = props => {
             
             //     // body
             //     body: { plants : plantDetails,
-            //             user_id : null,
+            //             user_id : loginName,
             //             plant_id : plantDetials.scientific_name,
             //             notes : ' '}
             //   }

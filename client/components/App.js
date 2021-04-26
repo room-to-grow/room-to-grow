@@ -23,42 +23,43 @@ const App = () => {
       // Set the statesData with the data received from fetch().
       setStatesData(statesData);
     })();
-  }, [/* loginName */]);
+  }, [loginName]);
 
   
-  // if (!loginName) {
-  //  return(
-  //    // this is where the login will go
-  //    <form>
-  //      <label for="userName">Input User Name:</label>
-  //      <input 
-  //        type="text" 
-  //        id="userName" 
-  //        name="userName"
-  //      >
-  //      <input 
-  //        type="submit" 
-  //         value="Submit"
-  //         onClick={() => {
-  //           let val = document.getElementById("userName");
-  //           val =  val.value 
-  //           // how to get the data from the input text field to assign to the user state??
-  //           setLoginName(val.value);
-  //         }}
-  //       >
-  //     </form>
-  //   )
-  // }
+  if (!loginName) {
+   return(
+     // this is where the login will go
+     <form>
+       <label for="userName">Input User Name:</label>
+       <input 
+         type="text" 
+         id="userName" 
+         name="userName"
+       ></input>
+       <input 
+         type="submit" 
+          value="Submit"
+          onClick={() => {
+            let val = document.getElementById("userName");
+            console.log(val.value);
+            //val =  val.value 
+            // how to get the data from the input text field to assign to the user state??
+            setLoginName(val.value);
+          }}
+        ></input>
+      </form>
+    )
+  }
  
 
   // If there is no statesData yet, show a loading indicator.
- /*else*/ if (!statesData) {
+ if (!statesData) {
     return (
       <div>Loading...</div>
     );
   }
 
-  /* else */ return (
+  return (
 
     <div id="outer-container">
       <div id = "info-container"> 
