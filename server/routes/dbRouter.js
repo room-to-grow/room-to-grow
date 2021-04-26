@@ -29,9 +29,14 @@ router.post("/signup", (req, res) => {
 
 //what does the req body for favorites look like?
 // what should this endpoint be?
-router.post("/:plantName", (req, res) => {
-  console.log("Attempting to save selection");
-  // what goes below here?
-  res.send(200).json(res.locals);
-  console.log("Saved fave!");
-});
+router.post(
+  "/faves",
+  favesController.addPlant,
+  favesController.addFave,
+  (req, res) => {
+    console.log("Attempting to save selection");
+    // what goes in the response?
+    res.send(200).json(res.locals);
+    console.log("Saved fave!");
+  }
+);
