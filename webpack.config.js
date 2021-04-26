@@ -1,45 +1,36 @@
-const path = require('path');
+const path = require("path");
 
 module.exports = {
+  entry: ["babel-polyfill", "./client/index.js"],
+  output: {
+    path: path.resolve(__dirname, "/build"),
+    filename: "bundle.js",
+  },
 
-    entry: ['babel-polyfill', './client/index.js'],
-    output: {
-      path: path.join(__dirname, '/build'),
-      filename: 'bundle.js',
+  mode: process.env.NODE_ENV,
+  devServer: {
+    publicPath: "/build",
+    proxy: {
+      // publicPath : '/build',
+      "/location/": "http://localhost:3000",
     },
-
-    mode: process.env.NODE_ENV,
-    devServer: {
-      publicPath : '/build',
-      proxy: {
-        // publicPath : '/build',
-         '/location/': 'http://localhost:3000'
-      },
-    },
-    module: {
-        rules: [
-          {
-            test: /\.jsx?/,
-            exclude: /node_modules/,
-            use : {
-              loader : 'babel-loader',
-              options : {
-                presets : ['@babel/preset-env', '@babel/preset-react']
-              }
-            }
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jsx?/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"],
           },
-          {
-            test: /\.s[ac]ss$/i,
-            use: [
-              "style-loader",
-              "css-loader",
-              "sass-loader"
-            ],
-          },
-        ]
+        },
       },
-}
-
-
-
-
+      {
+        test: /\.s[ac]ss$/i,
+        use: ["style-loader", "css-loader", "sass-loader"],
+      },
+    ],
+  },
+};

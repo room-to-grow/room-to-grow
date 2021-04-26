@@ -2,14 +2,14 @@ const express = require("express");
 const router = express.Router();
 
 const favesController = require("../controllers/favesController");
-const cookieController = require("../controllers/cookieController");
+const userController = require("../controllers/userController");
 
 router.get("/user", favesController.getFaves, (req, res, next) => {
   console.log("Router preparing to fetch user's saved plants");
   res.send(200).json(res.locals.faves);
-  return next();
 });
 
+/*
 router.post("/login", (req, res) => {
   // error handler
   // user not found handler -- login credentials not valid
@@ -18,17 +18,20 @@ router.post("/login", (req, res) => {
   res.status(200).redirect("/user");
   console.log("User verified");
 });
+*/
 
-router.post("/signup", (req, res) => {
+router.post("/", userController.createUser, (req, res) => {
   // error handler
   // handle if username is already taken
   // upon successful signup do the following:
-  res.status(200).redirect("/user");
+  console.log("Attempting to create user");
+  res.status(200).send("signed up");
   console.log("User successfully signed in!");
 });
 
 //what does the req body for favorites look like?
 // what should this endpoint be?
+/*
 router.post(
   "/faves",
   favesController.addPlant,
@@ -40,3 +43,7 @@ router.post(
     console.log("Saved fave!");
   }
 );
+
+
+*/
+module.exports = router;

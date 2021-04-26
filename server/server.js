@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const PORT = 3000;
 
 /*
@@ -27,6 +29,11 @@ app.use(
 */
 
 //
+app.use(express.json());
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
+// app.use(cors());
+
 app.use("/build", express.static(path.join(__dirname, "../build")));
 
 // serving static file index.html on the route '/':
@@ -59,7 +66,7 @@ app.use((err, req, res, next) => {
     message: { err: "An error occurred" },
   };
   const errObj = Object.assign({}, defaultErr, err);
-  console.log(errObj.log);
+  console.log(err);
   return res.status(errObj.status).json(errObj.message);
 });
 
