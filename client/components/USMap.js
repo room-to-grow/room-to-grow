@@ -4,15 +4,10 @@ import helpers from '../../helpers';
 
 const USMap = (props) => {
   const { statesData } = props;
-  const { setSelectedGeoState } = props;
-  const { setFamiliesData } = props;
-  const { setSelectedFamily } = props;
-  const { setSelectedPlant } = props;
+  const { setGState } = props;
+  const { setFamily } = props;
+  const { setPlant } = props;
 
-  // const {render}
-  // this is where the new state has to go
-  // then can pass down to listscotnainer and down from there
-  
   return (
     <svg viewBox="0 0 960 600">
       {statesData.map((stateData, index) =>
@@ -26,20 +21,14 @@ const USMap = (props) => {
           onMouseOver={(event) => {
             event.target.style.fill = 'forestgreen';
           }}
-          onClick={() => {
-            // when a state is clicked,
-            // set the selected geoState
-            // and null out family and plant
-            setSelectedGeoState(stateData.name);
-            fetch(`/location/${stateData.name}`)
-              .then(response => response.json())
-              .then(data => {
-                setFamiliesData(data);
-                setSelectedFamily(null);
-                setSelectedPlant(null);
-                // setSelectedGeoState(stateData.name)
-              });  
-          }}
+          onClick={
+            () => {
+              console.log(`${stateData.name} clicked`);
+              setGState(stateData.name);
+              setFamily(null);
+              setPlant(null);
+            }
+          }
           onMouseOut={(event) => {
             event.target.style.fill = 'springgreen';
           }}
