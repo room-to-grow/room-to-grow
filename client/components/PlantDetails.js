@@ -1,49 +1,111 @@
 import React, { useEffect, useState } from 'react';
 
 const PlantDetails = props => {
-  const [plantDetails, setPlantDetails] = useState(null);
+  // const [plantDetails, setPlantDetails] = useState(null);
 
   const { gState } = props;
   const { family } = props;
   const { plant } = props;
-  // const { plantDetails } = props;
-  // const { setPlantDetails } = props;
+  const { plantDetails } = props;
+  const { setPlantDetails } = props;
+  const { setFavorites } = props;
+  const { favorites } = props;
+  const { loginName } = props;
 
   useEffect(
-    // () => {
-    //   if (gState === null || family === null || plant === null) return;
-      
-    //   fetch(`/${gState}/${family}/${plant}`)
-    //     .then(response => response.json())
-    //     .then(data => {
-    //       setPlantDetails(data);
-    //     })
-    //     .catch(() => console.log('oops'));
-    // },
-    // [plant]
-    // FOR TESTING W/O BACKEND ONLY
     () => {
-      const obj = {
-        detail1: 'green plant',
-        detail2: 'edible'
-      };
-      setPlantDetails(obj);
-      console.log('plantDeets', plantDetails);
-    }, 
+      if (gState.name === null || family === null || plant === null) return;
+      console.log(plant);
+      console.log(gState.slug)
+      console.log(family)
+      console.log(plant.scientific_name)
+      fetch(`/location/${gState.slug}/${family}/${plant.scientific_name}`)
+        .then(response => response.json())
+        .then(data => {
+          console.log("plant details data: ", data)
+          setPlantDetails(data);
+        })
+        .catch(() => console.log('oops'));
+    },
     [plant]
+    // FOR TESTING W/O BACKEND ONLY
+    // () => {
+    //   const obj = {
+    //     detail1: 'green plant',
+    //     detail2: 'edible'
+    //   };
+    //   setPlantDetails(obj);
+    //   console.log('plantDeets', plantDetails);
+    // }, 
+    // [plant]
   );
 
-  if (plant === null) return (<div></div>)
+  if (plantDetails === null) return (<div></div>)
 
   else return (
-    <ul id="detailsList">
-      <li>
-        {`sciName: ${plantDetails.scientific_name}`}
-      </li>
-      <li>
-        {`common name: ${plantDetails.family_common_name}`}
-      </li>
-    </ul>
+    <div id="detailsContainer">
+      <ul id="detailsList">
+        <img className="detail-img" src={`${plantDetails.image_url}`}></img>
+        <li className="details-element">
+          <span className="details-field">Name:</span> {plantDetails.common_name}
+       
+        </li>
+        <li className="details-element">
+        <span className="details-field">Scientific Name:</span> {plantDetails.scientific_name}
+        </li>
+        <li className="details-element">
+        <span className="details-field">Edible:</span> {`${plantDetails.edible}`}
+        </li>
+        <li className="details-element">
+        <span className="details-field">Average Height:</span> {plantDetails.average_height}
+        </li>
+        <li className="details-element">
+        <span className="details-field">Growth Habit:</span> {plantDetails.growth_habit}
+        </li>
+        <li className="details-element">
+        <span className="details-field">Growth Rate:</span> {plantDetails.growth_rate}
+        </li>
+        <li>
+          <form>
+            <input id = "fav-input" type="text" name="notes" placeholder="Write notes here"></input>
+            <button id = "fav-button" type="submit" onClick = {(e) => {
+              e.preventDefault()
+              console.log('posting to db...');
+
+              // this response is from the database
+                // server gets body
+                // models.favorites.create(req.body)
+                  //res.locals.favorites = models.favorites.find({})
+                // res.send(res.locals.favorites)
+              
+              // response
+            //  const response =  fetch(`/db`, {
+            //     // method
+            //     method: 'POST',
+            //     // headers
+            //     headers: {
+            //       'Content-Type': 'application/json'
+            //     },
+            
+            //     // body
+            //     body: { plants : plantDetails,
+            //             user_id : null,
+            //             plant_id : plantDetials.scientific_name,
+            //             notes : ' '}
+            //   }
+            //   )
+              //const notes = document.getElementById('fav-input')
+              setFavorites([...favorites, plantDetails.common_name])
+            }
+            // setFavorites({response.json())
+            }
+           > Favorite</button>
+        </form>
+        </li>
+      </ul>
+      
+    </div>
+    
   );
 }
 

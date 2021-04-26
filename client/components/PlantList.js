@@ -10,23 +10,25 @@ const PlantList = props => {
   const { setPlant } = props;
 
   useEffect(
-    // () => {
-    //   if (gState === null || family === null) return;
-    //   console.log('fetching plant list', gState);
-    //   fetch(`/location/${gState}/${family}`)
-    //     .then(response => response.json())
-    //     .then(data => {
-    //       console.log('fetched plantList:', data);
-    //       setPlantList(data);
-    //       setPlantDetails(null);
-    //     })
-    //     .catch(() => console.log('oops'))
-    // },
-    // [family]
+    () => {
+      if (gState.name === null || family === null) return;
+      // console.log('fetching plant list', gState.name);
+      fetch(`/location/${gState.slug}/${family}`)
+        .then(response => response.json())
+        .then(data => {
+          console.log('fetched list of plants:', data);
+          console.log(typeof data)
+          //const list = data.plants.map((plant) => plant.common_name);
+          setPlantList(data.plants);
+          setPlantDetails(null);
+        })
+        .catch((err) => console.log('oops', err))
+    },
+    [family]
 
     // FOR TESTING W/O BACKEND ONLY
-    () => setPlantList(['rose', 'grass', 'amarillys']),
-    [family]
+    // () => setPlantList(['rose', 'grass', 'amarillys']),
+    // [family]
   )
   
   if (family === null || plantList === null) return (<div></div>);
@@ -36,9 +38,10 @@ const PlantList = props => {
       {plantList.map((plant, index) => {
         return (
           <li key={index}>
-            <Button onClick={() => setPlant(plant)}>
-              {plant}
-            </Button>
+            <img src={plant.image_url} width = "40px" height = "40px"></img>
+            <button className = "list-buttons" onClick={() => setPlant(plant)}>
+              {plant.common_name}
+            </button>
           </li>
         )
       })}
