@@ -1,49 +1,64 @@
 import React, { useEffect, useState } from 'react';
 
 const PlantDetails = props => {
-  const [plantDetails, setPlantDetails] = useState(null);
+  // const [plantDetails, setPlantDetails] = useState(null);
 
   const { gState } = props;
   const { family } = props;
   const { plant } = props;
-  // const { plantDetails } = props;
-  // const { setPlantDetails } = props;
+  const { plantDetails } = props;
+  const { setPlantDetails } = props;
 
   useEffect(
-    // () => {
-    //   if (gState === null || family === null || plant === null) return;
-      
-    //   fetch(`/${gState}/${family}/${plant}`)
-    //     .then(response => response.json())
-    //     .then(data => {
-    //       setPlantDetails(data);
-    //     })
-    //     .catch(() => console.log('oops'));
-    // },
-    // [plant]
-    // FOR TESTING W/O BACKEND ONLY
     () => {
-      const obj = {
-        detail1: 'green plant',
-        detail2: 'edible'
-      };
-      setPlantDetails(obj);
-      console.log('plantDeets', plantDetails);
-    }, 
+      if (gState.name === null || family === null || plant === null) return;
+      console.log(plant);
+      console.log(gState.slug)
+      console.log(family)
+      console.log(plant.scientific_name)
+      fetch(`/location/${gState.slug}/${family}/${plant.scientific_name}`)
+        .then(response => response.json())
+        .then(data => {
+          console.log("plant details data: ", data)
+          setPlantDetails(data);
+        })
+        .catch(() => console.log('oops'));
+    },
     [plant]
+    // FOR TESTING W/O BACKEND ONLY
+    // () => {
+    //   const obj = {
+    //     detail1: 'green plant',
+    //     detail2: 'edible'
+    //   };
+    //   setPlantDetails(obj);
+    //   console.log('plantDeets', plantDetails);
+    // }, 
+    // [plant]
   );
 
-  if (plant === null) return (<div></div>)
+  if (plantDetails === null) return (<div></div>)
 
   else return (
-    <ul id="detailsList">
-      <li>
-        {`sciName: ${plantDetails.scientific_name}`}
-      </li>
-      <li>
-        {`common name: ${plantDetails.family_common_name}`}
-      </li>
-    </ul>
+    <div id="detailsContainer">
+      <ul id="detailsList">
+        <li>
+          {`Name: ${plantDetails.common_name}`}
+       
+        </li>
+        <li>
+          {`edible: ${plantDetails.edible}`}
+        </li>
+        <li>
+        <form>
+        <input type="text" name="notes"></input>
+        <input type="submit" value="Favorite"></input>
+      </form>
+        </li>
+      </ul>
+      
+    </div>
+    
   );
 }
 

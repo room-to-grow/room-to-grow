@@ -7,10 +7,10 @@ import PlantDetails from './PlantDetails';
 const App = () => {
   // the collection of all of the states
   const [statesData, setStatesData] = useState(null);
-  const [gState, setGState] = useState(null);
+  const [gState, setGState] = useState({name : null, slug : null});
   const [family, setFamily] = useState(null);
   const [plant, setPlant] = useState(null);
-  // const [plantDetails, setPlantDetails] = useState(null);
+  const [plantDetails, setPlantDetails] = useState(null);
 
   // This should only run once due to the [] arg for the dependencies.
   useEffect(() => {
@@ -37,10 +37,12 @@ const App = () => {
           setGState={setGState} 
           setFamily={setFamily}
           setPlant={setPlant}
+          setPlantDetails={setPlantDetails}
         />
         <div id="listsContainer">
           <FamilyList 
             gState={gState}
+            setGState={setGState}
             setFamily={setFamily}
             setPlant={setPlant}
           />
@@ -48,14 +50,14 @@ const App = () => {
             family={family}
             gState={gState}
             setPlant={setPlant}
-            // setPlantDetails={setPlantDetails}
+            setPlantDetails={setPlantDetails}
           />
           <PlantDetails
             family={family}
             plant={plant}
             gState={gState}
-            // plantDetails={plantDetails}
-            // setPlantDetails={setPlantDetails}
+            plantDetails={plantDetails}
+            setPlantDetails={setPlantDetails}
           />
         </div>
     </div>

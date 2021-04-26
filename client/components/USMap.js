@@ -5,6 +5,7 @@ const USMap = (props) => {
   const { setGState } = props;
   const { setFamily } = props;
   const { setPlant } = props;
+  const { setPlantDetails } = props;
 
   return (
     <svg id="map-svg" viewBox="0 0 960 600" width="60%">
@@ -22,9 +23,10 @@ const USMap = (props) => {
           onClick={
             () => {
               console.log(`${stateData.name} clicked`);
-              setGState(stateData.name);
+              setGState({ name: stateData.name, slug: null });
               setFamily(null);
               setPlant(null);
+              setPlantDetails(null);
             }
           }
           onMouseOut={(event) => {
