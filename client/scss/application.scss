@@ -30,8 +30,12 @@ body {
   
 }
 
-.initial {
-  color: blue;
+#loginForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5em;
+  margin-top: 10em;
 }
 
 #map-container {
@@ -89,7 +93,7 @@ ul {
   list-style-type: none;
 }
 
-#fav-button {
+.fav-button {
   margin-top : 10px;
   margin-left : 10px;
   border: 2px solid $primaryGreen;
@@ -104,11 +108,11 @@ ul {
 
 }
 
-#fav-button:focus {
+.fav-button:focus {
   outline: none;
 }
 
-#fav-button:hover {
+.fav-button:hover {
   background-color : $primaryGreen;
   color : $darkGray;
 }
@@ -131,7 +135,7 @@ ul {
 }
 
 
-#fav-input{
+.fav-input{
   margin-top: 20px;
   background-color: $darkGray;
   border: 2px solid $primaryGreen;
@@ -139,11 +143,12 @@ ul {
   font-size: 2em;
   width : 250px;
   height : 100px;
+  padding-left: 0.5em;
   font-family: 'Amatic SC', monospace;
   //text-color : $primar
 }
 
-#fav-input:focus {
+.fav-input:focus {
   outline: none;
 }
 

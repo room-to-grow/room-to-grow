@@ -20,7 +20,6 @@ const FamilyList = props => {
     () => {
       if (gState.name === null) return;
       
-
       // console.log('fetching family list', gState.name);
       fetch(`/location/${gState.name}`)
         .then(response => response.json())

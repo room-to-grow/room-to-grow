@@ -15,7 +15,8 @@ const App = () => {
   const [favorites, setFavorites] = useState([]);
   const [loginName, setLoginName] = useState(null);
 
-  // This should only run once due to the [] arg for the dependencies.
+  // This should only run once -- when the loginname is input
+  // then fetch for the US State data and will then render the USMap
   useEffect(() => {
     (async () => {
       const res = await fetch('https://willhaley.com/assets/united-states-map-react/states.json');
@@ -23,42 +24,45 @@ const App = () => {
       // Set the statesData with the data received from fetch().
       setStatesData(statesData);
     })();
-  }, [/* loginName */]);
+  }, [loginName]);
 
-  
-  // if (!loginName) {
-  //  return(
-  //    // this is where the login will go
-  //    <form>
-  //      <label for="userName">Input User Name:</label>
-  //      <input 
-  //        type="text" 
-  //        id="userName" 
-  //        name="userName"
-  //      >
-  //      <input 
-  //        type="submit" 
-  //         value="Submit"
-  //         onClick={() => {
-  //           let val = document.getElementById("userName");
-  //           val =  val.value 
-  //           // how to get the data from the input text field to assign to the user state??
-  //           setLoginName(val.value);
-  //         }}
-  //       >
-  //     </form>
-  //   )
-  // }
+  // until loginName value is delcared (default of null), show the login page
+  // sets the loginName (w/o password) to send to backend
+  // to associate a user's favorites with their login name
+  if (!loginName) {
+   return(
+     // this is where the login will go
+     <form id="loginForm">
+       {/* <label for="userName">Input User Name:</label> */}
+       <input className="fav-input"
+         type="text" 
+         id="userName" 
+         name="userName"
+         placeholder="Input username here"
+       ></input>
+       <input className="fav-button"
+         type="submit" 
+          value="Submit"
+          onClick={() => {
+            let val = document.getElementById("userName");
+            console.log(val.value);
+            //val =  val.value 
+            // how to get the data from the input text field to assign to the user state??
+            setLoginName(val.value);
+          }}
+        ></input>
+      </form>
+    )
+  }
  
-
   // If there is no statesData yet, show a loading indicator.
- /*else*/ if (!statesData) {
+ if (!statesData) {
     return (
       <div>Loading...</div>
     );
   }
 
-  /* else */ return (
+  return (
 
     <div id="outer-container">
       <div id = "info-container"> 
@@ -101,7 +105,7 @@ const App = () => {
       <div id = "favorites-container"> 
         <Favorites 
           favorites={favorites} 
-          loginName={loginName}
+          // loginName={loginName}
         />
       </div>
     </div>

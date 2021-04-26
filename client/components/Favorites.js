@@ -4,12 +4,8 @@ import React from 'react';
 
 const Favorites = props => {
   const { favorites } = props;
+  // const { favorites }
 
-  // useEffect(() => {
-  //   // make a fetch to the server for the favorites list
-
-  // },
-  // [favorites])
   console.log(favorites);
 
   return ( 
@@ -21,7 +17,7 @@ const Favorites = props => {
         {favorites.map((fav, index) => {
           return (
             <li id ="favorite-list-el" key={index}>
-              {fav}
+              <span className="details-field">{fav.name}:</span> {fav.notes}
             </li>
           )
         })}
