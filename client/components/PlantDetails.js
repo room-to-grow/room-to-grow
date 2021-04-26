@@ -10,27 +10,27 @@ const PlantDetails = props => {
   // const { setPlantDetails } = props;
 
   useEffect(
-    () => {
-      if (gState === null || family === null || plant === null) return;
-      
-      fetch(`/${gState}/${family}/${plant}`)
-        .then(response => response.json())
-        .then(data => {
-          setPlantDetails(data);
-        })
-        .catch(() => console.log('oops'));
-    },
-    [plant]
-    // FOR TESTING W/O BACKEND ONLY
     // () => {
-    //   const obj = {
-    //     detail1: 'green plant',
-    //     detail2: 'edible'
-    //   };
-    //   setPlantDetails(obj);
-    //   console.log('plantDeets', plantDetails);
-    // }, 
+    //   if (gState === null || family === null || plant === null) return;
+      
+    //   fetch(`/${gState}/${family}/${plant}`)
+    //     .then(response => response.json())
+    //     .then(data => {
+    //       setPlantDetails(data);
+    //     })
+    //     .catch(() => console.log('oops'));
+    // },
     // [plant]
+    // FOR TESTING W/O BACKEND ONLY
+    () => {
+      const obj = {
+        detail1: 'green plant',
+        detail2: 'edible'
+      };
+      setPlantDetails(obj);
+      console.log('plantDeets', plantDetails);
+    }, 
+    [plant]
   );
 
   if (plant === null) return (<div></div>)
