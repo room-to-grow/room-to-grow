@@ -38,6 +38,7 @@
     "sass-loader": "^11.0.1",
     "scss-loader": "0.0.1",
     "style-loader": "^2.0.0",
+    "use-between": "0.0.18",
     "webpack": "^5.32.0"
   },
   "devDependencies": {

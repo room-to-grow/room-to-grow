@@ -1,50 +1,16 @@
-// Normally these would be "import" statements, but this is a simple demo and
-// is needed to render in the browser.
 import React, { useEffect, useState } from 'react';
-import { Button } from '@material-ui/core';
-// import USMap from './USMap';
+import USMap from './USMap';
+import FamilyList from './FamilyList'
+import PlantList from './PlantList';
+import PlantDetails from './PlantDetails';
 
-// Functional component for the SVG map. Take in the map JSON data as a prop and
-// return SVG.
-const USMap = (props) => {
-    const { statesData } = props;
-  
-    return (
-      <svg viewBox="0 0 960 600">
-        {statesData.map((stateData, index) =>
-          <path
-            className="someCSSClass"
-            style={{cursor: "pointer", fill: "springgreen"}}
-            key={index}
-            stroke="#fff"
-            strokeWidth="6px"
-            d={stateData.shape}
-            onMouseOver={(event) => {
-              event.target.style.fill = 'forestgreen';
-            }}
-            onClick={() => getPlantFamilies(stateData.name)}
-            onMouseOut={(event) => {
-              event.target.style.fill = 'springgreen';
-            }}
-          >
-          </path>
-        )}
-      </svg>
-    )
-  }
-
-const getPlantFamilies = (stateName) => {
-  //console.log("STATE :", stateName)
-    fetch(`/location/${stateName}`)
-        .then(response => response.json())
-        .then(data => console.log(data));
-}
-
-// Functional component for the app. This handles loading the data and showing
-// some sort of loading UI while waiting for the data.
 const App = () => {
-  // The statesData is null by default until we set it.
+  // the collection of all of the states
   const [statesData, setStatesData] = useState(null);
+  const [gState, setGState] = useState(null);
+  const [family, setFamily] = useState(null);
+  const [plant, setPlant] = useState(null);
+  // const [plantDetails, setPlantDetails] = useState(null);
 
   // This should only run once due to the [] arg for the dependencies.
   useEffect(() => {
@@ -64,20 +30,36 @@ const App = () => {
   }
 
   return (
-    <div id="map-container">
-        <USMap id="us-map" statesData={statesData} />
-        {/* <ListsContainer /> */}
+    <div id="outer-container">
+        <USMap 
+          id="us-map" 
+          statesData={statesData}
+          setGState={setGState} 
+          setFamily={setFamily}
+          setPlant={setPlant}
+        />
+        <div id="listsContainer">
+          <FamilyList 
+            gState={gState}
+            setFamily={setFamily}
+            setPlant={setPlant}
+          />
+          <PlantList
+            family={family}
+            gState={gState}
+            setPlant={setPlant}
+            // setPlantDetails={setPlantDetails}
+          />
+          <PlantDetails
+            family={family}
+            plant={plant}
+            gState={gState}
+            // plantDetails={plantDetails}
+            // setPlantDetails={setPlantDetails}
+          />
+        </div>
     </div>
   );
 };
-
-  
-// function App() { 
-//     // const [count, setCounter] = useState(0);
-
-//     return (
-//         <div className = "initial"> hi this is hooks.  and this is some test text! </div> 
-//     )
-// }
 
 export default App;
