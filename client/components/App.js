@@ -14,7 +14,6 @@ const App = () => {
   const [gState, setGState] = useState(null);
   const [family, setFamily] = useState(null);
   const [plant, setPlant] = useState(null);
-  const [familyList, setFamilyList] = useState(null);
 
   // This should only run once due to the [] arg for the dependencies.
   useEffect(() => {
@@ -47,8 +46,12 @@ const App = () => {
             gState={gState}
             // family={family}
             setFamily={setFamily}
-            // setPlant={setPlant}
+            setPlant={setPlant}
           />
+          {/* <PlantList
+            family={family}
+            gState={gState}
+          /> */}
         </div>
         {/* <ListsContainer 
         

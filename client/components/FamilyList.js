@@ -1,7 +1,7 @@
 // import React, { useState } from 'react';
 import React, {useEffect, useState} from 'react';
-import Button from "@material-ui/core/Grid";
-import helpers from '../../helpers';
+import Button from '@material-ui/core/Grid';
+// import helpers from '../../helpers';
 
 const FamilyList = props => {
   const [familiesData, setFamiliesData] = useState(null);
@@ -9,7 +9,7 @@ const FamilyList = props => {
   const { gState } = props;
   // const { family } = props;
   const { setFamily } = props;
-  // const { setPlant } = props;
+  const { setPlant } = props;
   // const { familiesData } = props;
   // const { setFamiliesData } = props;
 
@@ -33,7 +33,7 @@ const FamilyList = props => {
 
   // else return (<div>hello heloo</div>)
   else return (
-    <ul>
+    <div>
       {familiesData.map((family, index) => {
         console.log(family);
         return (
@@ -51,7 +51,7 @@ const FamilyList = props => {
             </Button>
         )
       })}
-    </ul>
+    </div>
   );
 }
 

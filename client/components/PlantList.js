@@ -1,42 +1,32 @@
-import React from 'react';
-import helpers from '../../helpers';
+import React, {useEffect, useState} from 'react';
+import Button from "@material-ui/core/Grid";
+// import helpers from '../../helpers';
 import Button from "@material-ui/core/Grid";
 
+useEffect(
+  () => {
+    console.log('fetching family list', gState);
+    fetch(`/location/${gState}/${family}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log('fetched data:', data);
+        setPlantList(data);
+      })
+      .catch(() => console.log('oops'))
+  },
+  [family]
+)
 
 const PlantList = props => {
-  const { selectedGeoState } = props;
-  const { selectedFamily } = props;
-  const { plantsData } = props;
-  const { setSelectedPlant } = props;
-  const { setPlantsData } = props;
+  const [plantList, setPlantList] = useState(null);
 
-  // set the plantsData using the selected geo state
-  // make sure just passing string names to getPlantsData
+  const { family } = props;
+  const { gState } = props;
 
-  // setPlantsData(helpers.getPlantsData(selectedGeoState, selectedFamily));
+  if (plantList === null) return (<div></div>);
 
-  // this is wrong- have to render nothing at first
-  // and then only update once the family is not null
-  // re-render every time the US fmaily changes
-  // is this an effect????
-  console.log('plantsData', plantsData);
-  if (selectedFamily === null) return (<div></div>);
-  else if (plantsData === undefined || plantsData.length === 0) return (<div></div>);
   else return (
-    <ul>
-      {plantsData.map(
-        <li>
-          <Button
-            onClick={
-              plant => {
-                setSelectedPlant(plant.name);
-              }
-            }
-          >
-          </Button>
-        </li>
-      )}
-    </ul>
+    
   );
 }
 
