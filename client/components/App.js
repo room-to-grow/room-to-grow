@@ -45,6 +45,8 @@ const App = () => {
             setGState={setGState}
             setFamily={setFamily}
             setPlant={setPlant}
+            setPlantDetails={setPlantDetails}
+
           />
           <PlantList
             family={family}

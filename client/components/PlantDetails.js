@@ -52,7 +52,7 @@ const PlantDetails = props => {
         <li>
         <form>
         <input type="text" name="notes"></input>
-        <input type="submit" value="Favorite"></input>
+        <input type="submit" value="Favorite" ></input>
       </form>
         </li>
       </ul>

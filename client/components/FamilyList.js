@@ -10,6 +10,7 @@ const FamilyList = props => {
   const { setGState } = props;
   const { setFamily } = props;
   const { setPlant } = props;
+  const { setPlantDetails } = props;
 
   // families receives object
   // first k-v pair 
@@ -45,6 +46,7 @@ const FamilyList = props => {
                 () => {
                   setFamily(family);
                   setPlant(null);
+                  setPlantDetails(null);
                 }
               }
             >
