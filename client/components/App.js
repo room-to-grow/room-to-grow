@@ -29,14 +29,15 @@ const App = () => {
   if (!loginName) {
    return(
      // this is where the login will go
-     <form>
-       <label for="userName">Input User Name:</label>
-       <input 
+     <form id="loginForm">
+       {/* <label for="userName">Input User Name:</label> */}
+       <input className="fav-input"
          type="text" 
          id="userName" 
          name="userName"
+         placeholder="Input username here"
        ></input>
-       <input 
+       <input className="fav-button"
          type="submit" 
           value="Submit"
           onClick={() => {
@@ -102,7 +103,7 @@ const App = () => {
       <div id = "favorites-container"> 
         <Favorites 
           favorites={favorites} 
-          loginName={loginName}
+          // loginName={loginName}
         />
       </div>
     </div>

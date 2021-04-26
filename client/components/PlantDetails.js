@@ -67,8 +67,8 @@ const PlantDetails = props => {
         </li>
         <li>
           <form>
-            <input id = "fav-input" type="text" name="notes" placeholder="Write notes here"></input>
-            <button id = "fav-button" type="submit" onClick = {(e) => {
+            <input className = "fav-input" type="text" name="notes" placeholder="Write notes here"></input>
+            <button className = "fav-button" type="submit" onClick = {(e) => {
               e.preventDefault()
               console.log('posting to db...');
 
