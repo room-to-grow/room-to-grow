@@ -10,6 +10,10 @@ const FamilyList = props => {
   const { setFamily } = props;
   const { setPlant } = props;
 
+  // families receives object
+  // first k-v pair 
+  // have to get the slug and pass back to backend with the family name
+  // similalry with plants, will receive slug and family name
   useEffect(
     () => {
       if (gState === null) return;
