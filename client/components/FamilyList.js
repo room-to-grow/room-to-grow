@@ -12,12 +12,14 @@ const FamilyList = props => {
 
   useEffect(
     () => {
-      console.log('fetching family list', gState);
+      if (gState === null) return;
+
+      // console.log('fetching family list', gState);
       fetch(`/location/${gState}`)
         .then(response => response.json())
         .then(data => {
-          console.log('fetched data:', data);
-          setFamiliesData(data);
+          // console.log('fetched data:', data);
+          setFamiliesData(data.families);
         })
         .catch(() => console.log('oops'))
     },
@@ -28,7 +30,7 @@ const FamilyList = props => {
   else return (
     <ul id="familyList">
       {familiesData.map((family, index) => {
-        console.log(family);
+        // console.log(family);
         return (
           <li key={index}>
             <Button 
