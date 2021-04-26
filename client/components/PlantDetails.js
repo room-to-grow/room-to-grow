@@ -1,15 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const PlantDetails = props => {
+  const [plantDetails, setPlantDetails] = useState(null);
 
-  // may not need gState and family for endpoints (check w/ backend)
-  // if can simply retrieve plant details by plant name
-  // if so, then don't need these first 2 props
   const { gState } = props;
   const { family } = props;
   const { plant } = props;
-  const { plantDetails } = props;
-  const { setPlantDetails } = props;
+  // const { plantDetails } = props;
+  // const { setPlantDetails } = props;
 
   useEffect(
     // () => {

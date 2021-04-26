@@ -10,7 +10,7 @@ const App = () => {
   const [gState, setGState] = useState(null);
   const [family, setFamily] = useState(null);
   const [plant, setPlant] = useState(null);
-  const [plantDetails, setPlantDetails] = useState(null);
+  // const [plantDetails, setPlantDetails] = useState(null);
 
   // This should only run once due to the [] arg for the dependencies.
   useEffect(() => {
@@ -32,30 +32,30 @@ const App = () => {
   return (
     <div id="outer-container">
         <USMap 
-            id="us-map" 
-            statesData={statesData}
-            setGState={setGState} 
-            setFamily={setFamily}
-            setPlant={setPlant}
+          id="us-map" 
+          statesData={statesData}
+          setGState={setGState} 
+          setFamily={setFamily}
+          setPlant={setPlant}
         />
         <div id="listsContainer">
           <FamilyList 
             gState={gState}
             setFamily={setFamily}
             setPlant={setPlant}
-            />
+          />
           <PlantList
             family={family}
             gState={gState}
-            // setPlantDetails={setPlantDetails}
             setPlant={setPlant}
+            // setPlantDetails={setPlantDetails}
           />
           <PlantDetails
             family={family}
             plant={plant}
-            plantDetails={plantDetails}
-            setPlantDetails={setPlantDetails}
             gState={gState}
+            // plantDetails={plantDetails}
+            // setPlantDetails={setPlantDetails}
           />
         </div>
     </div>
