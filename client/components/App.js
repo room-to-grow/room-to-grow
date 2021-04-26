@@ -47,6 +47,7 @@ const App = () => {
             gState={gState}
             // family={family}
             setFamily={setFamily}
+            // setPlant={setPlant}
           />
         </div>
         {/* <ListsContainer 

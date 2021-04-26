@@ -9,6 +9,7 @@ const FamilyList = props => {
   const { gState } = props;
   // const { family } = props;
   const { setFamily } = props;
+  // const { setPlant } = props;
   // const { familiesData } = props;
   // const { setFamiliesData } = props;
 
@@ -32,21 +33,25 @@ const FamilyList = props => {
 
   // else return (<div>hello heloo</div>)
   else return (
-    <div><ul>
-      {familiesData.map(family => {
+    <ul>
+      {familiesData.map((family, index) => {
         console.log(family);
-        <li>
-          <Button onClick={
-            () => {
-              setFamily(family);
-              setPlant(null);
-            }
-          }>
-            {family}
-          </Button>
-        </li>
+        return (
+          // <li key={index}>
+            <Button 
+              onClick={
+                () => {
+                  setFamily(family);
+                  setPlant(null);
+                }
+              }
+              key={index}
+              >
+                {family}
+            </Button>
+        )
       })}
-    </ul></div>
+    </ul>
   );
 }
 
