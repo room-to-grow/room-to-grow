@@ -38,10 +38,10 @@ const PlantList = props => {
       {plantList.map((plant, index) => {
         return (
           <li key={index}>
-            <img src={plant.image_url} width = "20px" height = "20px"></img>
-            <Button onClick={() => setPlant(plant)}>
+            <img src={plant.image_url} width = "40px" height = "40px"></img>
+            <button className = "list-buttons" onClick={() => setPlant(plant)}>
               {plant.common_name}
-            </Button>
+            </button>
           </li>
         )
       })}

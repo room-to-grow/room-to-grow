@@ -13,14 +13,14 @@ const Favorites = props => {
   console.log(favorites);
 
   return ( 
-    <div>
-      <h2>
+    <div id = "favorites-box">
+      <h2 id = "favorites-title">
         Favorites
       </h2>
       <ul>
         {favorites.map((fav, index) => {
           return (
-            <li key={index}>
+            <li id ="favorite-list-el" key={index}>
               {fav}
             </li>
           )

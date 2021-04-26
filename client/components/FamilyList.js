@@ -1,6 +1,6 @@
 // import React, { useState } from 'react';
 import React, {useEffect, useState} from 'react';
-import { Button } from '@material-ui/core';
+//import { Button } from '@material-ui/core';
 // import helpers from '../../helpers';
 
 const FamilyList = props => {
@@ -41,7 +41,9 @@ const FamilyList = props => {
         // console.log(family);
         return (
           <li key={index}>
-            <Button 
+            <button
+              className = "list-buttons"
+              // color = "#5dbb63"
               onClick={
                 () => {
                   setFamily(family);
@@ -51,7 +53,7 @@ const FamilyList = props => {
               }
             >
               {family}
-            </Button>
+            </button>
           </li>
         )
       })}

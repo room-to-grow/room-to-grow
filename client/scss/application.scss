@@ -1,49 +1,70 @@
-@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap");
+
+$primaryGreen: #5dbb63;
+$secondaryGreen: #7dc882;
+$darkGray: #373737;
 
 body {
-    background-color: #373737;
+  background-color: $darkGray;
+}
+
+#title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #title {
-    color: #5DBB63;
-    text-align: center;
-    font-size: 5em;
-    margin-bottom: 0;
-    font-family: 'Amatic SC', monospace;
+  color: $primaryGreen;
+  // text-align: center;
+  font-size: 7em;
+  margin: 0 0.25em;
+  // margin-bottom: 0;
+  font-family: "Amatic SC", monospace;
 }
 
-.initial{
-    color: blue;
+#logo {
+  // display: block;
+  // margin: 0 auto;
+  width: 5em;
+  
+}
+
+.initial {
+  color: blue;
 }
 
 #map-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .map-svg {
-    display: block;
-    margin: 0 auto 2em auto;
+  display: block;
+  margin: 0 auto 2em auto;
 }
 
 #family-list {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #us-map {
-    // flex-basis: 4;
+  // flex-basis: 4;
 }
 
 .plant-list {
-    // flex-basis: 1;
-    background-color: black;
+  // flex-basis: 1;
+  background-color: $darkGray;
 }
 
 #outer-container {
   // display: flex;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+
   // flex-direction: row;
 }
 
@@ -51,22 +72,162 @@ body {
   // flex-basis: 4;
 }
 
+#info-container {
+  margin-left: 50px;
+}
+
 #listsContainer {
+  margin-top : 20px;
   display: flex;
+  margin-left: 100px;
 }
 
 #familyList {
-  background-color: aqua;
+}
+
+ul {
+  list-style-type: none;
+}
+
+#fav-button {
+  margin-top : 10px;
+  margin-left : 10px;
+  border: 2px solid $primaryGreen;
+  border-radius: 7px;
+  padding : 5px 5px;
+  background-color : $darkGray;
+  color: $primaryGreen;
+  
+  font-size: 2em;
+
+  font-family: 'Amatic SC', monospace;
+
+}
+
+#fav-button:focus {
+  outline: none;
+}
+
+#fav-button:hover {
+  background-color : $primaryGreen;
+  color : $darkGray;
+}
+
+.list-buttons {
+
+    border: none;
+    background-color : $darkGray;
+    color: $primaryGreen;
+    
+    font-size: 3em;
+
+    font-family: 'Amatic SC', monospace;
+  
+}
+
+.list-buttons:hover{
+  font-size : 4em;
+
+}
+
+
+#fav-input{
+  margin-top: 20px;
+  background-color: $darkGray;
+  border: 2px solid $primaryGreen;
+  color : $primaryGreen;
+  font-size: 2em;
+  width : 250px;
+  height : 100px;
+  font-family: 'Amatic SC', monospace;
+  //text-color : $primar
+}
+
+#fav-input:focus {
+  outline: none;
+}
+
+.list-buttons:active {
+  background-color : $darkGray;
+}
+
+
+
+.list-buttons:focus {
+  outline: none;
+ // background-color: lighten( $darkGray, 70% );
+  color: lighten( $primaryGreen, 80% );
+  font-size: 4em;
 }
 
 #plantList {
-  background-color: bisque;
+  //background-color: $darkGray;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+#favorites-box {
+  //border-color :$primaryGreen;
+  // display: flex;
+  //justify-content: center;
+  height: 1000px;
+  border : 3px dashed $primaryGreen;
+  margin-right : 120px;
+}
+
+#favorites-title {
+  //margin-top : 20px;
+  text-align: center;
+  margin: 15px auto;
+  color: $primaryGreen;
+    
+  font-size: 4em;
+
+  font-family: 'Amatic SC', monospace;
+}
+
+#favorite-list-el{
+  
+  color: $primaryGreen;
+    
+  font-size: 3em;
+
+  font-family: 'Amatic SC', monospace;
 }
 
 #detailsList {
-  background-color: red;
+  //background-color: red;
+  padding: 20px 20px 0px 20px;
+  height: 70em;
+  width: 35em;
+  border: 5px dashed $primaryGreen;
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
 }
 
+.details-element {
+  border: none;
+  background-color : $darkGray;
+  color: $primaryGreen;
+  font-size: 3em;
+  font-family: 'Amatic SC', monospace;
+}
+
+.details-field {
+  color: lighten( $primaryGreen, 80% );
+}
+
+.detail-img {
+  margin-bottom: 15px;
+  width: 25em;
+  height: 25em;
+}
+
+#detailsContainer{
+  margin-left : 50px;
+}
 // .family-container{
 //     max-width: 200px;
 //     display : flex;

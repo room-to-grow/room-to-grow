@@ -8,7 +8,7 @@ const USMap = (props) => {
   const { setPlantDetails } = props;
 
   return (
-    <svg id="map-svg" viewBox="0 0 960 600" width="60%">
+    <svg id="map-svg" viewBox="0 0 960 600" width="95%">
       {statesData.map((stateData, index) =>
         <path
           className="renderedMap"
