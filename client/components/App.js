@@ -3,6 +3,7 @@ import USMap from './USMap';
 import FamilyList from './FamilyList'
 import PlantList from './PlantList';
 import PlantDetails from './PlantDetails';
+import Favorites from './Favorites';
 
 const App = () => {
   // the collection of all of the states
@@ -11,6 +12,8 @@ const App = () => {
   const [family, setFamily] = useState(null);
   const [plant, setPlant] = useState(null);
   const [plantDetails, setPlantDetails] = useState(null);
+  const [favorites, setFavorites] = useState([]);
+  const [loginName, setLoginName] = useState(null);
 
   // This should only run once due to the [] arg for the dependencies.
   useEffect(() => {
@@ -20,17 +23,45 @@ const App = () => {
       // Set the statesData with the data received from fetch().
       setStatesData(statesData);
     })();
-  }, []);
+  }, [/* loginName */]);
+
+  
+  // if (!loginName) {
+  //  return(
+  //    // this is where the login will go
+  //    <form>
+  //      <label for="userName">Input User Name:</label>
+  //      <input 
+  //        type="text" 
+  //        id="userName" 
+  //        name="userName"
+  //      >
+  //      <input 
+  //        type="submit" 
+  //         value="Submit"
+  //         onClick={() => {
+  //           let val = document.getElementById("userName");
+  //           val =  val.value 
+  //           // how to get the data from the input text field to assign to the user state??
+  //           setLoginName(val.value);
+  //         }}
+  //       >
+  //     </form>
+  //   )
+  // }
+ 
 
   // If there is no statesData yet, show a loading indicator.
-  if (!statesData) {
+ /*else*/ if (!statesData) {
     return (
       <div>Loading...</div>
     );
   }
 
-  return (
+  /* else */ return (
+
     <div id="outer-container">
+      <div id = "info-container"> 
         <USMap 
           id="us-map" 
           statesData={statesData}
@@ -60,8 +91,19 @@ const App = () => {
             gState={gState}
             plantDetails={plantDetails}
             setPlantDetails={setPlantDetails}
+            setFavorites={setFavorites}
+            favorites={favorites}
+            loginName={loginName}
           />
         </div>
+      </div>
+
+      <div id = "favorites-container"> 
+        <Favorites 
+          favorites={favorites} 
+          loginName={loginName}
+        />
+      </div>
     </div>
   );
 };

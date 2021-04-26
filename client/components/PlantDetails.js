@@ -8,6 +8,9 @@ const PlantDetails = props => {
   const { plant } = props;
   const { plantDetails } = props;
   const { setPlantDetails } = props;
+  const { setFavorites } = props;
+  const { favorites } = props;
+  const { loginName } = props;
 
   useEffect(
     () => {
@@ -42,32 +45,61 @@ const PlantDetails = props => {
   else return (
     <div id="detailsContainer">
       <ul id="detailsList">
-        <li>
-          {`Name: ${plantDetails.common_name}`}
+        <img className="detail-img" src={`${plantDetails.image_url}`}></img>
+        <li className="details-element">
+          <span className="details-field">Name:</span> {plantDetails.common_name}
        
         </li>
-        <li>
-          {`edible: ${plantDetails.edible}`}
+        <li className="details-element">
+        <span className="details-field">Scientific Name:</span> {plantDetails.scientific_name}
+        </li>
+        <li className="details-element">
+        <span className="details-field">Edible:</span> {`${plantDetails.edible}`}
+        </li>
+        <li className="details-element">
+        <span className="details-field">Average Height:</span> {plantDetails.average_height}
+        </li>
+        <li className="details-element">
+        <span className="details-field">Growth Habit:</span> {plantDetails.growth_habit}
+        </li>
+        <li className="details-element">
+        <span className="details-field">Growth Rate:</span> {plantDetails.growth_rate}
         </li>
         <li>
           <form>
-            <input type="text" name="notes"></input>
-            <input type="submit" onClick = {() => {
+            <input id = "fav-input" type="text" name="notes" placeholder="Write notes here"></input>
+            <button id = "fav-button" type="submit" onClick = {(e) => {
+              e.preventDefault()
               console.log('posting to db...');
-              fetch(`/db`, {
-                // method
-                method: 'POST',
-                // headers
-                headers: {
-                  'Content-Type': 'application/json'
-                },
+
+              // this response is from the database
+                // server gets body
+                // models.favorites.create(req.body)
+                  //res.locals.favorites = models.favorites.find({})
+                // res.send(res.locals.favorites)
+              
+              // response
+            //  const response =  fetch(`/db`, {
+            //     // method
+            //     method: 'POST',
+            //     // headers
+            //     headers: {
+            //       'Content-Type': 'application/json'
+            //     },
             
-                // body
-                body: {plantDetails}
-              }
-              )
-            }}
-          value="Favorite" ></input>
+            //     // body
+            //     body: { plants : plantDetails,
+            //             user_id : null,
+            //             plant_id : plantDetials.scientific_name,
+            //             notes : ' '}
+            //   }
+            //   )
+              //const notes = document.getElementById('fav-input')
+              setFavorites([...favorites, plantDetails.common_name])
+            }
+            // setFavorites({response.json())
+            }
+           > Favorite</button>
         </form>
         </li>
       </ul>
