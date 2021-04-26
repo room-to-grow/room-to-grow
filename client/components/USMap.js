@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import helpers from '../../helpers';
-// import { useBetween } from 'use-between';
+import React from 'react';
 
 const USMap = (props) => {
   const { statesData } = props;

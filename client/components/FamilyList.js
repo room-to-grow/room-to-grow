@@ -7,11 +7,8 @@ const FamilyList = props => {
   const [familiesData, setFamiliesData] = useState(null);
 
   const { gState } = props;
-  // const { family } = props;
   const { setFamily } = props;
   const { setPlant } = props;
-  // const { familiesData } = props;
-  // const { setFamiliesData } = props;
 
   useEffect(
     () => {

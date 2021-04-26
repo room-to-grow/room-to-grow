@@ -46,7 +46,6 @@ const App = () => {
         <div id="listsContainer">
           <FamilyList 
             gState={gState}
-            // family={family}
             setFamily={setFamily}
             setPlant={setPlant}
             />
