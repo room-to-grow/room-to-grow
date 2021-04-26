@@ -34,7 +34,7 @@ const PlantDetails = props => {
   if (plant === null) return (<div></div>)
 
   else return (
-    <ul>
+    <ul id="detailsList">
       <li>
         {`detail1: ${plantDetails.detail1}`}
       </li>

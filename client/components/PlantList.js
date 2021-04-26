@@ -33,7 +33,7 @@ const PlantList = props => {
   if (family === null) return (<div></div>);
   // else return (<div>heloo hello</div>)
   else return (
-    <ul>
+    <ul id="plantList">
     {plantList.map((plant, index) => {
       console.log('plant:', plant);
       return (

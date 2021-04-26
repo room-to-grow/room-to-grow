@@ -1,22 +1,24 @@
-.initial{
-    color: blue;
+#outer-container {
+  // display: flex;
+  // flex-direction: row;
 }
 
-.map-container {
-    // display: flex;
-    // flex-direction: row;
-}
-
-.us-map {
-    // flex-basis: 4;
-}
-
-.plant-list {
-    // flex-basis: 1;
-    // background-color: black;
+#us-map {
+  // flex-basis: 4;
 }
 
 #listsContainer {
   display: flex;
-  
+}
+
+#familyList {
+  background-color: aqua;
+}
+
+#plantList {
+  background-color: bisque;
+}
+
+#detailsList {
+  background-color: red;
 }
