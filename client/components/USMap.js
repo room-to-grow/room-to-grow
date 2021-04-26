@@ -7,17 +7,17 @@ const USMap = (props) => {
   const { setPlant } = props;
 
   return (
-    <svg viewBox="0 0 960 600">
+    <svg id="map-svg" viewBox="0 0 960 600" width="60%">
       {statesData.map((stateData, index) =>
         <path
-          className="renederedMap"
-          style={{cursor: "pointer", fill: "springgreen"}}
+          className="renderedMap"
+          style={{cursor: "pointer", fill: "#373737"}}
           key={index}
-          stroke="#fff"
-          strokeWidth="6px"
+          stroke="#5DBB63"
+          strokeWidth="3px"
           d={stateData.shape}
           onMouseOver={(event) => {
-            event.target.style.fill = 'forestgreen';
+            event.target.style.fill = '#7dc882';
           }}
           onClick={
             () => {
@@ -28,7 +28,7 @@ const USMap = (props) => {
             }
           }
           onMouseOut={(event) => {
-            event.target.style.fill = 'springgreen';
+            event.target.style.fill = '#373737';
           }}
         >
         </path>

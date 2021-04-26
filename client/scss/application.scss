@@ -1,3 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap');
+
+body {
+    background-color: #373737;
+}
+
+#title {
+    color: #5DBB63;
+    text-align: center;
+    font-size: 5em;
+    margin-bottom: 0;
+    font-family: 'Amatic SC', monospace;
+}
+
+.initial{
+    color: blue;
+}
+
+#map-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.map-svg {
+    display: block;
+    margin: 0 auto 2em auto;
+}
+
+#family-list {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#us-map {
+    // flex-basis: 4;
+}
+
+.plant-list {
+    // flex-basis: 1;
+    background-color: black;
+}
+
 #outer-container {
   // display: flex;
   // flex-direction: row;
@@ -22,3 +66,9 @@
 #detailsList {
   background-color: red;
 }
+
+// .family-container{
+//     max-width: 200px;
+//     display : flex;
+//     justify-content: space-between;
+// }
