@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
 const PlantDetails = props => {
-  // const [plantDetails, setPlantDetails] = useState(null);
-
   const { gState } = props;
   const { family } = props;
   const { plant } = props;
@@ -67,9 +65,10 @@ const PlantDetails = props => {
         </li>
         <li>
           <form>
-            <input className = "fav-input" type="text" name="notes" placeholder="Write notes here"></input>
+            <input id = 'notes-input' className = "fav-input" type="text" name="notes" placeholder="Write notes here"></input>
             <button className = "fav-button" type="submit" onClick = {(e) => {
               e.preventDefault()
+              const notes = document.getElementById('notes-input');
               console.log('posting to db...');
 
               // this response is from the database
@@ -95,7 +94,8 @@ const PlantDetails = props => {
             //   }
             //   )
               //const notes = document.getElementById('fav-input')
-              setFavorites([...favorites, plantDetails.common_name])
+              setFavorites([...favorites, {name : plantDetails.common_name, notes : notes.value}])
+              
             }
             // setFavorites({response.json())
             }

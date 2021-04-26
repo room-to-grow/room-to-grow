@@ -15,7 +15,8 @@ const App = () => {
   const [favorites, setFavorites] = useState([]);
   const [loginName, setLoginName] = useState(null);
 
-  // This should only run once due to the [] arg for the dependencies.
+  // This should only run once -- when the loginname is input
+  // then fetch for the US State data and will then render the USMap
   useEffect(() => {
     (async () => {
       const res = await fetch('https://willhaley.com/assets/united-states-map-react/states.json');
@@ -25,7 +26,9 @@ const App = () => {
     })();
   }, [loginName]);
 
-  
+  // until loginName value is delcared (default of null), show the login page
+  // sets the loginName (w/o password) to send to backend
+  // to associate a user's favorites with their login name
   if (!loginName) {
    return(
      // this is where the login will go
@@ -52,7 +55,6 @@ const App = () => {
     )
   }
  
-
   // If there is no statesData yet, show a loading indicator.
  if (!statesData) {
     return (
