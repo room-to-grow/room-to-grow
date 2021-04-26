@@ -20,6 +20,8 @@ const PlantDetails = props => {
     //     })
     //     .catch(() => console.log('oops'));
     // },
+
+    // FOR TESTING W/O BACKEND ONLY
     () => {
       const obj = {
         detail1: 'green plant',

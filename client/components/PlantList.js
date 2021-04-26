@@ -7,7 +7,6 @@ const PlantList = props => {
 
   const { family } = props;
   const { gState } = props;
-  // const { setPlantDetails } = props;
   const { setPlant } = props;
 
   useEffect(
@@ -23,38 +22,26 @@ const PlantList = props => {
     //     .catch(() => console.log('oops'))
     // },
     // [family]
-    () => {
-      setPlantList(['rose', 'grass', 'amarillys']);
-      // setPlantDetails(null);
-    },
+
+    // FOR TESTING W/O BACKEND ONLY
+    () => setPlantList(['rose', 'grass', 'amarillys']),
     [family]
   )
   
   if (family === null) return (<div></div>);
-  // else return (<div>heloo hello</div>)
   else return (
     <ul id="plantList">
-    {plantList.map((plant, index) => {
-      console.log('plant:', plant);
-      return (
-        <li key={index}>
-          <Button 
-            onClick={
-              () => {
-                setPlant(plant);
-                // setPlantDetails(null);
-              }
-            }
-          >
-            {plant}
-          </Button>
-        </li>
-      )
-    })}
-  </ul>
-
+      {plantList.map((plant, index) => {
+        return (
+          <li key={index}>
+            <Button onClick={() => setPlant(plant)}>
+              {plant}
+            </Button>
+          </li>
+        )
+      })}
+    </ul>
   );
 }
-
 
 export default PlantList;

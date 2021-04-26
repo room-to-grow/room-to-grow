@@ -24,11 +24,7 @@ const FamilyList = props => {
     [gState]
   );
 
-  // return (<div></div>);
-
   if (familiesData === null) return (<div></div>)
-
-  // else return (<div>hello heloo</div>)
   else return (
     <ul id="familyList">
       {familiesData.map((family, index) => {

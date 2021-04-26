@@ -1,14 +1,9 @@
-// Normally these would be "import" statements, but this is a simple demo and
-// is needed to render in the browser.
 import React, { useEffect, useState } from 'react';
 import USMap from './USMap';
 import FamilyList from './FamilyList'
 import PlantList from './PlantList';
 import PlantDetails from './PlantDetails';
-// import ListsContainer from './ListsContainer';
 
-// Functional component for the app. This handles loading the data and showing
-// some sort of loading UI while waiting for the data.
 const App = () => {
   // the collection of all of the states
   const [statesData, setStatesData] = useState(null);
@@ -63,9 +58,6 @@ const App = () => {
             gState={gState}
           />
         </div>
-        {/* <ListsContainer 
-        
-        /> */}
     </div>
   );
 };
