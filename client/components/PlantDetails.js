@@ -8,6 +8,8 @@ const PlantDetails = props => {
   const { plant } = props;
   const { plantDetails } = props;
   const { setPlantDetails } = props;
+  const { setFavorites } = props;
+  const { favorites } = props;
 
   useEffect(
     () => {
@@ -51,22 +53,35 @@ const PlantDetails = props => {
         </li>
         <li>
           <form>
-            <input type="text" name="notes"></input>
-            <input type="submit" onClick = {() => {
+            <input id = "fav-input" type="text" name="notes"></input>
+            <input type="submit" onClick = {(e) => {
+              e.preventDefault()
               console.log('posting to db...');
-              fetch(`/db`, {
-                // method
-                method: 'POST',
-                // headers
-                headers: {
-                  'Content-Type': 'application/json'
-                },
+
+              // this response is from the database
+                // server gets body
+                // models.favorites.create(req.body)
+                  //res.locals.favorites = models.favorites.find({})
+                // res.send(res.locals.favorites)
+              
+              // response
+            //  const response =  fetch(`/db`, {
+            //     // method
+            //     method: 'POST',
+            //     // headers
+            //     headers: {
+            //       'Content-Type': 'application/json'
+            //     },
             
-                // body
-                body: {plantDetails}
-              }
-              )
-            }}
+            //     // body
+            //     body: {plantDetails}
+            //   }
+            //   )
+              //const notes = document.getElementById('fav-input')
+              setFavorites([...favorites, plantDetails.common_name])
+            }
+            // setFavorites({response.json())
+            }
           value="Favorite" ></input>
         </form>
         </li>
