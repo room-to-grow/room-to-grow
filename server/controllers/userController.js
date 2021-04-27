@@ -5,8 +5,13 @@ const saltRounds = 10;
 const userController = {};
 
 userController.createUser = (req, res, next) => {
+  console.log("in CreateUser")
+  console.log(req.body.password);
+
+  console.log('userController log', req.body);
   const { username, password } = req.body;
   console.log("username: ", username);
+  console.log("password: ", password);
   bcrypt.hash(password, saltRounds, (err, hash) => {
     const values = [username, hash];
     console.log(values);
