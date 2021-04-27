@@ -19,7 +19,13 @@ const PlantList = props => {
           console.log('fetched list of plants:', data);
           console.log(typeof data)
           //const list = data.plants.map((plant) => plant.common_name);
-          setPlantList(data.plants);
+          setPlantList(data.plants); // an array of plants -> plant.scientific_name
+          /*
+            plant = { common_name : ...,
+                      image_url: ...,
+                      scientfic_name : ...}
+
+          */
           setPlantDetails(null);
         })
         .catch((err) => console.log('oops', err))
@@ -34,6 +40,7 @@ const PlantList = props => {
   if (family === null || plantList === null) return (<div></div>);
 
   else return (
+    
     <ul id="plantList">
       {plantList.map((plant, index) => {
         return (

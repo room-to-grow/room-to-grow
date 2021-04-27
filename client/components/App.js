@@ -32,7 +32,20 @@ const App = () => {
   if (!loginName) {
    return(
      // this is where the login will go
-     <form id="loginForm">
+     <form id="loginForm" onSubmit={() => {
+      //onClick={() => {method}}
+                  fetch('/signup', {
+                      // method
+                      method: 'POST',
+                      // headers
+                      headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+      
+                      },
+                      body : { username : 'testusername', password : 'password123'}
+                  })
+                  setLoginName('testusername');
+                  }} >
        {/* <label for="userName">Input User Name:</label> */}
        <input className="fav-input"
          type="text" 
@@ -43,13 +56,27 @@ const App = () => {
        <input className="fav-button"
          type="submit" 
           value="Submit"
-          onClick={() => {
-            let val = document.getElementById("userName");
-            console.log(val.value);
-            //val =  val.value 
-            // how to get the data from the input text field to assign to the user state??
-            setLoginName(val.value);
-          }}
+//           onClick={() => {
+// //onClick={() => {method}}
+//             let val = document.getElementById("userName");
+//             console.log(val.value);
+//             fetch('/signup', {
+//                 // method
+//                 method: 'POST',
+//                 // headers
+//                 headers: {
+//                   'Content-Type': 'application/x-www-form-urlencoded'
+
+//                 },
+//                 body : { username : val.value, password : 'password123'}
+//             }
+            // )
+//             //val =  val.value 
+//             // how to get the data from the input text field to assign to the user state??
+//             
+//           }
+        // }
+        
         ></input>
       </form>
     )
