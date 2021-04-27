@@ -1,14 +1,16 @@
 // import React, { useState } from 'react';
 import React, {useEffect, useState} from 'react';
-import { Button } from '@material-ui/core';
+//import { Button } from '@material-ui/core';
 // import helpers from '../../helpers';
 
 const FamilyList = props => {
   const [familiesData, setFamiliesData] = useState(null);
 
   const { gState } = props;
+  const { setGState } = props;
   const { setFamily } = props;
   const { setPlant } = props;
+  const { setPlantDetails } = props;
 
   // families receives object
   // first k-v pair 
@@ -16,18 +18,19 @@ const FamilyList = props => {
   // similalry with plants, will receive slug and family name
   useEffect(
     () => {
-      if (gState === null) return;
-
-      // console.log('fetching family list', gState);
-      fetch(`/location/${gState}`)
+      if (gState.name === null) return;
+      
+      // console.log('fetching family list', gState.name);
+      fetch(`/location/${gState.name}`)
         .then(response => response.json())
         .then(data => {
           // console.log('fetched data:', data);
           setFamiliesData(data.families);
+          setGState({name : gState.name, slug : data.slug});
         })
         .catch(() => console.log('oops'))
     },
-    [gState]
+    [gState.name]
   );
 
   if (familiesData === null) return (<div></div>)
@@ -37,16 +40,19 @@ const FamilyList = props => {
         // console.log(family);
         return (
           <li key={index}>
-            <Button 
+            <button
+              className = "list-buttons"
+              // color = "#5dbb63"
               onClick={
                 () => {
                   setFamily(family);
                   setPlant(null);
+                  setPlantDetails(null);
                 }
               }
             >
               {family}
-            </Button>
+            </button>
           </li>
         )
       })}

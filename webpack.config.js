@@ -11,10 +11,17 @@ module.exports = {
     mode: process.env.NODE_ENV,
     devServer: {
       publicPath : '/build',
+      port : 8080,
       proxy: {
-        // publicPath : '/build',
-         '/location/': 'http://localhost:3000'
-      },
+          '/': 'http://localhost:3000'
+        }
+      
+      //{
+        
+      //   // publicPath : '/build',
+      //    '/location/': 'http://localhost:3000',
+      //    '/signup/' : 'http://localhost:3000'
+      // },
     },
     module: {
         rules: [
