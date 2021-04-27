@@ -238,3 +238,21 @@ ul {
 //     display : flex;
 //     justify-content: space-between;
 // }
+
+.zip-search {
+  display: flex;
+  font-family: 'Amatic SC', monospace;
+  font-size: 2rem;
+  color: $primaryGreen;
+  align-items: center;
+}
+
+.zip-search input {
+  font-family: 'Amatic SC', monospace;
+  width: 250px;
+  margin-left: 20px;
+  line-height: 1;
+  font-size: 3rem;
+  padding: 30px;
+  align-self: flex-end;
+}

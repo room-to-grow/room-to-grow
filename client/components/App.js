@@ -4,11 +4,12 @@ import FamilyList from './FamilyList'
 import PlantList from './PlantList';
 import PlantDetails from './PlantDetails';
 import Favorites from './Favorites';
+import SearchContainer from './SearchContainer';
 
 const App = () => {
   // the collection of all of the states
   const [statesData, setStatesData] = useState(null);
-  const [gState, setGState] = useState({name : null, slug : null});
+  const [gState, setGState] = useState({ name: null, slug: null });
   const [family, setFamily] = useState(null);
   const [plant, setPlant] = useState(null);
   const [plantDetails, setPlantDetails] = useState(null);
@@ -30,18 +31,18 @@ const App = () => {
   // sets the loginName (w/o password) to send to backend
   // to associate a user's favorites with their login name
   if (!loginName) {
-   return(
-     // this is where the login will go
-     <form id="loginForm">
-       {/* <label for="userName">Input User Name:</label> */}
-       <input className="fav-input"
-         type="text" 
-         id="userName" 
-         name="userName"
-         placeholder="Input username here"
-       ></input>
-       <input className="fav-button"
-         type="submit" 
+    return (
+      // this is where the login will go
+      <form id="loginForm">
+        {/* <label for="userName">Input User Name:</label> */}
+        <input className="fav-input"
+          type="text"
+          id="userName"
+          name="userName"
+          placeholder="Input username here"
+        ></input>
+        <input className="fav-button"
+          type="submit"
           value="Submit"
           onClick={() => {
             let val = document.getElementById("userName");
@@ -54,9 +55,9 @@ const App = () => {
       </form>
     )
   }
- 
+
   // If there is no statesData yet, show a loading indicator.
- if (!statesData) {
+  if (!statesData) {
     return (
       <div>Loading...</div>
     );
@@ -65,17 +66,19 @@ const App = () => {
   return (
 
     <div id="outer-container">
-      <div id = "info-container"> 
-        <USMap 
-          id="us-map" 
+
+      <div id="info-container">
+        <SearchContainer />
+        <USMap
+          id="us-map"
           statesData={statesData}
-          setGState={setGState} 
+          setGState={setGState}
           setFamily={setFamily}
           setPlant={setPlant}
           setPlantDetails={setPlantDetails}
         />
         <div id="listsContainer">
-          <FamilyList 
+          <FamilyList
             gState={gState}
             setGState={setGState}
             setFamily={setFamily}
@@ -102,10 +105,10 @@ const App = () => {
         </div>
       </div>
 
-      <div id = "favorites-container"> 
-        <Favorites 
-          favorites={favorites} 
-          // loginName={loginName}
+      <div id="favorites-container">
+        <Favorites
+          favorites={favorites}
+        // loginName={loginName}
         />
       </div>
     </div>
