@@ -42,6 +42,8 @@ Full CRUD for users and faves
 
 Add error handlers to our middlewares :)
 
+The current build is broken, it broke very close to the presentation so we did not have time to fix it. However, the webpack dev server still works.
+
 EXTRA NOTES:
 
 There are unhandles errors with the trefle API, and not all of the entries are complete
