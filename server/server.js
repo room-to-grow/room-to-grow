@@ -31,7 +31,6 @@ const PORT = 7070;
 
 
 
-//
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
@@ -42,6 +41,7 @@ app.use("/build", express.static(path.join(__dirname, "../build")));
 
 
 
+//  >>  FETCH REQUEST TEST/ FLOW TEST  <<
 app.use((req, res, next) => {
   console.log(`
   ***** FLOW TEST *****\n
@@ -58,12 +58,16 @@ app.get("/", (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, "../index.html"));
 });
 
-// route handlers go here
+
+//  >>  ROUTING FOR MAP AND LOCATION DATA  <<
 const location = require("./routes/locationRouter");
 app.use("/location", location);
 
-const signup = require("./routes/dbRouter");
-app.use("/signup", signup);
+
+//  >>  ROUTING FOR SIGNING UP AND LOGGING IN  <<
+const login = require("./routes/dbRouter");
+app.use("/signup", login);
+app.use("/login", login);
 
 // const faves = require('./routes/dbRouter')
 // app.use('/user', faves);
