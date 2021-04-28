@@ -73,7 +73,8 @@ favesController.addFave = async (req, res, next) => {
  
   const { user_id, plant_id, notes } = req.body;
 
-   
+  console.log(user_id)
+  console.log(plant_id)
   const userQueryString = {
     text : 'SELECT _id from users WHERE users.username = $1',
     values : [user_id],
@@ -88,12 +89,14 @@ favesController.addFave = async (req, res, next) => {
   const user_result = await db.query(userQueryString);
   const plant_result = await db.query(plantQueryString);
 
-
   const addQueryString = {
     text : 'INSERT INTO favorites (plant_id, user_id) VALUES ($1 $2)',
-    values = [plant_result.row[0][0], user_result.row[0][0]],
+    values : [plant_result.row[0][0], user_result.row[0][0]],
     rowMode : 'array'
   }
+
+  
+
 
   const favorites_result = await db.query(addQueryString);
   
