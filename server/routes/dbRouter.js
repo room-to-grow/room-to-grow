@@ -37,12 +37,12 @@ router.post("/", userController.createUser, cookieController.createCookie, cooki
 router.post(
   "/faves",
   favesController.addPlant,
-  //favesController.addFave,
-  //favesController.getFaves,
+  favesController.addFave,
+  favesController.getFaves,
   (req, res) => {
     console.log("Attempting to save selection");
     // what goes in the response?
-    res.sendStatus(200);
+    res.sendStatus(200).json(res.locals.favorites);
     console.log("Saved fave!");
   }
 );

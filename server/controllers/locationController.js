@@ -68,10 +68,18 @@ locationController.getPlants = async (req, res, next) => {
   //   }
   // randomizer(5);
   for (let i = 0; i < 20; i++) {
+    const plant_query = {
+      text : 'SELECT COUNT(*) FROM favorites JOIN (SELECT _id FROM plants WHERE plants.scientific_name = $1) AS plant ON favorites.plant_id = plant._id',
+      //text : 'SELECT plant_id FROM favorites WHERE user_id = $1',
+      values : [data[i].scientific_name],
+      rowMode : 'array'
+    }
+    const num_favs = await db.query(plant_query)
     const plant = {
       common_name: data[i].common_name,
       scientific_name: data[i].scientific_name,
       image_url: data[i].image_url,
+      favorites : num_favs.rows[0][0]
     };
     randoPlants.push(data[i]);
     console.log(plant);
@@ -99,6 +107,7 @@ locationController.getDetails = async (req, res, next) => {
   const newResponse = await fetch(url);
   const jsonRes = await newResponse.json();
   const data = jsonRes.data;
+
   const resultObj = {
     common_name: data.common_name,
     scientific_name: data.scientific_name,
