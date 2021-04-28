@@ -84,7 +84,7 @@ const App = () => {
 //           }
         // }
         
-        ></button>
+        >Submit</button>
       </form>
       </div>
     )
@@ -115,9 +115,12 @@ const App = () => {
             setGState={setGState}
             family={family}
             setFamily={setFamily}
+            plant={plant}
             setPlant={setPlant}
+            plantDetails={plantDetails}
             setPlantDetails={setPlantDetails}
-
+            favorites={favorites}
+            loginName={loginName}
           />
           <PlantDetails
             family={family}

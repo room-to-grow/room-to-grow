@@ -8,6 +8,10 @@ const PlantList = props => {
   const { family } = props;
   const { gState } = props;
   const { setPlant } = props;
+  // const { plantDetails } = props;
+  const { setPlantDetails } = props;
+  // const { plant } = props;
+  // const { setPlant } = props;
 
   useEffect(
     () => {
@@ -17,13 +21,14 @@ const PlantList = props => {
         .then(response => response.json())
         .then(data => {
           console.log('fetched list of plants:', data);
-          console.log(typeof data)
+          // console.log(typeof data)
           //const list = data.plants.map((plant) => plant.common_name);
           setPlantList(data.plants); // an array of plants -> plant.scientific_name
           /*
             plant = { common_name : ...,
                       image_url: ...,
-                      scientfic_name : ...}
+                      scientfic_name : ...
+                    favorites: Integer}
 
           */
           setPlantDetails(null);
@@ -40,19 +45,22 @@ const PlantList = props => {
   if (family === null || plantList === null) return (<div></div>);
 
   else return (
-    
+    <div>
+    <h2>Plant List in {family}:</h2>
     <ul id="plantList">
       {plantList.map((plant, index) => {
         return (
+         
           <li key={index}>
             <img src={plant.image_url} width = "40px" height = "40px"></img>
-            <button className = "list-buttons" onClick={() => setPlant(plant)}>
+            <button className = "plantlist-buttons" onClick={() => setPlant(plant)}>
               {plant.common_name}
             </button>
           </li>
         )
       })}
     </ul>
+    </div>
   );
 }
 
