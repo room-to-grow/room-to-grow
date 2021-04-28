@@ -21,7 +21,7 @@ router.post("/login", (req, res) => {
 });
 */
 
-router.post("/", userController.createUser,cookieController.createCookie, cookieController.startSession, (req, res) => {
+router.post("/", userController.createUser, cookieController.createCookie, cookieController.clearSessions, cookieController.startSession, (req, res) => {
   // error handler
   // handle if username is already taken
   // upon successful signup do the following:
