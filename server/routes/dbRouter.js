@@ -3,6 +3,7 @@ const router = express.Router();
 
 const favesController = require("../controllers/favesController");
 const userController = require("../controllers/userController");
+const cookieController = require('../controllers/cookieController');
 
 router.get("/user", favesController.getFaves, (req, res, next) => {
   console.log("Router preparing to fetch user's saved plants");
@@ -20,7 +21,7 @@ router.post("/login", (req, res) => {
 });
 */
 
-router.post("/", userController.createUser, (req, res) => {
+router.post("/", userController.createUser,cookieController.createCookie, cookieController.startSession, (req, res) => {
   // error handler
   // handle if username is already taken
   // upon successful signup do the following:
