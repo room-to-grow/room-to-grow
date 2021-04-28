@@ -1,6 +1,20 @@
-const cookieParser = require("cookie-parser");
-
 const cookieController = {};
+
+
+
+cookieController.setSSIDCookie = (req,res,next) => {
+  console.log('********* COOKIE CONTROLLER START *********')
+  // console.log(req.body)
+
+  //  >>  UPDATE WHEN WE HAVE REQ.BODY.PASSWORD  <<
+  res.cookie('ssid', req.body.password, {httpOnly: false, maxAge: 1000000})
+
+  // console.log(res.cookies)
+  // console.log('********* COOKIE CONTROLLER END *********')
+  return next();
+}
+
+
 
 // cookieController.sessionHandler = (req, res, next) => {
 //     // extracting the user id from the session
@@ -11,5 +25,7 @@ const cookieController = {};
 //         userId = (/*cookie creator we already have*/)
 //     }
 // }
+
+
 
 module.exports = cookieController;
