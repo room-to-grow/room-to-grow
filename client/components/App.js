@@ -17,6 +17,7 @@ const App = () => {
   const [loginName, setLoginName] = useState(null);
   const [zip, setZip] = useState('');
   const [registrationState, setRegistrationState] = useState(false);
+
   const [userName, setUsername] = useState();
   const [password, setPassword] = useState();
   const [newUsername, setNewusername] = useState();
@@ -151,39 +152,25 @@ const App = () => {
   }
 
   if (!loginName) {
-<<<<<<< HEAD
+
     return (
       // this is where the login will go
-      <form id="loginForm">
+      <div id="loginForm">
         {/* <label for="userName">Input User Name:</label> */}
         <input className="fav-input"
           type="text"
           id="userName"
-          name="userName"
           placeholder="Input username here"
-        ></input>
-        <input className="fav-button"
-          type="submit"
-=======
-   return(
-     // this is where the login will go
-     <div id="loginForm">
-       {/* <label for="userName">Input User Name:</label> */}
-       <input className="fav-input"
-         type="text"
-         id="userName"
-         placeholder="Input username here"
-       ></input><br></br>
+        ></input><br></br>
 
         <input className="fav-input"
-         type="password"
-         id="password"
-         placeholder="Input password here"
-       ></input><br/>
+          type="password"
+          id="password"
+          placeholder="Input password here"
+        ></input><br />
 
-       <input className="fav-button"
-         type="submit"
->>>>>>> main
+        <input className="fav-button"
+          type="submit"
           value="Submit"
           onClick={onUserLogin}
         ></input>
@@ -198,11 +185,8 @@ const App = () => {
     )
   }
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> main
   // If there is no statesData yet, show a loading indicator.
   if (!statesData) {
     return (
