@@ -7,6 +7,7 @@ import PlantDetails from './PlantDetails';
 
 const FamilyList = props => {
   const [familiesData, setFamiliesData] = useState(null);
+  const [familyListIsOpen, setfamilyListIsOpen] = useState(null);
 //useState:
 //const [default state, method that changes state] = useState(null)
   function revertStates() {
@@ -39,6 +40,7 @@ const FamilyList = props => {
         .then(data => {
           // console.log('fetched data:', data);
           setFamiliesData(data.families);
+          setfamilyListIsOpen(true)
           setGState({name : gState.name, slug : data.slug});
         })
         .catch(() => console.log('oops'))
@@ -84,7 +86,7 @@ const FamilyList = props => {
   //   )
   // }
 
-  if (familiesData === null) return (<div></div>)
+  if (familiesData === null || familyListIsOpen === null) return (<div></div>)
   else return (
     <div className='popup-box'>
         <div className='box'>
