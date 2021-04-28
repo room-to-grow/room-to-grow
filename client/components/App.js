@@ -144,14 +144,6 @@ const App = () => {
     )
   }
 
-  // If there is no statesData yet, show a loading indicator.
-  if (!statesData) {
-    return (
-      <div>Loading...</div>
-    );
-  }
-
-
   return (
     <div id="outer-container">
         <UserPage loginName={loginName} logout={setLoginName}/>
