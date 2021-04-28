@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+
 import UserPage from './UserMenu'
 
 const App = () => {
   // the collection of all of the states
   const [loginName, setLoginName] = useState(null);
+  const [zip, setZip] = useState('');
   const [registrationState, setRegistrationState] = useState(false);
 
   /** NOT NEEDED/ SECURITY FLAW TO STORE USER PASSWORD IN STATE **/
@@ -141,6 +143,14 @@ const App = () => {
       </div>
     )
   }
+
+  // If there is no statesData yet, show a loading indicator.
+  if (!statesData) {
+    return (
+      <div>Loading...</div>
+    );
+  }
+
 
   return (
     <div id="outer-container">
