@@ -5,8 +5,6 @@ const saltRounds = 10;
 const userController = {};
 
 userController.createUser = (req, res, next) => {
-  console.log("in CreateUser")
-  console.log('userController log', req.body);
   const { username, password } = req.body;
   console.log("username: ", username);
   console.log("password: ", password);
@@ -26,19 +24,31 @@ userController.createUser = (req, res, next) => {
   });
 };
 
-//tbd endpoint
-// userController.post =
-//   ("/login",
-//   (req, res) => {
-//     bcrypt.hash =
-//       (req.body.password,
-//       saltRounds,
-//       (err, hash) => {
-//         db.users.create({
-//           username: req.body.username,
-//           password: hash,
-//         });
-//       });
-//   });
+userController.verifyUser = (req, res, next) => {
+  const { username, password } = req.body;
+  const findQuery = {
+    text: 'SELECT username, password FROM users where username = $1',
+    values: [username],
+    rowMode: 'array'
+  };
+
+  db.
+    query(findQuery)
+    .then((user) => {
+      // assigning the pw that is currently saved in DB to a constant
+      const passwordFromDB = user.rows[0][1];
+      return passwordFromDB;
+    }).then((passwordFromDB) => {
+      // comparing the pw that is currently saved in DB to the pw that was entered
+      bcrypt.compare(password, passwordFromDB, (err, success) => {
+        if(success) console.log('pw matches!');
+        // res.locals.verification set to true/false based on compare results
+        res.locals.verification = success;
+        //need to add logic to exit out of the middleware if the password is incorrect - normally this is done with a redirect;
+      });
+    }).then((password) => next()); 
+
+}
+
 
 module.exports = userController;

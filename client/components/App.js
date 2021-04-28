@@ -14,6 +14,7 @@ const App = () => {
   const [plantDetails, setPlantDetails] = useState(null);
   const [favorites, setFavorites] = useState([]);
   const [loginName, setLoginName] = useState(null);
+  const [isLoggedIn, setLoginStatus] = useState(false);
 
   // This should only run once -- when the loginname is input
   // then fetch for the US State data and will then render the USMap
@@ -26,6 +27,7 @@ const App = () => {
     })();
   }, [loginName]);
 
+
   // until loginName value is delcared (default of null), show the login page
   // sets the loginName (w/o password) to send to backend
   // to associate a user's favorites with their login name
@@ -35,10 +37,11 @@ const App = () => {
     {/* // this is where the login will go */}
      <form id="loginForm" onSubmit={() => {
       //onClick={() => {method}}
-                      const val = document.getElementById("userName");
-                      const bodyData = {username: val.value, password: 'password123'};
-                      console.log('val.value', val.value);
-                      fetch('/signup', {
+                      const userNameVal = document.getElementById("userName");
+                      const pwVal = document.getElementById("password");
+                      const bodyData = {username: userNameVal.value, password: pwVal.value};
+                    
+                      fetch('/signup/new', {
                       // method
                       method: 'POST',
                       // headers
@@ -49,7 +52,7 @@ const App = () => {
                       },
                       body: JSON.stringify(bodyData)
                   }) 
-                  setLoginName('testusername');
+                  setLoginName(userNameVal);
                   }} >
        {/* <label for="userName">Input User Name:</label> */}
        <input className="fav-input"
@@ -57,35 +60,45 @@ const App = () => {
          id="userName" 
          name="userName"
          placeholder="Input username here"
+       ></input><br></br>
+       <input className="fav-input"
+         type="text" 
+         id="password" 
+         name="password"
+         placeholder="Input password here"
        ></input>
        <button className="fav-button"
          type="submit"
          id='submit'
          name='submit' 
-          // value="Submit"
-//           onClick={() => {
-// //onClick={() => {method}}
-//             let val = document.getElementById("userName");
-//             console.log(val.value);
-//             fetch('/signup', {
-//                 // method
-//                 method: 'POST',
-//                 // headers
-//                 headers: {
-//                   'Content-Type': 'application/x-www-form-urlencoded'
+        >Sign Up</button>
+      </form><br></br>
+      <button className="logIn" onClick={() => {
+        const userNameVal = document.getElementById("userName");
+        const pwVal = document.getElementById("password");
+        const bodyData = {username: userNameVal.value, password: pwVal.value};
+        fetch('/signup/login', {
+          // method
+          method: 'POST',
+          // headers
+          headers: {
+            // 'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json'
 
-//                 },
-//                 body : { username : val.value, password : 'password123'}
-//             }
-            // )
-//             //val =  val.value 
-//             // how to get the data from the input text field to assign to the user state??
-//             
-//           }
-        // }
+          },
+          body: JSON.stringify(bodyData)
+        }).then((res) => {
+          return res.json();
+        }).then((json) => {
+          if(json) {
+            setLoginStatus(json);
+            console.log('Login Status after verification', isLoggedIn);
+          }
+        });
+        setLoginName(userNameVal);
         
-        >Submit</button>
-      </form>
+        // setLoginName('testusername');
+        }}>Log In with an Existing Account</button> 
       </div>
     )
   }
