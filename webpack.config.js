@@ -13,16 +13,11 @@ module.exports = {
     historyApiFallback: true,
     publicPath: "/build",
     proxy: {
-      '/location': {
+      '/': {
         // publicPath : '/build',
         target: "http://localhost:7070",
         secure: false,
       },
-      '/signup': {
-        // publicPath : '/build',
-        target: "http://localhost:7070",
-        secure: false,
-      }
     },
   },
   module: {
