@@ -21,7 +21,7 @@ router.post("/login", (req, res) => {
 });
 */
 
-router.post("/", userController.createUser, cookieController.createCookie, cookieController.clearSessions, cookieController.startSession, (req, res) => {
+router.post("/new", userController.createUser, cookieController.createCookie, cookieController.clearSessions, cookieController.startSession, (req, res) => {
   // error handler
   // handle if username is already taken
   // upon successful signup do the following:
@@ -29,6 +29,15 @@ router.post("/", userController.createUser, cookieController.createCookie, cooki
   console.log("Attempting to create user");
   res.status(200).send("signed up");
   console.log("User successfully signed in!");
+});
+
+router.post("/login", userController.verifyUser, cookieController.createCookie, cookieController.clearSessions, cookieController.startSession, (req, res) => {
+  // error handler
+  // handle if username is already taken
+  // upon successful signup do the following:
+  console.log(req.body)
+  res.status(200).send(res.locals.verification);
+  console.log("Check response for login status!");
 });
 
 //what does the req body for favorites look like?

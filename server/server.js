@@ -46,8 +46,9 @@ app.get("/", (req, res) => {
 const location = require("./routes/locationRouter");
 app.use("/location", location);
 
-const signup = require("./routes/dbRouter");
-app.use("/signup", signup);
+const dbRouter = require("./routes/dbRouter");
+app.use("/signup", dbRouter);
+
 
 // const faves = require('./routes/dbRouter')
 // app.use('/user', faves);
