@@ -126,16 +126,14 @@ const App = () => {
           <FamilyList 
             gState={gState}
             setGState={setGState}
-            setFamily={setFamily}
-            setPlant={setPlant}
-            setPlantDetails={setPlantDetails}
-
-          />
-          <PlantList
             family={family}
-            gState={gState}
+            setFamily={setFamily}
+            plant={plant}
             setPlant={setPlant}
+            plantDetails={plantDetails}
             setPlantDetails={setPlantDetails}
+            favorites={favorites}
+            loginName={loginName}
           />
           <PlantDetails
             family={family}

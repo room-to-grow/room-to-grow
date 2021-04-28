@@ -3,13 +3,19 @@ const db = require("../models/plantModel");
 const favesController = {};
 
 // this middleware retrieves a user's favorited plants
-favesController.getFaves = (req, res, next) => {
-  const queryString = "SELECT faves.* FROM faves";
-  const userFaves = db.query(queryString);
-  userFaves
-    .then((data) => (res.locals.faves = data.rows))
-    .then(console.log("fetching user's favorite plants NOW!"))
-    .then(() => next());
+favesController.getFaves = async (req, res, next) => {
+  
+  const userQueryString = {
+    text : 'SELECT plants.common_name FROM plants JOIN(SELECT plant_id FROM favorites WHERE user_id = $1) AS favs ON plants._id = favs.plant_id',
+    //text : 'SELECT plant_id FROM favorites WHERE user_id = $1',
+    values : ['28'],
+    rowMode : 'array'
+  }
+
+  const fav_plants = await db.query(userQueryString);
+  res.locals.favorites = fav_plants.rows;
+  next();
+ 
 };
 
 
@@ -62,20 +68,49 @@ favesController.addPlant = (req, res, next) => {
 };
 
 // this middleware adds the selected plant's id (scientific name) to the faves table along with the user id and the user's notes for the plant
-favesController.addFave = (req, res, next) => {
+favesController.addFave = async (req, res, next) => {
   
-  
+ 
   const { user_id, plant_id, notes } = req.body;
-  //   req.body.plants = {...plant details....}
-  //
-  //req.user_id
-  const { plants } = req.body;
 
-  const favesString =
-    "INSERT INTO public.faves VALUES (user_id, plant_id, notes)";
-  const newFave = db.query(queryString);
-  newFave.then(() => next());
+  console.log(user_id)
+  console.log(plant_id)
+  const userQueryString = {
+    text : 'SELECT _id from users WHERE users.username = $1',
+    values : [user_id],
+    rowMode : 'array'
+  }
+  const plantQueryString = {
+    text : 'SELECT _id from plants WHERE plants.scientific_name = $1',
+    values : [plant_id],
+    rowMode : 'array'
+  }
+
+  const user_result = await db.query(userQueryString);
+  const plant_result = await db.query(plantQueryString);
+
+  const addQueryString = {
+    text : 'INSERT INTO favorites (plant_id, user_id) VALUES ($1 $2)',
+    values : [plant_result.row[0][0], user_result.row[0][0]],
+    rowMode : 'array'
+  }
+
+  
+
+
+  const favorites_result = await db.query(addQueryString);
+  
+  res.locals.user_id = user_result.row[0][0];
+  next();
+
 };
+
+favesController.deleteFav = async (req, res, next) => {
+    // similar to addFav
+    
+}
+
+
 
 module.exports = favesController;
 
