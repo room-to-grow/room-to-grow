@@ -17,14 +17,14 @@ const cookieController = require("../controllers/cookieController");
 
 //  THIS SHOULD BE FOR SIGN-UP
 router.post("/signup", 
-  // userController.createUser, 
-  cookieController.setSSIDCookie,
+  userController.verifyExisting, 
+  userController.encryptPswd,
   (req, res) => {
   // error handler
   // handle if username is already taken
   // upon successful signup do the following:
   console.log("Attempting to create user");
-  res.status(200).send("signed up");
+  res.status(200).json({message: 'successful'});
   console.log("User successfully signed in!");
 });
 
@@ -32,7 +32,7 @@ router.post("/signup",
 //  >>  UPDATE LOGIN WHEN WE HAVE USER DB SET  <<
 router.post(
   "/login", 
-  // userController.logIn,
+  userController.logIn,
   cookieController.setSSIDCookie,
   (req, res) => {
     // error handler
