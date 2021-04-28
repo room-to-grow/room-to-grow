@@ -5,7 +5,8 @@ import React, {useEffect, useState} from 'react';
 
 const FamilyList = props => {
   const [familiesData, setFamiliesData] = useState(null);
-
+//useState:
+//const [default state, method that changes state] = useState(null)
   function revertStates() {
     setFamiliesData(null);
     setGState({ name: null, slug: null })
@@ -13,6 +14,7 @@ const FamilyList = props => {
 
   const { gState } = props;
   const { setGState } = props;
+  const { family } = props;
   const { setFamily } = props;
   const { setPlant } = props;
   const { setPlantDetails } = props;
@@ -38,6 +40,22 @@ const FamilyList = props => {
     [gState.name]
   );
 
+  let plants;
+
+  if(family === null) plants = <div></div>;
+
+  else {
+    plants = (
+  <div className='plantListComponent'>
+  <PlantList
+  family={family}
+  gState={gState}
+  setPlant={setPlant}
+  setPlantDetails={setPlantDetails}
+  />
+  </div>)
+  }
+
   if (familiesData === null) return (<div></div>)
   else return (
     <div className='popup-box'>
@@ -49,8 +67,7 @@ const FamilyList = props => {
                 <button className='familyList-dropbtn'>See Family List:</button>
                 <div className='dropdown-content'>
                   {familiesData.map((family, index) => {
-                    // console.log(family);
-                    
+                    // console.log(family);                    
                     return (
                       <li key={index}>
                         <button
@@ -72,6 +89,7 @@ const FamilyList = props => {
               </div>
               </div>
             </ul>
+            {plants}
           </div>
         </div>
   );
