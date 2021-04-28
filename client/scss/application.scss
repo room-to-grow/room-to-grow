@@ -144,6 +144,22 @@ ul {
   overflow: auto;
 }
 
+.plantDetails-box {
+  position: relative;
+  justify-content: space-between;
+  width: 70%;
+  margin: 0 auto;
+  height: auto;
+  max-height: 70vh;
+  margin-top: calc(100vh - 85vh - 20px);
+  // background: #fff;
+  background-color: lightgrey;
+  border-radius: 4px;
+  padding: 20px;
+  border: 1px solid #999;
+  overflow: auto;
+}
+
 .close-icon {
   content: 'x';
   cursor: pointer;
@@ -263,6 +279,21 @@ ul {
 }
 
 // .plantListComponent
+
+.plantlist-buttons {
+  background-color : lightgrey;
+  border: none;
+  color: darkgreen;
+  // color: $primaryGreen;
+  // border-color: $primaryGreen;
+  font-size: 2em;
+
+  font-family: 'Amatic SC', monospace;
+}
+
+.plantlist-buttons:hover {
+  font-size: 2.5em;
+}
 
 #plantList {
   //background-color: $darkGray;
