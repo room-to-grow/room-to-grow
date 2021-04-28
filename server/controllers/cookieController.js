@@ -48,4 +48,15 @@ cookieController.startSession = (req, res, next) => {
 
 }
 
+cookieController.clearSessions = (req, res, next) => {
+
+  const queryString = 'DELETE FROM sessions WHERE expiresat < CURRENT_TIMESTAMP'
+  
+  db.
+    query(queryString)
+    .then(()=>{
+      next();
+    });
+}
+
 module.exports = cookieController;
