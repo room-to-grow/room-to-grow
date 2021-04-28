@@ -1,46 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import USMap from './USMap';
 import UserPage from './UserMenu'
-import PlantList from './PlantList';
-import PlantDetails from './PlantDetails';
-import Favorites from './Favorites';
 
 const App = () => {
   // the collection of all of the states
-  const [gState, setGState] = useState({name : null, slug : null});
-  const [family, setFamily] = useState(null);
-  const [plant, setPlant] = useState(null);
-  const [plantDetails, setPlantDetails] = useState(null);
-  const [favorites, setFavorites] = useState([]);
   const [loginName, setLoginName] = useState(null);
   const [registrationState, setRegistrationState] = useState(false);
 
-  const [userName, setUsername] = useState();
-  const [password, setPassword] = useState();
-  const [newUsername, setNewusername] = useState();
-  const [newPswd, setNewpswd] = useState();
-
-  // This should only run once -- when the loginname is input
-  // then fetch for the US State data and will then render the USMap
-  
-
+  /** NOT NEEDED/ SECURITY FLAW TO STORE USER PASSWORD IN STATE **/
+  /** REQUEST SHOULD BE SENT DIRECTLY WITH USERNAME/PASSWORD ON SUBMIT **/
+  // const [userName, setUsername] = useState();
+  // const [password, setPassword] = useState();
+  // const [newUsername, setNewusername] = useState();
+  // const [newPswd, setNewpswd] = useState();
 
   function onUserLogin() {
-    // () => {
-    //   let val = document.getElementById("userName");
-    //   console.log(val.value);
-    //   //val =  val.value 
-    //   // how to get the data from the input text field to assign to the user state??
-    //   setLoginName(val.value);
-    // } [ akldfjdaklsf  ] => { value: fdsahfhadkf, }
-    
+
     const nameInput = document.getElementById('userName');
-    const pswdInput = document.getElementById('password'); 
-    
+    const pswdInput = document.getElementById('password');
+
     const username = nameInput.value;
     const password = pswdInput.value;
-
-    //
 
     nameInput.value = '';
     pswdInput.value = '';
@@ -53,7 +32,7 @@ const App = () => {
     //reroute to login page, indefinitely
     //
     // fetch('/user') 
-  
+
   }
 
 
@@ -64,7 +43,7 @@ const App = () => {
 
     const newUserval = newUser.value;
     const newPswdval = newPswd.value;
-    
+
     /////////// WORK IN PROGRESS
 
     // fetch('/users') //POST
@@ -88,18 +67,6 @@ const App = () => {
 
 
   }
-    //cross reference
-
-
- 
-
-    
-
-    //can INSERT if user doesnt already exist
-    //or can do two fetch requests
-    //request the user.body.usernames to make sure username doesn't already exist
-  
-
 
   // until loginName value is delcared (default of null), show the login page
   // sets the loginName (w/o password) to send to backend
@@ -107,90 +74,77 @@ const App = () => {
 
   if (registrationState === true) {
 
-    return(
+    return (
       //registration page
 
       <form id="loginForm">
 
-      <input className="fav-input"
-         type="text" 
-         id="newUsername" 
-         placeholder="New username here"
-       ></input><br/>
-       
-       <input className="fav-input"
-         type="password" 
-         id="newPswd" 
-         placeholder="New password here"
-       ></input><br/>
+        <input className="fav-input"
+          type="text"
+          id="newUsername"
+          placeholder="New username here"
+        ></input><br />
 
-      <input className="fav-input"
-         type="password" 
-         id="newPswdconfirm" 
-         placeholder="Confirm password here"
-       ></input><br/>
+        <input className="fav-input"
+          type="password"
+          id="newPswd"
+          placeholder="New password here"
+        ></input><br />
+
+        <input className="fav-input"
+          type="password"
+          id="newPswdconfirm"
+          placeholder="Confirm password here"
+        ></input><br />
 
         <input className="fav-button"
-         type="submit" 
+          type="submit"
           value="Create Account"
           onClick={onUserRegistration}
         ></input>
 
-       </form>
+      </form>
 
     )
 
   }
-  
+
   if (!loginName) {
    return(
      // this is where the login will go
      <div id="loginForm">
        {/* <label for="userName">Input User Name:</label> */}
        <input className="fav-input"
-         type="text" 
-         id="userName" 
+         type="text"
+         id="userName"
          placeholder="Input username here"
        ></input><br></br>
-    
+
         <input className="fav-input"
-         type="password" 
-         id="password" 
+         type="password"
+         id="password"
          placeholder="Input password here"
        ></input><br/>
 
        <input className="fav-button"
-         type="submit" 
+         type="submit"
           value="Submit"
           onClick={onUserLogin}
         ></input>
 
         <input className="register-button"
-        type="submit"
-        value="Register"
-        onClick={() => setRegistrationState(true)}
+          type="submit"
+          value="Register"
+          onClick={() => setRegistrationState(true)}
         ></input>
 
       </div>
     )
   }
 
-
- 
   return (
-    <div id="outer-container"> 
-        <UserPage family={family} 
-        setGState={setGState} 
-        setFamily={setFamily} 
-        setPlant={setPlant} 
-        plant={plant} 
-        gState={gState} 
-        plantDetails={plantDetails} 
-        setPlantDetails={setPlantDetails} 
-        setFavorites={setFavorites} 
-        favorites={favorites} 
-        loginName={loginName} 
-        logout={setLoginName}/>
+    <div id="outer-container">
+        <UserPage loginName={loginName} logout={setLoginName}/>
     </div>
   );
 };

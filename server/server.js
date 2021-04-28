@@ -4,6 +4,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const PORT = 3000;
+const cors = require('cors');
 
 /*
 // SESSION CONTROL
@@ -29,6 +30,7 @@ app.use(
 */
 
 //
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
