@@ -46,6 +46,7 @@ const App = () => {
     pswdInput.value = '';
 
     console.log(username, password);
+    setLoginName(username);
 
     //fix routing later
     //route so that unless input matches user info in database,
