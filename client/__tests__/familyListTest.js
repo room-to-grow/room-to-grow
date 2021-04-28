@@ -17,9 +17,7 @@ import USMap from '../components/USMap';
 
 //1. number of li items matches the length familiesData
 //2. verify that button invokes setFamily method
-//3. setFamily method changes family state
-//4. test that useEffect is not getting invoked when gState.name is null
-        // -the useEffect method is getting invoked when gState.name is not null
+
 //
 
 describe('React App TEST', () => {
@@ -31,8 +29,8 @@ describe('React App TEST', () => {
         slug: 'slug', 
         name: 'Georgia',
       },
-      setFamily: () => {
-        return 'setFamily works'; 
+      setFamily: (arg) => {
+        return 'setFamily works' + arg; 
       }, 
       setPlant: () => {
         return 'setPlant works';
@@ -45,18 +43,43 @@ describe('React App TEST', () => {
       wrapper = shallow(<FamilyList {...props} />)
     })
 
-    it('should render a list populated with whatever is passed into familiesData', () => {
+    // beforeEach(() )
+
+    it('should render a list of buttons populated with whatever is passed into familiesData', () => {
       
       // const listArr = wrapper.find('li').getElements();
-      // for(let i = 0; i < listArr.length; i += 1) {
-      //   expect(listArr[i])
-      // }
+      for(let i = 0; i < 10; i += 1) {
+        expect(wrapper.containsMatchingElement(<button className="list-buttons">{i}</button>));
+      }
       // expect(wrapper.setFamily()).toEqual
       // expect(wrapper.find('li').getElements().length).toEqual(10);
-      expect(wrapper.containsMatchingElement(<button className="list-buttons"></button>)).toEqual(true)
-      expect(wrapper.contains(<FamilyList gState='Georgia' />)).toEqual(true)
+      // expect(wrapper.containsMatchingElement(<button className="list-buttons">1</button>)).toEqual(true)
+      //expect(wrapper.contains(<button className = "list-buttons" />)).toEqual(true)
     })
+
+    // it('should invoke setFamily, setPlant, and setPlantDetails when a button is clicked', () => {
+    //   // const mockCallback = jest.fn(); 
+    //   // const tempWrapper = shallow(<FamilyList {...props}/>)
+    //   const newWrapper = shallow(<button onClick={() => {setFamily(props.familiesData[0])}}></button>)
+    //   // tempWrapper.find('.list-buttons').simulate('click')
+    //   newWrapper.simulate('click')
+    //   // wrapper.find('button').simulate('click'); 
+    //   expect(setFamily()).toHaveBeenCalled(); 
+    // })
 
   })
 })
+
+/*
+describe('Test Button component', () => {
+  it('Test click event', () => {
+    const mockCallBack = jest.fn();
+
+    const button = shallow((<Button onClick={mockCallBack}>Ok!</Button>));
+    button.find('button').simulate('click');
+    expect(mockCallBack.mock.calls.length).toEqual(1);
+  });
+});
+
+*/
 
