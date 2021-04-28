@@ -113,58 +113,44 @@ const App = () => {
   // sets the loginName (w/o password) to send to backend
   // to associate a user's favorites with their login name
 
-  if (registrationState === true) {
+  // if (registrationState === true) {
 
-    return (
-      //registration page
+  //   return (
+  //     //registration page
 
-      <form id="loginForm">
+  //     <form id="loginForm">
 
-        <input className="fav-input"
-          type="text"
-          id="newUsername"
-          placeholder="New username here"
-        ></input><br />
+  //       <input className="fav-input"
+  //         type="text"
+  //         id="newUsername"
+  //         placeholder="New username here"
+  //       ></input><br />
 
-        <input className="fav-input"
-          type="password"
-          id="newPswd"
-          placeholder="New password here"
-        ></input><br />
+  //       <input className="fav-input"
+  //         type="password"
+  //         id="newPswd"
+  //         placeholder="New password here"
+  //       ></input><br />
 
-        <input className="fav-input"
-          type="password"
-          id="newPswdconfirm"
-          placeholder="Confirm password here"
-        ></input><br />
+  //       <input className="fav-input"
+  //         type="password"
+  //         id="newPswdconfirm"
+  //         placeholder="Confirm password here"
+  //       ></input><br />
 
-        <input className="fav-button"
-          type="submit"
-          value="Create Account"
-          onClick={onUserRegistration}
-        ></input>
+  //       <input className="fav-button"
+  //         type="submit"
+  //         value="Create Account"
+  //         onClick={onUserRegistration}
+  //       ></input>
 
-      </form>
+  //     </form>
 
-    )
+  //   )
 
-  }
+  // }
 
   if (!loginName) {
-<<<<<<< HEAD
-    return (
-      // this is where the login will go
-      <form id="loginForm">
-        {/* <label for="userName">Input User Name:</label> */}
-        <input className="fav-input"
-          type="text"
-          id="userName"
-          name="userName"
-          placeholder="Input username here"
-        ></input>
-        <input className="fav-button"
-          type="submit"
-=======
    return(
      // this is where the login will go
      <div id="loginForm">
@@ -183,7 +169,6 @@ const App = () => {
 
        <input className="fav-button"
          type="submit"
->>>>>>> main
           value="Submit"
           onClick={onUserLogin}
         ></input>
@@ -198,11 +183,8 @@ const App = () => {
     )
   }
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> main
   // If there is no statesData yet, show a loading indicator.
   if (!statesData) {
     return (
