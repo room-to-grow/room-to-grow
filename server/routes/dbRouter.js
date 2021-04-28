@@ -24,6 +24,7 @@ router.post("/", userController.createUser, (req, res) => {
   // error handler
   // handle if username is already taken
   // upon successful signup do the following:
+  console.log(req.body)
   console.log("Attempting to create user");
   res.status(200).send("signed up");
   console.log("User successfully signed in!");
