@@ -35,26 +35,23 @@ router.post(
   userController.logIn,
   cookieController.setSSIDCookie,
   (req, res) => {
-    // error handler
-    // user not found handler -- login credentials not valid
-    // upon verification do the following:
-    // use "bcrypt compare" to verify that the username/password on the req body match
     res.status(200).redirect("/user");
-    console.log("User verified");
   });
     
   
   
-  router.get(
-    "/user", 
-    favesController.getFaves, 
-    (req, res, next) => {
-      console.log("Router preparing to fetch user's saved plants");
-      res.send(200).json(res.locals.faves);}
-  );
+router.get(
+  "/user", 
+  favesController.getFaves, 
+  (req, res, next) => {
+    console.log("Router preparing to fetch user's saved plants");
+    res.send(200).json(res.locals.faves);}
+);
+
+
+
 //what does the req body for favorites look like?
 // what should this endpoint be?
-/*
 router.post(
   "/faves",
   favesController.addPlant,
@@ -68,5 +65,5 @@ router.post(
 );
 
 
-*/
+
 module.exports = router;

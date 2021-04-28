@@ -10,22 +10,25 @@ const userController = {};
 userController.verifyExisting = (req, res, next) => {
   const { username, password } = req.body;
   console.log("username: ", username);
-  
-  const queryStringCheck = `SELECT users.username.*;`;
+  //can also do a WHERE check and if rows.length <1
+  const queryStringCheck = `SELECT username FROM users`;
   db.query(queryStringCheck)
-    .then((response) => (response).rows)
+    .then((response) => response.rows)
     .then(rows => {
-      if (rows.includes(req.body.username)) {
-        return res.status(200).json({message: 'usernameInUse'});
+      for (let user of rows) {
+        if (user.username===username) {
+          return res.status(200).json({message: 'usernameInUse'});
+        }
       }
       return next();
     })
+    .catch(err => console.log('Problem verifying user! ERROR: ', err))
 };
 
 
 userController.encryptPswd = (req, res, next) => {
   const { username, password } = req.body;
-
+  // console.log("Made it to encryption")
   bcrypt.hash(password, saltRounds, (err, hash) => {
     const values = [username, hash];
     console.log(values);
@@ -46,38 +49,55 @@ userController.encryptPswd = (req, res, next) => {
 
 
 
-//  >>  ADDED FROM NFVOTE  <<
+// //  >>  LOGIN CONTROLLER  <<
 userController.logIn = (req, res, next) => {
   // console.log('userController.logIn', req.body);
   const { username, password } = req.body;
-
-  // bcrypt.hash(password, saltRounds, (err, hash) => {
-
-  // }
-
-  const qValues = [
-    req.body.password,
-  ]
-  console.log(qValues)
-
-  const qString = `SELECT users, hash FROM users WHERE hash = $1`;
-
-  db.query(qString, qValues, (err, data) => {
-    if (err) {
-      return next({
-        log: err,
-        err: 'ERROR: userController.logIn failed to query a user in the database'
-      })
-    }
-    // console.log('THIS IS NOW A CALLBACK',data.rows[0]);
-    // const passwordCheck = userAuth.CHECK(req.body.password,data.rows[0].hash);
-    const passwordCheck = data.rows[0];
-    // console.log('passwordCheck after login:', passwordCheck);
-
-    if (passwordCheck) return next();
-    else return res.status(200).json({logIn: false})
-  })
+  console.log("username: ", username);
+  //can also do a WHERE check and if rows.length <1
+  const queryStringCheck = `SELECT username FROM users`;
+  db.query(queryStringCheck)
+    .then((response) => response.rows)
+    .then(rows => {
+      if (rows.includes(req.body.username)) {
+        return res.status(200).json({message: 'usernameInUse'});
+      }
+      return next();
+    })
+    .catch(err => console.log('Problem verifying user! ERROR: ', err))
 }
+
+// //  >>  ADDED FROM NFVOTE  <<
+// userController.logIn = (req, res, next) => {
+//   // console.log('userController.logIn', req.body);
+//   const { username, password } = req.body;
+
+//   // bcrypt.hash(password, saltRounds, (err, hash) => {
+
+//   // }
+
+//   const qValues = [
+//     req.body.password,
+//   ]
+//   console.log(qValues)
+//   const qString = `SELECT users, hash FROM users WHERE hash = $1`;
+
+//   db.query(qString, qValues, (err, data) => {
+//     if (err) {
+//       return next({
+//         log: err,
+//         err: 'ERROR: userController.logIn failed to query a user in the database'
+//       })
+//     }
+//     // console.log('THIS IS NOW A CALLBACK',data.rows[0]);
+//     // const passwordCheck = userAuth.CHECK(req.body.password,data.rows[0].hash);
+//     const passwordCheck = data.rows[0];
+//     // console.log('passwordCheck after login:', passwordCheck);
+
+//     if (passwordCheck) return next();
+//     else return res.status(200).json({logIn: false})
+//   })
+// }
 
 
 

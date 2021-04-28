@@ -7,35 +7,10 @@ const PORT = 7070;
 
 
 
-
-// // SESSION CONTROL
-// const session = require("express-session");
-// const pg = require("pg");
-// const pgSession = require("connect-pg-simple")(session);
-
-// app.use(
-//   session({
-//     store: new pgSession({
-//       pool: db, // our pool
-//       tableName: "user_sessions",
-//     }),
-//     secret: randomString.generate({
-//       length: 14,
-//       charset: "alphanumeric",
-//     }),
-//     resave: true,
-//     saveUninitialized: true,
-//     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
-//   })
-// ); 
-
-
-
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
 
 app.use("/build", express.static(path.join(__dirname, "../build")));
 
@@ -66,8 +41,7 @@ app.use("/location", location);
 
 //  >>  ROUTING FOR SIGNING UP AND LOGGING IN  <<
 const login = require("./routes/dbRouter");
-app.use("/signup", login);
-app.use("/login", login);
+app.use("/user", login);
 
 // const faves = require('./routes/dbRouter')
 // app.use('/user', faves);
@@ -98,3 +72,27 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Connected, listening on port ${PORT}`);
 });
+
+
+
+
+// // SESSION CONTROL
+// const session = require("express-session");
+// const pg = require("pg");
+// const pgSession = require("connect-pg-simple")(session);
+
+// app.use(
+//   session({
+//     store: new pgSession({
+//       pool: db, // our pool
+//       tableName: "user_sessions",
+//     }),
+//     secret: randomString.generate({
+//       length: 14,
+//       charset: "alphanumeric",
+//     }),
+//     resave: true,
+//     saveUninitialized: true,
+//     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
+//   })
+// ); 

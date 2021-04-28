@@ -30,9 +30,9 @@ const App = () => {
     console.log(username, password);
     setLoginName(username);
 
-    fetch('/signup', {
+    fetch('/users/login', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+      headers: {'Content-Type': 'Application/JSON'},
       body: newUser
     }) //POST
                     //query for SELECT users.username.*
@@ -70,20 +70,24 @@ const App = () => {
       setInfo('Passwords don\'t match!')
       return;
     }
-    const newUser = { username: newUserval, password: newPswdval }
+    const newUser = JSON.stringify({ username: newUserval, password: newPswdval })
 
-    fetch('/signup', {
+    fetch('/user/signup', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(newUser)
+      headers: {'Content-Type': 'Application/JSON'},
+      body: newUser
     }) //POST
                     //query for SELECT users.username.*
                     //req.body.json()
                     //send users.username in array form
                     //if (newPswd.value === newPswdconfirm.value &&)
-    .then(response => response.json())
+    .then(response => {
+      console.log(response);
+      return response.json();
+    })
 
     .then(data => {
+      console.log(data);
       if (data.message === "usernameInUse") {
         newUsername.value = '';
         setInfo('Username already exists!')
