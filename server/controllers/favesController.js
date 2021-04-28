@@ -12,30 +12,59 @@ favesController.getFaves = (req, res, next) => {
     .then(() => next());
 };
 
+
 // this middleware checks to see if a plant already exists in our plant table and if it doesn't, inserts the selected plant
 favesController.addPlant = (req, res, next) => {
   const { plants } = req.body;
-  const selectQuery =
-    "SELECT scientific_name FROM public.plants WHERE public.plants.scientific_name = plants.scientific_name";
-  const queryString = `public.plants VALUES ( plants.common_name,
-    plants.scientific_name,
-    plants.family_common_name,
-    plants.edible,
-    plants.vegetable,
-    plants.image_url,
-    plants.toxicity,
-    plants.growth_habit,
-    plants.growth_form,
-    plants.growth_rate,
-    plants.shape_and_orientation,
-    plants.average_height )`;
-  const insertQuery = `INSERT INTO ${queryString} WHERE NOT EXISTS ${selectQuery}`;
-  const result = db.query(insertQuery);
-  result.then(() => next());
+  console.log('in add plant');
+  console.log('plants obj', plants);
+  
+  const insertQuery = 'INSERT INTO plants (common_name) VALUES ($1)'
+  
+  console.log('plants.scientific_name', plants.scientific_name);
+  const plantTemp = ['attempt'];
+  const plantDetails = [
+      plants.common_name,
+      plants.scientific_name,
+      plants.family_common_name,
+      plants.edible,
+      plants.vegetable,
+      plants.image_url,
+      plants.toxicity,
+      plants.growth_habit,
+      plants.growth_form,
+      plants.growth_rate,
+      plants.shape_and_orientation,
+      plants.average_height];
+  
+      const query = {
+        text: 'INSERT INTO plants (common_name, scientific_name, family_common_name, edible, vegetable, image_url, toxicity, growth_habit, growth_form, growth_rate, shape_and_orientation, average_height) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)',
+        values: [
+          plants.common_name,
+          plants.scientific_name,
+          plants.family_common_name,
+          plants.edible,
+          plants.vegetable,
+          plants.image_url,
+          plants.toxicity,
+          plants.growth_habit,
+          plants.growth_form,
+          plants.growth_rate,
+          plants.shape_and_orientation,
+          plants.average_height
+        ],
+        rowMode: 'array',
+      }
+  
+    db
+    .query(query)
+    .then((res) => next());
 };
 
 // this middleware adds the selected plant's id (scientific name) to the faves table along with the user id and the user's notes for the plant
 favesController.addFave = (req, res, next) => {
+  
+  
   const { user_id, plant_id, notes } = req.body;
   //   req.body.plants = {...plant details....}
   //

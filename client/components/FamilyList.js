@@ -6,6 +6,11 @@ import React, {useEffect, useState} from 'react';
 const FamilyList = props => {
   const [familiesData, setFamiliesData] = useState(null);
 
+  function revertStates() {
+    setFamiliesData(null);
+    setGState({ name: null, slug: null })
+  }
+
   const { gState } = props;
   const { setGState } = props;
   const { setFamily } = props;
@@ -35,28 +40,40 @@ const FamilyList = props => {
 
   if (familiesData === null) return (<div></div>)
   else return (
-    <ul id="familyList">
-      {familiesData.map((family, index) => {
-        // console.log(family);
-        return (
-          <li key={index}>
-            <button
-              className = "list-buttons"
-              // color = "#5dbb63"
-              onClick={
-                () => {
-                  setFamily(family);
-                  setPlant(null);
-                  setPlantDetails(null);
-                }
-              }
-            >
-              {family}
-            </button>
-          </li>
-        )
-      })}
-    </ul>
+    <div className='popup-box'>
+        <div className='box'>
+          <span className='close-icon' onClick={() => {revertStates()}}>x</span>
+          <h1>See Plants In {gState.name}:</h1>
+            <ul id="familyList">
+              <div className='familyList-dropdown'>
+                <button className='familyList-dropbtn'>See Family List:</button>
+                <div className='dropdown-content'>
+                  {familiesData.map((family, index) => {
+                    // console.log(family);
+                    
+                    return (
+                      <li key={index}>
+                        <button
+                          className = "list-buttons"
+                          // color = "#5dbb63"
+                          onClick={
+                            () => {
+                              setFamily(family);
+                              setPlant(null);
+                              setPlantDetails(null);
+                            }
+                          }
+                        >
+                          {family}
+                        </button>
+                      </li>
+                    )          
+                  })}
+              </div>
+              </div>
+            </ul>
+          </div>
+        </div>
   );
 }
 

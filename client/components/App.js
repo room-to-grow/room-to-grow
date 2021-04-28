@@ -31,8 +31,26 @@ const App = () => {
   // to associate a user's favorites with their login name
   if (!loginName) {
    return(
-     // this is where the login will go
-     <form id="loginForm">
+   <div>
+    {/* // this is where the login will go */}
+     <form id="loginForm" onSubmit={() => {
+      //onClick={() => {method}}
+                      const val = document.getElementById("userName");
+                      const bodyData = {username: val.value, password: 'password123'};
+                      console.log('val.value', val.value);
+                      fetch('/signup', {
+                      // method
+                      method: 'POST',
+                      // headers
+                      headers: {
+                        // 'Content-Type': 'application/x-www-form-urlencoded'
+                        'Content-Type': 'application/json'
+      
+                      },
+                      body: JSON.stringify(bodyData)
+                  }) 
+                  setLoginName('testusername');
+                  }} >
        {/* <label for="userName">Input User Name:</label> */}
        <input className="fav-input"
          type="text" 
@@ -40,18 +58,35 @@ const App = () => {
          name="userName"
          placeholder="Input username here"
        ></input>
-       <input className="fav-button"
-         type="submit" 
-          value="Submit"
-          onClick={() => {
-            let val = document.getElementById("userName");
-            console.log(val.value);
-            //val =  val.value 
-            // how to get the data from the input text field to assign to the user state??
-            setLoginName(val.value);
-          }}
-        ></input>
+       <button className="fav-button"
+         type="submit"
+         id='submit'
+         name='submit' 
+          // value="Submit"
+//           onClick={() => {
+// //onClick={() => {method}}
+//             let val = document.getElementById("userName");
+//             console.log(val.value);
+//             fetch('/signup', {
+//                 // method
+//                 method: 'POST',
+//                 // headers
+//                 headers: {
+//                   'Content-Type': 'application/x-www-form-urlencoded'
+
+//                 },
+//                 body : { username : val.value, password : 'password123'}
+//             }
+            // )
+//             //val =  val.value 
+//             // how to get the data from the input text field to assign to the user state??
+//             
+//           }
+        // }
+        
+        ></button>
       </form>
+      </div>
     )
   }
  
@@ -109,6 +144,7 @@ const App = () => {
         />
       </div>
     </div>
+
   );
 };
 

@@ -23,7 +23,6 @@ locationController.familyNames = async (req, res, next) => {
     `${TREFLE_DIST}?token=${TOKEN}&q=${req.params.locName}`
   );
   const json = await response.json();
-
   //const json = await response.json();
   //console.log(`${TREFLE_DIST}/${location}/plants?filter%5Bestablishment%5D=native&token=${TOKEN}`)
   const slug = json.data[0].slug;
@@ -31,6 +30,7 @@ locationController.familyNames = async (req, res, next) => {
   const newResponse = await fetch(url);
   const jsonRes = await newResponse.json();
   const data = jsonRes.data;
+
   const obj = {};
   data.forEach((plant) => {
     obj[plant["family_common_name"]] = true;
