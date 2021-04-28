@@ -174,7 +174,7 @@ const App = () => {
 
   return (
     <div id="outer-container">
-        <UserPage loginName={loginName} logout={setLoginName}/>
+      <UserPage loginName={loginName} logout={setLoginName} />
     </div>
   );
 };

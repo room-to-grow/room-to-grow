@@ -69,12 +69,12 @@ app.use((err, req, res, next) => {
 
 
 // listener:
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Connected, listening on port ${PORT}`);
 });
 
 
-
+module.exports = server;
 
 // // SESSION CONTROL
 // const session = require("express-session");

@@ -23,7 +23,7 @@ const SearchContainer = props => {
         <div className="zip-search">
             <h1>Enter Your ZIP to search, or click on the map below</h1>
             <form onSubmit={handleSubmit}>
-                <input type="text" value={zip} onChange={e => setZip(e.target.value)} />
+                <input className="test" type="text" value={zip} onChange={e => setZip(e.target.value)} />
                 <input type="submit" value="Search"></input>
             </form>
         </div>
