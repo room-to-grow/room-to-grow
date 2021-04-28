@@ -5,6 +5,32 @@ const saltRounds = 10;
 const userController = {};
 
 
+
+//  >>  OLD FORMAT FROM ROOM TO GROW  <<
+userController.createUser = (req, res, next) => {
+  const { username, password } = req.body;
+  console.log("username: ", username);
+  bcrypt.hash(password, saltRounds, (err, hash) => {
+    const values = [username, hash];
+    console.log(values);
+
+    const queryString = `
+    INSERT INTO public.users(username, password)
+    VALUES ('${username}', '${hash}')
+    `;
+
+    db.query(queryString, [username, hash])
+      .then(() => console.log("Success in middleware!"))
+      .then(() => next())
+      .catch(err => next({
+        log: err,
+        err: 'ERROR: userController.signUp FAILED TO CREATE USER'
+      }));
+  });
+};
+
+
+
 //  >>  ADDED FROM NFVOTE  <<
 userController.signUp = (req, res, next) => {
   // console.log('userController.signUp:',req.body)
@@ -61,28 +87,7 @@ userController.logIn = (req, res, next) => {
 
 
 
-//  >>  OLD FORMAT FROM ROOM TO GROW  <<
-userController.createUser = (req, res, next) => {
-  const { username, password } = req.body;
-  console.log("username: ", username);
-  bcrypt.hash(password, saltRounds, (err, hash) => {
-    const values = [username, hash];
-    console.log(values);
 
-    const queryString = `
-    INSERT INTO public.users(username, password)
-    VALUES ('${username}', '${hash}')
-    `;
-
-    db.query(queryString, [username, hash])
-      .then(() => console.log("Success in middleware!"))
-      .then(() => next())
-      .catch(err => next({
-        log: err,
-        err: 'ERROR: userController.signUp FAILED TO CREATE USER'
-      }));
-  });
-};
 
 
 

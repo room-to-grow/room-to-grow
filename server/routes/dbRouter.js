@@ -16,8 +16,9 @@ const cookieController = require("../controllers/cookieController");
 
 
 //  THIS SHOULD BE FOR SIGN-UP
-router.post("/", 
+router.post("/signup", 
   // userController.createUser, 
+  cookieController.setSSIDCookie,
   (req, res) => {
   // error handler
   // handle if username is already taken
@@ -32,7 +33,7 @@ router.post("/",
 router.post(
   "/login", 
   // userController.logIn,
-  // cookieController.setSSIDCookie,
+  cookieController.setSSIDCookie,
   (req, res) => {
     // error handler
     // user not found handler -- login credentials not valid
