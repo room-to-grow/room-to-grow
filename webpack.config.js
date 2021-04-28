@@ -15,12 +15,12 @@ module.exports = {
     proxy: {
       '/location': {
         // publicPath : '/build',
-        target: "http://localhost:8008",
+        target: "http://localhost:7070",
         secure: false,
       },
       '/signup': {
         // publicPath : '/build',
-        target: "http://localhost:8008",
+        target: "http://localhost:7070",
         secure: false,
       }
     },
