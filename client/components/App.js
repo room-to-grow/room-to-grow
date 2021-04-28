@@ -15,6 +15,8 @@ const App = () => {
   const [plantDetails, setPlantDetails] = useState(null);
   const [favorites, setFavorites] = useState([]);
   const [loginName, setLoginName] = useState(null);
+  const [zip, setZip] = useState('');
+  // const [stateName, setStateName] = useState(null);
 
   // This should only run once -- when the loginname is input
   // then fetch for the US State data and will then render the USMap
@@ -68,7 +70,12 @@ const App = () => {
     <div id="outer-container">
 
       <div id="info-container">
-        <SearchContainer />
+        <SearchContainer
+          zip={zip}
+          setZip={setZip}
+          gState={gState}
+          setGState={setGState}
+        />
         <USMap
           id="us-map"
           statesData={statesData}
