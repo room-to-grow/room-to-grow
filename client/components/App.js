@@ -15,17 +15,12 @@ const App = () => {
   const [plantDetails, setPlantDetails] = useState(null);
   const [favorites, setFavorites] = useState([]);
   const [loginName, setLoginName] = useState(null);
-<<<<<<< HEAD
   const [zip, setZip] = useState('');
-  // const [stateName, setStateName] = useState(null);
-=======
   const [registrationState, setRegistrationState] = useState(false);
-
   const [userName, setUsername] = useState();
   const [password, setPassword] = useState();
   const [newUsername, setNewusername] = useState();
   const [newPswd, setNewpswd] = useState();
->>>>>>> main
 
   // This should only run once -- when the loginname is input
   // then fetch for the US State data and will then render the USMap
@@ -47,10 +42,10 @@ const App = () => {
     //   // how to get the data from the input text field to assign to the user state??
     //   setLoginName(val.value);
     // } [ akldfjdaklsf  ] => { value: fdsahfhadkf, }
-    
+
     const nameInput = document.getElementById('userName');
-    const pswdInput = document.getElementById('password'); 
-    
+    const pswdInput = document.getElementById('password');
+
     const username = nameInput.value;
     const password = pswdInput.value;
 
@@ -66,7 +61,7 @@ const App = () => {
     //reroute to login page, indefinitely
     //
     // fetch('/user') 
-  
+
   }
 
 
@@ -77,7 +72,7 @@ const App = () => {
 
     const newUserval = newUser.value;
     const newPswdval = newPswd.value;
-    
+
     /////////// WORK IN PROGRESS
 
     // fetch('/users') //POST
@@ -101,17 +96,17 @@ const App = () => {
 
 
   }
-    //cross reference
+  //cross reference
 
 
- 
 
-    
 
-    //can INSERT if user doesnt already exist
-    //or can do two fetch requests
-    //request the user.body.usernames to make sure username doesn't already exist
-  
+
+
+  //can INSERT if user doesnt already exist
+  //or can do two fetch requests
+  //request the user.body.usernames to make sure username doesn't already exist
+
 
 
   // until loginName value is delcared (default of null), show the login page
@@ -120,41 +115,41 @@ const App = () => {
 
   if (registrationState === true) {
 
-    return(
+    return (
       //registration page
 
       <form id="loginForm">
 
-      <input className="fav-input"
-         type="text" 
-         id="newUsername" 
-         placeholder="New username here"
-       ></input><br/>
-       
-       <input className="fav-input"
-         type="password" 
-         id="newPswd" 
-         placeholder="New password here"
-       ></input><br/>
+        <input className="fav-input"
+          type="text"
+          id="newUsername"
+          placeholder="New username here"
+        ></input><br />
 
-      <input className="fav-input"
-         type="password" 
-         id="newPswdconfirm" 
-         placeholder="Confirm password here"
-       ></input><br/>
+        <input className="fav-input"
+          type="password"
+          id="newPswd"
+          placeholder="New password here"
+        ></input><br />
+
+        <input className="fav-input"
+          type="password"
+          id="newPswdconfirm"
+          placeholder="Confirm password here"
+        ></input><br />
 
         <input className="fav-button"
-         type="submit" 
+          type="submit"
           value="Create Account"
           onClick={onUserRegistration}
         ></input>
 
-       </form>
+      </form>
 
     )
 
   }
-  
+
   if (!loginName) {
 <<<<<<< HEAD
     return (
@@ -175,28 +170,28 @@ const App = () => {
      <div id="loginForm">
        {/* <label for="userName">Input User Name:</label> */}
        <input className="fav-input"
-         type="text" 
-         id="userName" 
+         type="text"
+         id="userName"
          placeholder="Input username here"
        ></input><br></br>
-    
+
         <input className="fav-input"
-         type="password" 
-         id="password" 
+         type="password"
+         id="password"
          placeholder="Input password here"
        ></input><br/>
 
        <input className="fav-button"
-         type="submit" 
+         type="submit"
 >>>>>>> main
           value="Submit"
           onClick={onUserLogin}
         ></input>
 
         <input className="register-button"
-        type="submit"
-        value="Register"
-        onClick={() => setRegistrationState(true)}
+          type="submit"
+          value="Register"
+          onClick={() => setRegistrationState(true)}
         ></input>
 
       </div>
@@ -206,7 +201,7 @@ const App = () => {
 <<<<<<< HEAD
 =======
 
- 
+
 >>>>>>> main
   // If there is no statesData yet, show a loading indicator.
   if (!statesData) {
