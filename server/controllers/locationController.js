@@ -19,10 +19,15 @@ const locationController = {};
 // the key is 'family_name_common'
 // formerly known as 'fetchDistro'
 locationController.familyNames = async (req, res, next) => {
+  console.log("HERE COMES THE LOCNAME");
+  console.log(req.params)
+  console.log(req.params.locName);
   const response = await fetch(
     `${TREFLE_DIST}?token=${TOKEN}&q=${req.params.locName}`
   );
   const json = await response.json();
+  console.log("HERE COMES THE JSON")
+  console.log(json);
 
   //const json = await response.json();
   //console.log(`${TREFLE_DIST}/${location}/plants?filter%5Bestablishment%5D=native&token=${TOKEN}`)
@@ -35,7 +40,8 @@ locationController.familyNames = async (req, res, next) => {
   data.forEach((plant) => {
     obj[plant["family_common_name"]] = true;
   });
-  //console.log(obj)
+
+  console.log(obj)
   //res.locals.families = Object.keys(obj);
   res.locals.families = {
     families: Object.keys(obj),
