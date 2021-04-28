@@ -32,19 +32,20 @@ router.post("/", userController.createUser, (req, res) => {
 
 //what does the req body for favorites look like?
 // what should this endpoint be?
-/*
+
 router.post(
   "/faves",
   favesController.addPlant,
-  favesController.addFave,
+  //favesController.addFave,
+  //favesController.getFaves,
   (req, res) => {
     console.log("Attempting to save selection");
     // what goes in the response?
-    res.send(200).json(res.locals);
+    res.sendStatus(200);
     console.log("Saved fave!");
   }
 );
 
 
-*/
+
 module.exports = router;

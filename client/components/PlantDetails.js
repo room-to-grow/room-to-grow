@@ -64,12 +64,41 @@ const PlantDetails = props => {
         <span className="details-field">Growth Rate:</span> {plantDetails.growth_rate}
         </li>
         <li>
-          <form>
-            <input id = 'notes-input' className = "fav-input" type="text" name="notes" placeholder="Write notes here"></input>
-            <button className = "fav-button" type="submit" onClick = {(e) => {
-              e.preventDefault()
+          <form onSubmit = {(e) => {
+                e.preventDefault();
+                const bodyData = { 
+                  plants : plantDetails,
+                  user_id : 'loginName',
+                  plant_id : plantDetails.scientific_name,
+                  notes : ' '}; 
+              try {
+    
+                console.log('in try block')
+                fetch('/signup/faves', {
+                // method
+                method: 'POST',
+                // headers
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+            
+                // body
+                body: JSON.stringify(bodyData)
+              }
+              )
+              }
+              catch (err) {
+                console.log(err);
+              }
+
+              
               const notes = document.getElementById('notes-input');
               console.log('posting to db...');
+              setFavorites([...favorites, {name : plantDetails.common_name, notes : notes.value}])
+          }}>
+            <input id = 'notes-input' className = "fav-input" type="text" name="notes" placeholder="Write notes here"></input>
+            <button className = "fav-button" type="submit" onClick = {(e) => {
+    
 
               // this response is from the database
                 // server gets body
@@ -94,7 +123,7 @@ const PlantDetails = props => {
             //   }
             //   )
               //const notes = document.getElementById('fav-input')
-              setFavorites([...favorites, {name : plantDetails.common_name, notes : notes.value}])
+              
               
             }
             // setFavorites({response.json())

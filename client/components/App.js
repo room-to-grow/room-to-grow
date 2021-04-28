@@ -31,19 +31,24 @@ const App = () => {
   // to associate a user's favorites with their login name
   if (!loginName) {
    return(
-     // this is where the login will go
+   <div>
+    {/* // this is where the login will go */}
      <form id="loginForm" onSubmit={() => {
       //onClick={() => {method}}
-                  fetch('/signup', {
+                      const val = document.getElementById("userName");
+                      const bodyData = {username: val.value, password: 'password123'};
+                      console.log('val.value', val.value);
+                      fetch('/signup', {
                       // method
                       method: 'POST',
                       // headers
                       headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
+                        // 'Content-Type': 'application/x-www-form-urlencoded'
+                        'Content-Type': 'application/json'
       
                       },
-                      body : { username : 'testusername', password : 'password123'}
-                  })
+                      body: JSON.stringify(bodyData)
+                  }) 
                   setLoginName('testusername');
                   }} >
        {/* <label for="userName">Input User Name:</label> */}
@@ -53,9 +58,11 @@ const App = () => {
          name="userName"
          placeholder="Input username here"
        ></input>
-       <input className="fav-button"
-         type="submit" 
-          value="Submit"
+       <button className="fav-button"
+         type="submit"
+         id='submit'
+         name='submit' 
+          // value="Submit"
 //           onClick={() => {
 // //onClick={() => {method}}
 //             let val = document.getElementById("userName");
@@ -77,8 +84,9 @@ const App = () => {
 //           }
         // }
         
-        ></input>
+        ></button>
       </form>
+      </div>
     )
   }
  
@@ -136,6 +144,7 @@ const App = () => {
         />
       </div>
     </div>
+
   );
 };
 
