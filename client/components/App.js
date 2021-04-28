@@ -72,7 +72,7 @@ const App = () => {
     const newUserval = newUser.value;
     const newPswdval = newPswd.value;
     
-    //////////WORK IN PROGRESS
+    /////////// WORK IN PROGRESS
 
     // fetch('/users') //POST
     //                 //query for SELECT users.username.*
