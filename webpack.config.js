@@ -16,7 +16,7 @@ module.exports = {
     proxy: {
       // publicPath : '/build',
       "/location/": "http://localhost:3000",
-      "/signup/**" : "http://localhost:3000",
+      "/signup/" : "http://localhost:3000",
       //"/api/" : "http://localhost:3000"
     },
   },
