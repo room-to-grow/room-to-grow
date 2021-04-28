@@ -3,6 +3,7 @@ const router = express.Router();
 
 const favesController = require("../controllers/favesController");
 const userController = require("../controllers/userController");
+const cookieController = require('../controllers/cookieController');
 
 router.get("/user", favesController.getFaves, (req, res, next) => {
   console.log("Router preparing to fetch user's saved plants");
@@ -20,7 +21,7 @@ router.post("/login", (req, res) => {
 });
 */
 
-router.post("/", userController.createUser, (req, res) => {
+router.post("/", userController.createUser,cookieController.createCookie, cookieController.startSession, (req, res) => {
   // error handler
   // handle if username is already taken
   // upon successful signup do the following:
@@ -32,19 +33,20 @@ router.post("/", userController.createUser, (req, res) => {
 
 //what does the req body for favorites look like?
 // what should this endpoint be?
-/*
+
 router.post(
   "/faves",
   favesController.addPlant,
-  favesController.addFave,
+  //favesController.addFave,
+  //favesController.getFaves,
   (req, res) => {
     console.log("Attempting to save selection");
     // what goes in the response?
-    res.send(200).json(res.locals);
+    res.sendStatus(200);
     console.log("Saved fave!");
   }
 );
 
 
-*/
+
 module.exports = router;
