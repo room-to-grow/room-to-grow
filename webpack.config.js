@@ -9,10 +9,20 @@ module.exports = {
 
   mode: process.env.NODE_ENV,
   devServer: {
+    hot: true,
+    historyApiFallback: true,
     publicPath: "/build",
     proxy: {
-      // publicPath : '/build',
-      "/location/": "http://localhost:3000",
+      '/location': {
+        // publicPath : '/build',
+        target: "http://localhost:8008",
+        secure: false,
+      },
+      '/signup': {
+        // publicPath : '/build',
+        target: "http://localhost:8008",
+        secure: false,
+      }
     },
   },
   module: {

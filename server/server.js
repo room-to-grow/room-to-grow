@@ -1,40 +1,55 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const PORT = 3000;
+const cors = require("cors");
+const PORT = 8008;
 
-/*
-// SESSION CONTROL
-const session = require("express-session");
-const pg = require("pg");
-const pgSession = require("connect-pg-simple")(session);
 
-app.use(
-  session({
-    store: new pgSession({
-      pool: db, // our pool
-      tableName: "user_sessions",
-    }),
-    secret: randomString.generate({
-      length: 14,
-      charset: "alphanumeric",
-    }),
-    resave: true,
-    saveUninitialized: true,
-    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
-  })
-);
-*/
+
+
+// // SESSION CONTROL
+// const session = require("express-session");
+// const pg = require("pg");
+// const pgSession = require("connect-pg-simple")(session);
+
+// app.use(
+//   session({
+//     store: new pgSession({
+//       pool: db, // our pool
+//       tableName: "user_sessions",
+//     }),
+//     secret: randomString.generate({
+//       length: 14,
+//       charset: "alphanumeric",
+//     }),
+//     resave: true,
+//     saveUninitialized: true,
+//     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
+//   })
+// ); 
+
+
 
 //
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
-// app.use(cors());
+app.use(cors());
 
 app.use("/build", express.static(path.join(__dirname, "../build")));
+
+
+
+app.use((req, res, next) => {
+  console.log(`
+  ***** FLOW TEST *****\n
+  METHOD: ${req.method}\n
+  URL: ${req.url}\n`);
+  return next();
+});
+
+
 
 // serving static file index.html on the route '/':
 //needs to send login page info
@@ -51,6 +66,8 @@ app.use("/signup", signup);
 
 // const faves = require('./routes/dbRouter')
 // app.use('/user', faves);
+
+
 
 // unknown path handler
 app.get("*", function (req, res) {
@@ -69,6 +86,8 @@ app.use((err, req, res, next) => {
   console.log(err);
   return res.status(errObj.status).json(errObj.message);
 });
+
+
 
 // listener:
 app.listen(PORT, () => {

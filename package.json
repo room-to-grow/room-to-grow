@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production nodemon server/server.js",
+    "start": "cross-env NODE_ENV=development nodemon server/server.js",
     "build": "cross-env NODE_ENV=production webpack",
-    "dev": "cross-env NODE_ENV=development webpack serve --open & NODE_ENV=development nodemon server/server.js"
+    "dev": "concurrently \"cross-env NODE_ENV=development webpack serve --open\" \"cross-env NODE_ENV=development nodemon server/server.js\"",
+    "go": "cross-env NODE_ENV=development webpack serve --open"
   },
   "repository": {
     "type": "git",
@@ -22,15 +23,19 @@
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "babel-polyfill": "^6.26.0",
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "connect-pg-simple": "^6.2.1",
     "cookie-parser": "^1.4.5",
     "cookie-session": "^1.4.0",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "css-loader": "^5.2.4",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "fetch": "^1.1.0",
     "file-loader": "^6.2.0",
+    "nginx": "^1.0.2",
     "pg": "^8.6.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -48,8 +53,6 @@
     "@babel/preset-env": "^7.13.15",
     "@babel/preset-react": "^7.13.13",
     "babel-loader": "^8.2.2",
-    "concurrently": "^6.0.2",
-    "cross-env": "^7.0.3",
     "isomorphic-fetch": "^3.0.0",
     "nodemon": "^2.0.7",
     "webpack": "^5.36.0",
