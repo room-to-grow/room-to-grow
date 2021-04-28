@@ -1,7 +1,7 @@
 import React from 'react';
 import { configure, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-17';
-import toJson from 'enzyme-to-json';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+
 
 
 configure({ adapter: new Adapter() });
@@ -27,6 +27,10 @@ describe('React App TEST', () => {
     let wrapper;
     const props = {
       familiesData: [1,2,3,4,5,6,7,8,9,10],
+      gState: {
+        slug: 'slug', 
+        name: 'Georgia',
+      },
       setFamily: () => {
         return 'setFamily works'; 
       }, 
@@ -34,7 +38,7 @@ describe('React App TEST', () => {
         return 'setPlant works';
       }, 
       setPlantDetails: () => {
-        return 'setPlantDetails'; 
+        return 'setPlantDetails works'; 
       },
     }
     beforeAll(() => {
@@ -48,8 +52,11 @@ describe('React App TEST', () => {
       //   expect(listArr[i])
       // }
       // expect(wrapper.setFamily()).toEqual
-      expect(wrapper.find('li').length).toEqual(10);
+      // expect(wrapper.find('li').getElements().length).toEqual(10);
+      expect(wrapper.containsMatchingElement(<button className="list-buttons"></button>)).toEqual(true)
+      expect(wrapper.contains(<FamilyList gState='Georgia' />)).toEqual(true)
     })
 
   })
 })
+
