@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import USMap from './USMap';
-import FamilyList from './FamilyList'
+import UserPage from './UserMenu'
 import PlantList from './PlantList';
 import PlantDetails from './PlantDetails';
 import Favorites from './Favorites';
 
 const App = () => {
   // the collection of all of the states
-  const [statesData, setStatesData] = useState(null);
   const [gState, setGState] = useState({name : null, slug : null});
   const [family, setFamily] = useState(null);
   const [plant, setPlant] = useState(null);
@@ -17,14 +16,7 @@ const App = () => {
 
   // This should only run once -- when the loginname is input
   // then fetch for the US State data and will then render the USMap
-  useEffect(() => {
-    (async () => {
-      const res = await fetch('https://willhaley.com/assets/united-states-map-react/states.json');
-      const statesData = await res.json();
-      // Set the statesData with the data received from fetch().
-      setStatesData(statesData);
-    })();
-  }, [loginName]);
+  
 
   // until loginName value is delcared (default of null), show the login page
   // sets the loginName (w/o password) to send to backend
@@ -55,59 +47,20 @@ const App = () => {
     )
   }
  
-  // If there is no statesData yet, show a loading indicator.
- if (!statesData) {
-    return (
-      <div>Loading...</div>
-    );
-  }
-
   return (
-
-    <div id="outer-container">
-      <div id = "info-container"> 
-        <USMap 
-          id="us-map" 
-          statesData={statesData}
-          setGState={setGState} 
-          setFamily={setFamily}
-          setPlant={setPlant}
-          setPlantDetails={setPlantDetails}
-        />
-        <div id="listsContainer">
-          <FamilyList 
-            gState={gState}
-            setGState={setGState}
-            setFamily={setFamily}
-            setPlant={setPlant}
-            setPlantDetails={setPlantDetails}
-
-          />
-          <PlantList
-            family={family}
-            gState={gState}
-            setPlant={setPlant}
-            setPlantDetails={setPlantDetails}
-          />
-          <PlantDetails
-            family={family}
-            plant={plant}
-            gState={gState}
-            plantDetails={plantDetails}
-            setPlantDetails={setPlantDetails}
-            setFavorites={setFavorites}
-            favorites={favorites}
-            loginName={loginName}
-          />
-        </div>
-      </div>
-
-      <div id = "favorites-container"> 
-        <Favorites 
-          favorites={favorites} 
-          // loginName={loginName}
-        />
-      </div>
+    <div id="outer-container"> 
+        <UserPage family={family} 
+        setGState={setGState} 
+        setFamily={setFamily} 
+        setPlant={setPlant} 
+        plant={plant} 
+        gState={gState} 
+        plantDetails={plantDetails} 
+        setPlantDetails={setPlantDetails} 
+        setFavorites={setFavorites} 
+        favorites={favorites} 
+        loginName={loginName} 
+        logout={setLoginName}/>
     </div>
   );
 };
