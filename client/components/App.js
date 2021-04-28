@@ -112,24 +112,24 @@ const App = () => {
   }
 
   if (!loginName) {
-   return(
-     // this is where the login will go
-     <div id="loginForm">
-       {/* <label for="userName">Input User Name:</label> */}
-       <input className="fav-input"
-         type="text"
-         id="userName"
-         placeholder="Input username here"
-       ></input><br></br>
+    return (
+      // this is where the login will go
+      <div id="loginForm">
+        {/* <label for="userName">Input User Name:</label> */}
+        <input className="fav-input"
+          type="text"
+          id="userName"
+          placeholder="Input username here"
+        ></input><br></br>
 
         <input className="fav-input"
-         type="password"
-         id="password"
-         placeholder="Input password here"
-       ></input><br/>
+          type="password"
+          id="password"
+          placeholder="Input password here"
+        ></input><br />
 
-       <input className="fav-button"
-         type="submit"
+        <input className="fav-button"
+          type="submit"
           value="Submit"
           onClick={onUserLogin}
         ></input>
@@ -146,7 +146,7 @@ const App = () => {
 
   return (
     <div id="outer-container">
-        <UserPage loginName={loginName} logout={setLoginName}/>
+      <UserPage loginName={loginName} logout={setLoginName} />
     </div>
   );
 };
