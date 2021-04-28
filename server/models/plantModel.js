@@ -13,7 +13,7 @@ notes TEXT
 
 //URI to elephantSQL database that will store the users favorite plants and any notes that add to those faves
 const PG_URI =
-  "postgres://sdwuwgqm:Q9JX9BZljzycURlyiyGYSwU6xX0O1tXz@queenie.db.elephantsql.com:5432/sdwuwgqm";
+  "postgres://aucntabm:ofyl9T6henHqWVzxS7HnAQNgpX5VHdXL@queenie.db.elephantsql.com:5432/aucntabm";
 
 //create a new pool here using the connection string above
 const pool = new Pool({

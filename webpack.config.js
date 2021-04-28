@@ -3,16 +3,26 @@ const path = require("path");
 module.exports = {
   entry: ["babel-polyfill", "./client/index.js"],
   output: {
-    path: path.resolve(__dirname, "/build"),
+    path: path.resolve(__dirname, "./build"),
     filename: "bundle.js",
   },
 
   mode: process.env.NODE_ENV,
   devServer: {
+    hot: true,
+    historyApiFallback: true,
     publicPath: "/build",
     proxy: {
-      // publicPath : '/build',
-      "/location/": "http://localhost:3000",
+      '/location': {
+        // publicPath : '/build',
+        target: "http://localhost:7070",
+        secure: false,
+      },
+      '/signup': {
+        // publicPath : '/build',
+        target: "http://localhost:7070",
+        secure: false,
+      }
     },
   },
   module: {

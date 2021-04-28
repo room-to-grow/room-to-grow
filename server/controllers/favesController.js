@@ -1,6 +1,9 @@
 const db = require("../models/plantModel");
 
+
 const favesController = {};
+
+
 
 // this middleware retrieves a user's favorited plants
 favesController.getFaves = (req, res, next) => {
@@ -11,6 +14,8 @@ favesController.getFaves = (req, res, next) => {
     .then(console.log("fetching user's favorite plants NOW!"))
     .then(() => next());
 };
+
+
 
 // this middleware checks to see if a plant already exists in our plant table and if it doesn't, inserts the selected plant
 favesController.addPlant = (req, res, next) => {
@@ -34,6 +39,8 @@ favesController.addPlant = (req, res, next) => {
   result.then(() => next());
 };
 
+
+
 // this middleware adds the selected plant's id (scientific name) to the faves table along with the user id and the user's notes for the plant
 favesController.addFave = (req, res, next) => {
   const { user_id, plant_id, notes } = req.body;
@@ -48,7 +55,11 @@ favesController.addFave = (req, res, next) => {
   newFave.then(() => next());
 };
 
+
+
 module.exports = favesController;
+
+
 
 /*
 Backup controller if "EXISTS" doesn't work as expected
