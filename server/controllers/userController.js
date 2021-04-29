@@ -8,6 +8,13 @@ userController.createUser = (req, res, next) => {
   const { username, password } = req.body;
   console.log("username: ", username);
   console.log("password: ", password);
+
+  const checkQuery = {
+    text: 'SELECT username FROM users where username = $1',
+    values: [username],
+    rowMode: 'array'
+  };
+
   bcrypt.hash(password, saltRounds, (err, hash) => {
     const values = [username, hash];
     console.log(values);
@@ -20,7 +27,10 @@ userController.createUser = (req, res, next) => {
     db.query(queryString, [username, hash])
       .then(() => console.log("Create User success in middleware!"))
       .then(() => next())
-      .catch((err) => console.log("we're hitting it", err));
+      .catch((err) => {
+        console.log('username already exists', err);
+        return res.send(['ERROR: username already exits']);
+      });
   });
 };
 
