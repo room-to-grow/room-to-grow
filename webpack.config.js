@@ -15,7 +15,7 @@ module.exports = {
     publicPath: '/build',
     proxy: {
       '/': {
-        // publicPath : '/build',
+        publicPath: '/build',
         target: 'http://localhost:7070',
         secure: false,
       },
