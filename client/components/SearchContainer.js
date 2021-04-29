@@ -12,6 +12,7 @@ const SearchContainer = (props) => {
   const { gState } = props;
   const { setGState } = props;
 
+  const [zipError, setZipError] = useState(null);
   const [prevState, setPrevState] = useState('Florida');
   // const states = document.querySelectorAll('path');
 
@@ -41,11 +42,18 @@ const SearchContainer = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(states[0].attributes[2].value);
-    fetch(`https://us-zipcode.api.smartystreets.com/lookup?auth-id=3afe3193-f166-1706-b1e6-c5cfa1e36a0f&auth-token=vbtl6TwJILdnWrp6KxY7&city=&state=&zipcode=${zip}`)
+    fetch(`https://us-zipcode.api.smartystreets.com/lookup?auth-id=5bcc57bf-d427-6a53-2fe1-c4e618216065&auth-token=qGN37gyZ7lZyhWQ0p9m3&city=&state=&zipcode=${zip}`)
       .then((res) => res.json())
-      .then((results) => setGState({ name: results[0].city_states[0].state, slug: null }))
+      .then((results) => {
+        if (!results[0].city_states) {
+          setZipError('ZIP not found! Please check and search again.');
 
-    // console.log(gState.name);
+          // setZipError("render")
+        } else {
+          setGState({ name: results[0].city_states[0].state, slug: null })
+          setZipError(null);
+        }
+      })
   };
 
   return (
@@ -55,6 +63,7 @@ const SearchContainer = (props) => {
         <input className="test" type="text" value={zip} onChange={(e) => setZip(e.target.value)} />
         <input type="submit" value="Search" />
       </form>
+      <div id="zip-error">{zipError}</div>
     </div>
   );
 };
