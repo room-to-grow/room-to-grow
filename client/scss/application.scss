@@ -361,6 +361,7 @@ ul {
   height: 1000px;
   border : 3px dashed $primaryGreen;
   margin-right : 120px;
+  overflow-y: scroll;
 }
 
 #favorites-title {
