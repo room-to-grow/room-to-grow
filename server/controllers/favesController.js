@@ -99,16 +99,17 @@ favesController.addFave = async (req, res, next) => {
 
   // async function find () {
   // const find_query = {
-  //   text: 'SELECT * FROM plants WHERE plants.scientific_name = ($1)',
+  //   text: 'SELECT f.* FROM favorites f WHERE plant_id = ($1) AND user_id = ($2)',
   //   values: [
-  //     plants.scientific_name,
+  //     plant_id,
+  //     user_id
   //   ],
   //   rowMode: 'array',
   // }
 
   // const find_result = await db.query(find_query);
   // console.log('getting result in ADD FAVE')
-  // console.log(find_result);
+  // console.log(find_result.rows);
   // // } find().catch(e => e.stack)
   // if(find_result.rows.length !== 0){
   //   return next();
@@ -117,7 +118,7 @@ favesController.addFave = async (req, res, next) => {
   console.log(user_id)
   console.log(plant_id)
   const userQueryString = {
-    text : 'SELECT _id from users WHERE users.username = $1',
+    text : 'SELECT _id FROM users WHERE users.username = $1',
     values : [user_id],
     rowMode : 'array'
   }
