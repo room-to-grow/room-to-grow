@@ -1,22 +1,21 @@
+// // PAGE WAS TAKEN FROM SESSIONMODEL IN UNIT11-AUTHENTICATION
 
-//PAGE WAS TAKEN FROM SESSIONMODEL IN UNIT11-AUTHENTICATION
+// // FIX THIS TO BE SQL INSTEAD
 
+// const mongoose = require('mongoose');
 
-// FIX THIS TO BE SQL INSTEAD 
+// const { Schema } = mongoose;
 
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+// /**
+// * Check out the `createdAt` field below. This is set up to use Mongo's automatic document
+// * expiration service by giving the Mongoose schema the `expires` property.
+// * After 30 seconds, the session will automatically be removed from the collection!
+// * (actually, Mongo's cleanup service only runs once per minute so the session
+// * could last up to 90 seconds before it's deleted, but still pretty cool!)
+// */
+// const sessionSchema = new Schema({
+//   cookieId: { type: String, required: true, unique: true },
+//   createdAt: { type: Date, expires: 30, default: Date.now },
+// });
 
-/**
-* Check out the `createdAt` field below. This is set up to use Mongo's automatic document
-* expiration service by giving the Mongoose schema the `expires` property.
-* After 30 seconds, the session will automatically be removed from the collection!
-* (actually, Mongo's cleanup service only runs once per minute so the session
-* could last up to 90 seconds before it's deleted, but still pretty cool!)
-*/
-const sessionSchema = new Schema({
-  cookieId: { type: String, required: true, unique: true },
-  createdAt: { type: Date, expires: 30, default: Date.now }
-});
-
-module.exports = mongoose.model('Session', sessionSchema);
+// module.exports = mongoose.model('Session', sessionSchema);

@@ -1,3 +1,5 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable no-param-reassign */
 import React from 'react';
 
 const USMap = (props) => {
@@ -9,10 +11,10 @@ const USMap = (props) => {
 
   return (
     <svg id="map-svg" viewBox="0 0 960 600" width="95%">
-      {statesData.map((stateData, index) =>
+      {statesData.map((stateData, index) => (
         <path
           className="renderedMap"
-          style={{cursor: "pointer", fill: "#373737"}}
+          style={{ cursor: 'pointer', fill: '#373737' }}
           key={index}
           stroke="#5DBB63"
           strokeWidth="3px"
@@ -32,11 +34,10 @@ const USMap = (props) => {
           onMouseOut={(event) => {
             event.target.style.fill = '#373737';
           }}
-        >
-        </path>
-      )}
+        />
+      ))}
     </svg>
-  )
-}
+  );
+};
 
-export default USMap
+export default USMap;

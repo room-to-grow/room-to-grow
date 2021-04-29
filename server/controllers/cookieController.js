@@ -1,20 +1,16 @@
 const cookieController = {};
 
-
-
-cookieController.setSSIDCookie = (req,res,next) => {
-  console.log('********* COOKIE CONTROLLER START *********')
+cookieController.setSSIDCookie = (req, res, next) => {
+  console.log('********* COOKIE CONTROLLER START *********');
   // console.log(req.body)
 
   //  >>  UPDATE WHEN WE HAVE REQ.BODY.PASSWORD  <<
-  res.cookie('ssid', req.body.password, {httpOnly: false, maxAge: 1000000})
+  res.cookie('ssid', req.body.password, { httpOnly: false, maxAge: 1000000 });
 
   // console.log(res.cookies)
   // console.log('********* COOKIE CONTROLLER END *********')
   return next();
-}
-
-
+};
 
 // cookieController.sessionHandler = (req, res, next) => {
 //     // extracting the user id from the session
@@ -25,7 +21,5 @@ cookieController.setSSIDCookie = (req,res,next) => {
 //         userId = (/*cookie creator we already have*/)
 //     }
 // }
-
-
 
 module.exports = cookieController;

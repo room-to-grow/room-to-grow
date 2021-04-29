@@ -1,30 +1,29 @@
-const bcrypt = require("bcrypt");
-const db = require("../models/plantModel");
+/* eslint-disable no-restricted-syntax */
+const bcrypt = require('bcrypt');
+const db = require('../models/plantModel');
+
 const saltRounds = 10;
 
 const userController = {};
 
-
-
 //  >>  OLD FORMAT FROM ROOM TO GROW  <<
 userController.verifyExisting = (req, res, next) => {
   const { username, password } = req.body;
-  console.log("username: ", username);
-  //can also do a WHERE check and if rows.length <1
-  const queryStringCheck = `SELECT username FROM users`;
+  console.log('username: ', username);
+  // can also do a WHERE check and if rows.length <1
+  const queryStringCheck = 'SELECT username FROM users';
   db.query(queryStringCheck)
     .then((response) => response.rows)
-    .then(rows => {
-      for (let user of rows) {
-        if (user.username===username) {
-          return res.status(200).json({message: 'usernameInUse'});
+    .then((rows) => {
+      for (const user of rows) {
+        if (user.username === username) {
+          return res.status(200).json({ message: 'usernameInUse' });
         }
       }
       return next();
     })
-    .catch(err => console.log('Problem verifying user! ERROR: ', err))
+    .catch((err) => console.log('Problem verifying user! ERROR: ', err));
 };
-
 
 userController.encryptPswd = (req, res, next) => {
   const { username, password } = req.body;
@@ -32,40 +31,37 @@ userController.encryptPswd = (req, res, next) => {
   bcrypt.hash(password, saltRounds, (err, hash) => {
     const values = [username, hash];
     console.log(values);
-    const queryString = 
-    `INSERT INTO users(username, password)
+    const queryString = `INSERT INTO users(username, password)
     VALUES ('${username}', '${hash}')`;
-  
+
     db.query(queryString, [username, hash])
-      .then(() => console.log("=================== Account Creation Successful ======================"))
+      .then(() => console.log('=================== Account Creation Successful ======================'))
       .then(() => next())
-      .catch(err => next({
+      // eslint-disable-next-line no-shadow
+      .catch((err) => next({
         log: err,
-        err: '================== userController.encryptPswd failed to add to database ====================='
+        err: '================== userController.encryptPswd failed to add to database =====================',
       }));
-    }
-  );
+  });
 };
-
-
 
 // //  >>  LOGIN CONTROLLER  <<
 userController.logIn = (req, res, next) => {
   // console.log('userController.logIn', req.body);
   const { username, password } = req.body;
-  console.log("username: ", username);
-  //can also do a WHERE check and if rows.length <1
-  const queryStringCheck = `SELECT username FROM users`;
+  console.log('username: ', username);
+  // can also do a WHERE check and if rows.length <1
+  const queryStringCheck = 'SELECT username FROM users';
   db.query(queryStringCheck)
     .then((response) => response.rows)
-    .then(rows => {
+    .then((rows) => {
       if (rows.includes(req.body.username)) {
-        return res.status(200).json({message: 'usernameInUse'});
+        return res.status(200).json({ message: 'usernameInUse' });
       }
       return next();
     })
-    .catch(err => console.log('Problem verifying user! ERROR: ', err))
-}
+    .catch((err) => console.log('Problem verifying user! ERROR: ', err));
+};
 
 // //  >>  ADDED FROM NFVOTE  <<
 // userController.logIn = (req, res, next) => {
@@ -99,8 +95,6 @@ userController.logIn = (req, res, next) => {
 //   })
 // }
 
-
-
 //  >>  ADDED FROM NFVOTE  <<
 // userController.signUp = (req, res, next) => {
 //   // console.log('userController.signUp:',req.body)
@@ -127,17 +121,8 @@ userController.logIn = (req, res, next) => {
 //     }))
 // }
 
-
-
-
-
-
-
-
-
-
 //  >>  OLD FORMAT FROM ROOM TO GROW  <<
-//tbd endpoint
+// tbd endpoint
 // userController.post =
 //   ("/login",
 //   (req, res) => {
@@ -151,7 +136,5 @@ userController.logIn = (req, res, next) => {
 //         });
 //       });
 //   });
-
-
 
 module.exports = userController;
