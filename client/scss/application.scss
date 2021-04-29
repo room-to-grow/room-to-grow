@@ -30,12 +30,16 @@ body {
   
 }
 
-#loginForm {
+#formContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 5em;
-  margin-top: 10em;
+  margin-top: 50px;
+}
+
+#login {
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 #map-container {

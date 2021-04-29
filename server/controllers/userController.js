@@ -18,7 +18,7 @@ userController.createUser = (req, res, next) => {
     `;
 
     db.query(queryString, [username, hash])
-      .then(() => console.log("Success in middleware!"))
+      .then(() => console.log("Create User success in middleware!"))
       .then(() => next())
       .catch((err) => console.log("we're hitting it", err));
   });
@@ -41,13 +41,17 @@ userController.verifyUser = (req, res, next) => {
     }).then((passwordFromDB) => {
       // comparing the pw that is currently saved in DB to the pw that was entered
       bcrypt.compare(password, passwordFromDB, (err, success) => {
-        if(success) console.log('pw matches!');
-        // res.locals.verification set to true/false based on compare results
-        res.locals.verification = success;
-        //need to add logic to exit out of the middleware if the password is incorrect - normally this is done with a redirect;
-      });
-    }).then((password) => next()); 
-
+        if(success) {
+          console.log('pw matches');
+        // res.locals.verification set to true to reflect the password verification
+          res.locals.verification = success;
+          next();
+        } else {
+          console.log('invalid pw');
+          return res.send(["invalid username or password"]);
+        }
+    })
+  });
 }
 
 

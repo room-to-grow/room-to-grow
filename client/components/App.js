@@ -13,8 +13,9 @@ const App = () => {
   const [plant, setPlant] = useState(null);
   const [plantDetails, setPlantDetails] = useState(null);
   const [favorites, setFavorites] = useState([]);
+  const [loginStatus, setLoginStatus] = useState(null);
   const [loginName, setLoginName] = useState(null);
-  const [isLoggedIn, setLoginStatus] = useState(false);
+  
 
   // This should only run once -- when the loginname is input
   // then fetch for the US State data and will then render the USMap
@@ -33,7 +34,7 @@ const App = () => {
   // to associate a user's favorites with their login name
   if (!loginName) {
    return(
-   <div>
+   <div id="formContainer">
     {/* // this is where the login will go */}
      <form id="loginForm" onSubmit={() => {
       //onClick={() => {method}}
@@ -52,6 +53,7 @@ const App = () => {
                       },
                       body: JSON.stringify(bodyData)
                   }) 
+                  setLoginStatus(true);
                   setLoginName(userNameVal);
                   }} >
        {/* <label for="userName">Input User Name:</label> */}
@@ -59,13 +61,13 @@ const App = () => {
          type="text" 
          id="userName" 
          name="userName"
-         placeholder="Input username here"
-       ></input><br></br>
+         placeholder="Enter username here"
+       ></input>
        <input className="fav-input"
-         type="text" 
+         type="password" 
          id="password" 
          name="password"
-         placeholder="Input password here"
+         placeholder="Enter password here"
        ></input>
        <button className="fav-button"
          type="submit"
@@ -73,7 +75,7 @@ const App = () => {
          name='submit' 
         >Sign Up</button>
       </form><br></br>
-      <button className="logIn" onClick={() => {
+      <button className="fav-button" id="logIn" onClick={() => {
         const userNameVal = document.getElementById("userName");
         const pwVal = document.getElementById("password");
         const bodyData = {username: userNameVal.value, password: pwVal.value};
@@ -89,16 +91,18 @@ const App = () => {
           body: JSON.stringify(bodyData)
         }).then((res) => {
           return res.json();
-        }).then((json) => {
-          if(json) {
-            setLoginStatus(json);
-            console.log('Login Status after verification', isLoggedIn);
-          }
+        }).then((res) => {
+          console.log('type of json respnse', typeof res);
+          if(res === true) {
+            setLoginStatus(true);
+            setLoginName(userNameVal);
+          };
+          console.log('Login Status after verification', loginStatus);
         });
-        setLoginName(userNameVal);
+        // setLoginName(userNameVal);
         
-        // setLoginName('testusername');
-        }}>Log In with an Existing Account</button> 
+   
+        }}>Log In</button> 
       </div>
     )
   }
@@ -121,6 +125,7 @@ const App = () => {
           setFamily={setFamily}
           setPlant={setPlant}
           setPlantDetails={setPlantDetails}
+          loginStatus={loginStatus}
         />
         <div id="listsContainer">
           <FamilyList 
