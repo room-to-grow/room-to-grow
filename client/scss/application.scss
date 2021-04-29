@@ -119,7 +119,9 @@ ul {
 
 .popup-box {
   position: fixed;
-  background: #00000050;
+  // background: #00000050;
+  // background-color: darkGray;
+  // border: 3px solid #5dbb63;
   // background-color: black;
   width: 100%;
   height: 100vh;
@@ -131,32 +133,38 @@ ul {
 .box {
   position: relative;
   justify-content: space-between;
+  background-color: $darkGray;
+  //box-shadow: 
+  box-shadow: 10px 10px 15px $primaryGreen;
+  border: 3px solid #5dbb63;
   width: 70%;
   margin: 0 auto;
   height: auto;
   max-height: 70vh;
   margin-top: calc(100vh - 85vh - 20px);
   // background: #fff;
-  background-color: lightgrey;
+  // background-color: lightgrey;
   border-radius: 4px;
   padding: 20px;
-  border: 1px solid #999;
+  // border: 1px solid #999;
   overflow: auto;
 }
 
 .plantDetails-box {
   position: relative;
   justify-content: space-between;
+  background-color:$darkGray;
+  border: 3px solid #5dbb63;
   width: 70%;
   margin: 0 auto;
   height: auto;
   max-height: 70vh;
   margin-top: calc(100vh - 85vh - 20px);
   // background: #fff;
-  background-color: lightgrey;
+  // background-color: lightgrey;
   border-radius: 4px;
   padding: 20px;
-  border: 1px solid #999;
+  // border: 1px solid #999;
   overflow: auto;
 }
 

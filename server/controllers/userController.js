@@ -44,6 +44,9 @@ userController.verifyUser = (req, res, next) => {
         if(success) console.log('pw matches!');
         // res.locals.verification set to true/false based on compare results
         res.locals.verification = success;
+        //next();
+        //console.log('in verify user')
+        //console.log(res.locals.verification)
         //need to add logic to exit out of the middleware if the password is incorrect - normally this is done with a redirect;
       });
     }).then((password) => next()); 

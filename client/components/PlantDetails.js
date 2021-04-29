@@ -73,13 +73,14 @@ function revertDetailStates () {
                 <li>
                   <form onSubmit = {(e) => {
                         e.preventDefault();
+                        console.log("this is login name ", loginName)
                         const bodyData = { 
                           plants : plantDetails,
-                          user_id : 'loginName',
+                          user_id : loginName,
                           plant_id : plantDetails.scientific_name,
                           notes : ' '}; 
-                      try {
-            
+                          console.log(bodyData)
+              
                         console.log('in try block')
                         fetch('/signup/faves', {
                         // method
@@ -92,16 +93,22 @@ function revertDetailStates () {
                         // body
                         body: JSON.stringify(bodyData)
                       }
-                      )
-                      }
-                      catch (err) {
-                        console.log(err);
-                      }
+                      ).then(result => result.json())
+                        .then(data => {
+                          const notes = document.getElementById('notes-input');
+                          console.log('in the date:', data)
+                          setFavorites(data)})
+                      .catch(e => console.log('in the catch', e.stack))
+                      
+                       
+                      console.log('posting to db...');
+                      //console.log(result)
+                     // setFavorites([...favorites, {name : plantDetails.common_name, notes : notes.value}])
+                      
+                   
 
                       
-                      const notes = document.getElementById('notes-input');
-                      console.log('posting to db...');
-                      setFavorites([...favorites, {name : plantDetails.common_name, notes : notes.value}])
+
                   }}>
                     <input id = 'notes-input' className = "fav-input" type="text" name="notes" placeholder="Write notes here"></input>
                     <button className = "fav-button" type="submit" onClick = {(e) => {
