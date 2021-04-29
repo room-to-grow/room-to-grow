@@ -32,14 +32,10 @@ body {
 
 #formContainer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 50px;
-}
-
-#login {
-  margin-top: 0px;
-  margin-bottom: 0px;
 }
 
 #map-container {
@@ -374,6 +370,15 @@ ul {
 
 #detailsContainer{
   margin-left : 50px;
+}
+
+#failed-login-message {
+  color: red;
+}
+
+#button-div {
+  display: flex;
+  flex-direction: row;
 }
 // .family-container{
 //     max-width: 200px;
