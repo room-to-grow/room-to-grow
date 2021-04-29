@@ -64,8 +64,9 @@ app.use((err, req, res, next) => {
   return res.status(errObj.status).json(errObj.message);
 });
 
+
 // listener:
-const server = app.listen(PORT, () => {
+const server = app.use(PORT, () => {
   console.log(`Connected, listening on port ${PORT}`);
 });
 
