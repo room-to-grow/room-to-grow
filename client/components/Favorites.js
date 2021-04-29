@@ -53,8 +53,8 @@ const Favorites = props => {
               
               <button className="deleteFav-btn" onClick={() => deleteFav(fav[1])}>Delete</button>
 
-              <div className='notesContainer'>
-              {!notesIsOpen ? (
+              {/* <div className='notesContainer'> */}
+              {/* {!notesIsOpen ? (
               <button className='seeNote-btn' onClick={() => toggleNotes(true)}>See Notes:</button>
               ) : (
                 <div className='Notespopup-box'>
@@ -63,7 +63,7 @@ const Favorites = props => {
                   </div>
                 </div>
               )}
-              </div>
+              </div> */}
               
               {/* <span className='icon'><NotesIcon icon={faQuestionCircle} size='xs' style={{color: 'steelBlue'}} onClick={(e) => openDetailsModal(e, fav[0])}/></span> */}
             </li>

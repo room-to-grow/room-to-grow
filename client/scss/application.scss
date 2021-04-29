@@ -251,6 +251,7 @@ ul {
 .dropdown-content {
   display: none;
   position: absolute;
+  // background-color: $darkGray;
   // background-color: #f1f1f1;
   min-width: 160px;
   // box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -279,9 +280,11 @@ ul {
 .list-buttons {
 
     // border: none;
-    background-color : lightgrey;
+    // background-color : lightgrey;
+    background-color: $darkGray;
     border: none;
-    color: darkgreen;
+    // color: darkgreen;
+    color:  #7dc882;
     // color: $primaryGreen;
     // border-color: $primaryGreen;
     font-size: 2em;
@@ -333,9 +336,11 @@ ul {
 // .plantListComponent
 
 .plantlist-buttons {
-  background-color : lightgrey;
+  // background-color : lightgrey;
+  background-color: $darkGray;
   border: none;
-  color: darkgreen;
+  // color: darkgreen;
+  color:  #7dc882;
   // color: $primaryGreen;
   // border-color: $primaryGreen;
   font-size: 2em;
