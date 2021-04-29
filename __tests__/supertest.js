@@ -9,38 +9,34 @@ const fs = require('fs');
 const path = require('path');
 const runtime = require('regenerator-runtime');
 const server = require('../server/server');
-
+import regeneratorRuntime from "regenerator-runtime";
 /**
  * Read the docs! https://www.npmjs.com/package/supertest
  */
 
-// TEST FOR ROOT
-describe('Testing the root path', () => {
-  describe('GET request', () => {
-    it('responds with 200 status and text/html content type',
-      () => request(server)
-        .get('/')
-        .expect('Content-Type', /text\/html/)
-        .expect(200));
-
-    it('sends back main index.html page',
-      async () => {
-        const getRequest = await request(server).get('/');
-        expect(getRequest.body).toEqual(JSON.parse(fs.readFileSync(path.join(__dirname, '../index.html'))));
-      });
+describe('Server Side Functionality', () => {
+  // TEST FOR ROOT - THIS DEFINITLEY WORKS
+  describe('Testing the root path', () => {
+    describe('GET', () => {
+      it('responds with 200 status and text/html content type',
+        () => request(server)
+          .get('/')
+          .expect('Content-Type', /text\/html/)
+          .expect(200));
+    });
   });
-});
 
-// TEST FOR BUILD
-describe('Testing the build path', () => {
-  describe('GET request', () => {
-    it('responds with 200 status and application/json content type',
-      () => {
-        request(server)
-          .get('/build')
-          .expect('Content-Type', /application\/json/)
-          .expect(200);
-      });
+  // TEST FOR BUILD
+  describe('Testing the build path', () => {
+    describe('GET', () => {
+      it('responds with 200 status and text/html content type',
+        () => {
+          request(server)
+            .get('/build')
+            .expect('Content-Type', /text\/html/)
+            .expect(200);
+        });
+    });
 
     it('markets from "DB" json are in body of response',
       async () => {
@@ -51,33 +47,27 @@ describe('Testing the build path', () => {
         expect(gtRequest.body).toEqual(express.static(path.join(__dirname, '../build')));
       });
   });
-});
 
-// // TEST FOR lOCATION
-describe('Testing the location path', () => {
-  describe('GET request', () => {
-    it('responds with 200 status and text/html content type',
-      () => request(server)
-        .get('/location/Florida')
-        .expect('Content-Type', /application\/json/)
-        .expect(200));
+  // TEST FOR lOCATION
+  describe('Testing the location path', () => {
+    describe('GET', () => {
+      it('responds with 200 status and text/html content type',
+        () => request(server)
+          .get('/location/Delaware')
+          .expect('Content-Type', /application\/json/)
+          .expect(200));
+    });
   });
 });
 
-// TEST FOR USER
-describe('Testing the user path', () => {
-  describe('POST request', () => {
-    const data = {
-      username: 'test',
-      password: 'pass',
-    };
-    it('should create a new user', async () => {
-      const res = await request(server)
-        .post('/user/signup')
-        .send(data)
-        .expect('Content-Type', /application\/json/)
-        .expect(200)
-        .expect('{"message":"usernameInUse"}');
+  // TEST FOR USER
+  xdescribe('Testing the user path', () => {
+    describe('GET', () => {
+      it('responds with 200 status and text/html content type',
+        () => request(server)
+          .get('/user')
+          .expect('Content-Type', /text\/html/)
+          .expect(200));
     });
   });
 });

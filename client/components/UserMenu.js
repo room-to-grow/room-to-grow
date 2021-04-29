@@ -25,7 +25,7 @@ const UserPage = (props) => {
   useEffect(() => {
     fetch('https://willhaley.com/assets/united-states-map-react/states.json')
       .then((data) => data.json())
-    // Set the statesData with the data received from fetch().
+      // Set the statesData with the data received from fetch().
       .then((res) => setStatesData(res));
   }, [renderMap]);
 
@@ -33,14 +33,14 @@ const UserPage = (props) => {
     <FamilyList gState={gState} setGState={setGState} setFamily={setFamily} setPlant={setPlant} setPlantDetails={setPlantDetails} />
     <PlantList family={family} gState={gState} setPlant={setPlant} setPlantDetails={setPlantDetails} />
     <PlantDetails family={family} plant={plant} gState={gState} plantDetails={plantDetails} setPlantDetails={setPlantDetails} setFavorites={setFavorites} favorites={favorites} loginName={props.loginName} />
-                        </div>];
+  </div>];
 
   const favoritesContent = [<div id="favorites-container"><Favorites favorites={favorites} loginName={props.loginName} /></div>];
 
   // If there is no statesData yet, show a loading indicator.
   let map = <div>Loading states map...</div>;
   if (statesData) {
-    map = [<USMap id="us-map" statesData={statesData} setGState={setGState} setFamily={setFamily} setPlant={setPlant} setPlantDetails={setPlantDetails} />];
+    map = [<USMap id="us-map" statesData={statesData} gState={gState} setGState={setGState} setFamily={setFamily} setPlant={setPlant} setPlantDetails={setPlantDetails} />];
   }
 
   let currentContent;
@@ -61,6 +61,8 @@ const UserPage = (props) => {
         setZip={setZip}
         gState={gState}
         setGState={setGState}
+        statesData={statesData}
+        setStatesData={setStatesData}
       />
       {map}
       <div id="usermenu-container">
