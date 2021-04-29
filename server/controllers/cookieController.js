@@ -2,7 +2,6 @@ const bcrypt = require("bcrypt");
 const db = require("../models/plantModel");
 const saltRounds = 10;
 
-
 const cookieController = {};
 
 cookieController.createSessionCookie = (req,res,next) => {
@@ -78,11 +77,7 @@ cookieController.getUserFromSSID = (req,res,next) => {
     res.locals.username = data.rows[0].username;
     return next();
   })
-
-
 }
-
-
 
 // cookieController.sessionHandler = (req, res, next) => {
 //     // extracting the user id from the session
@@ -93,7 +88,5 @@ cookieController.getUserFromSSID = (req,res,next) => {
 //         userId = (/*cookie creator we already have*/)
 //     }
 // }
-
-
 
 module.exports = cookieController;

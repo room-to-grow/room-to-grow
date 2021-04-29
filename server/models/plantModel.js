@@ -1,6 +1,6 @@
-const { Pool } = require("pg");
+const { Pool } = require('pg');
 
-/*Schema set up as below - used CREATE TABLE in ElephantSQL to make the schema. Syntax used listed below:
+/* Schema set up as below - used CREATE TABLE in ElephantSQL to make the schema. Syntax used listed below:
 CREATE TABLE faves (
 image TEXT,
 commonname TEXT,
@@ -11,11 +11,10 @@ notes TEXT
 );
 */
 
-//URI to elephantSQL database that will store the users favorite plants and any notes that add to those faves
-const PG_URI =
-  "postgres://aucntabm:ofyl9T6henHqWVzxS7HnAQNgpX5VHdXL@queenie.db.elephantsql.com:5432/aucntabm";
+// URI to elephantSQL database that will store the users favorite plants and any notes that add to those faves
+const PG_URI = 'postgres://aucntabm:ofyl9T6henHqWVzxS7HnAQNgpX5VHdXL@queenie.db.elephantsql.com:5432/aucntabm';
 
-//create a new pool here using the connection string above
+// create a new pool here using the connection string above
 const pool = new Pool({
   connectionString: PG_URI,
 });
@@ -28,6 +27,7 @@ const pool = new Pool({
 module.exports = {
   query: (text, params, callback) => {
     // console.log("executed query", text);
+    // eslint-disable-next-line no-param-reassign
     params = pool.connectionString;
     // console.log("executed params", params);
     // console.log("executed callback", callback);

@@ -1,9 +1,8 @@
-const db = require("../models/plantModel");
-
+/* eslint-disable camelcase */
+/* eslint-disable no-return-assign */
+const db = require('../models/plantModel');
 
 const favesController = {};
-
-
 
 // this middleware retrieves a user's favorited plants
 favesController.getFaves = (req, res, next) => {
@@ -27,13 +26,10 @@ favesController.getFaves = (req, res, next) => {
     .then(() => next());
 };
 
-
-
 // this middleware checks to see if a plant already exists in our plant table and if it doesn't, inserts the selected plant
 favesController.addPlant = (req, res, next) => {
   const { plants } = req.body;
-  const selectQuery =
-    "SELECT scientific_name FROM public.plants WHERE public.plants.scientific_name = plants.scientific_name";
+  const selectQuery = 'SELECT scientific_name FROM public.plants WHERE public.plants.scientific_name = plants.scientific_name';
   const queryString = `public.plants VALUES ( plants.common_name,
     plants.scientific_name,
     plants.family_common_name,
@@ -50,8 +46,6 @@ favesController.addPlant = (req, res, next) => {
   const result = db.query(insertQuery);
   result.then(() => next());
 };
-
-
 
 // this middleware adds the selected plant's id (scientific name) to the faves table along with the user id and the user's notes for the plant
 favesController.addFave = (req, res, next) => {
@@ -73,11 +67,7 @@ favesController.addFave = (req, res, next) => {
   });
 };
 
-
-
 module.exports = favesController;
-
-
 
 /*
 Backup controller if "EXISTS" doesn't work as expected

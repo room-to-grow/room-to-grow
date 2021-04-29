@@ -1,13 +1,12 @@
-const express = require("express");
+const express = require('express');
+
 const router = express.Router();
 
-const favesController = require("../controllers/favesController");
-const userController = require("../controllers/userController");
-const cookieController = require("../controllers/cookieController");
+const favesController = require('../controllers/favesController');
+const userController = require('../controllers/userController');
+const cookieController = require('../controllers/cookieController');
 
-
-
-//main route for the userAuth route handler.
+// main route for the userAuth route handler.
 // const welcomeToUserAuth = 'Welcome To User Authentication\nFeel free to customize the main route as needed';
 // userAuthRouter.get('/', (req,res) => {
 //   return res.status(200).send(welcomeToUserAuth);
@@ -24,22 +23,9 @@ router.get("/verifySession",
   console.log("User successfully registered!");
 });
 
-router.get("/ssidCheck",
-  cookieController.sessionValidation,
-  (req, res) => {
-  // error handler
-  // handle if username is already taken
-  // upon successful signup do the following:
-  console.log("Attempting to check session");
-  res.status(200).json(res.locals);
-  console.log("User successfully registered!");
-});
-
-
-
 //  THIS SHOULD BE FOR SIGN-UP
-router.post("/signup", 
-  userController.verifyExisting, 
+router.post('/signup',
+  userController.verifyExisting,
   userController.encryptPswd,
   (req, res) => {
   // error handler
@@ -83,13 +69,11 @@ router.post(
   //favesController.addPlant,
   favesController.addFave,
   (req, res) => {
-    console.log("Attempting to save selection");
+    console.log('Attempting to save selection');
     // what goes in the response?
     res.status(200).json(res.locals.newfav);
     console.log("Saved fave!");
   }
 );
-
-
 
 module.exports = router;

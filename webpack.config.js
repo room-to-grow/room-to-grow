@@ -1,21 +1,22 @@
-const path = require("path");
+/* eslint-disable linebreak-style */
+const path = require('path');
 
 module.exports = {
-  entry: ["babel-polyfill", "./client/index.js"],
+  entry: ['babel-polyfill', './client/index.js'],
   output: {
-    path: path.resolve(__dirname, "./build"),
-    filename: "bundle.js",
+    path: path.resolve(__dirname, './build'),
+    filename: 'bundle.js',
   },
 
   mode: process.env.NODE_ENV,
   devServer: {
     hot: true,
     historyApiFallback: true,
-    publicPath: "/build",
+    publicPath: '/build',
     proxy: {
       '/': {
         // publicPath : '/build',
-        target: "http://localhost:7070",
+        target: 'http://localhost:7070',
         secure: false,
       },
     },
@@ -26,15 +27,15 @@ module.exports = {
         test: /\.jsx?/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
+            presets: ['@babel/preset-env', '@babel/preset-react'],
           },
         },
       },
       {
         test: /\.s[ac]ss$/i,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(gif|png|jpe?g|svg)$/i,

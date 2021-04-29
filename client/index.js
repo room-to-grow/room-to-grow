@@ -14,5 +14,5 @@ document.getElementById('title-container').appendChild(title);
 
 render(
   <App />,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
