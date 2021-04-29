@@ -15,7 +15,7 @@ const App = () => {
   const [favorites, setFavorites] = useState([]);
   const [loginStatus, setLoginStatus] = useState(null);
   const [loginName, setLoginName] = useState(null);
-  const [failMessage, setFailMessage] = useState(<div></div>);
+  
 
   // This should only run once -- when the loginname is input
   // then fetch for the US State data and will then render the USMap
@@ -28,14 +28,34 @@ const App = () => {
     })();
   }, [loginName]);
 
+
   // until loginName value is delcared (default of null), show the login page
   // sets the loginName (w/o password) to send to backend
   // to associate a user's favorites with their login name
   if (!loginName) {
    return(
-      
    <div id="formContainer">
     {/* // this is where the login will go */}
+     <form id="loginForm" onSubmit={() => {
+      //onClick={() => {method}}
+                      const userNameVal = document.getElementById("userName");
+                      const pwVal = document.getElementById("password");
+                      const bodyData = {username: userNameVal.value, password: pwVal.value};
+                    
+                      fetch('/signup/new', {
+                      // method
+                      method: 'POST',
+                      // headers
+                      headers: {
+                        // 'Content-Type': 'application/x-www-form-urlencoded'
+                        'Content-Type': 'application/json'
+      
+                      },
+                      body: JSON.stringify(bodyData)
+                  }) 
+                  setLoginStatus(true);
+                  setLoginName(userNameVal.value);
+                  }} >
        {/* <label for="userName">Input User Name:</label> */}
        <input className="fav-input"
          type="text" 
@@ -49,65 +69,43 @@ const App = () => {
          name="password"
          placeholder="Enter password here"
        ></input>
-      <div id="button-div">
-        <button className="fav-button"
-          id='submit'
-          name='submit' 
-          onClick={() => {
-              //onClick={() => {method}}
-                const userNameVal = document.getElementById("userName");
-                const pwVal = document.getElementById("password");
-                const bodyData = {username: userNameVal.value, password: pwVal.value};
-              
-                fetch('/signup/new', {
-                // method
-                method: 'POST',
-                // headers
-                headers: {
-                  // 'Content-Type': 'application/x-www-form-urlencoded'
-                  'Content-Type': 'application/json'
+       <button className="fav-button"
+         type="submit"
+         id='submit'
+         name='submit' 
+        >Sign Up</button>
+      </form><br></br>
+      <button className="fav-button" id="logIn" onClick={() => {
+        const userNameVal = document.getElementById("userName");
+        const pwVal = document.getElementById("password");
+        const bodyData = {username: userNameVal.value, password: pwVal.value};
+        fetch('/signup/login', {
+          // method
+          method: 'POST',
+          // headers
+          headers: {
+            // 'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json'
 
-                },
-                body: JSON.stringify(bodyData)
-            }) 
+          },
+          body: JSON.stringify(bodyData)
+        }).then((res) => {
+          console.log('res', res);
+          return res.json();
+        }).then((res) => {
+          const { favorites, verification } = res;
+          if(verification === true) {
             setLoginStatus(true);
             setLoginName(userNameVal.value);
-            }}
-          >Sign Up</button>
-        <button className="fav-button" id="logIn" onClick={() => {
-          const userNameVal = document.getElementById("userName");
-          const pwVal = document.getElementById("password");
-          const bodyData = {username: userNameVal.value, password: pwVal.value};
-          fetch('/signup/login', {
-            // method
-            method: 'POST',
-            // headers
-            headers: {
-              // 'Content-Type': 'application/x-www-form-urlencoded'
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(bodyData)
-          }).then((res) => {
-            console.log('res', res);
-            return res.json();
-          }).then((res) => {
-            const { favorites, verification } = res;
+            //or an array of arrays with two elements in each array
+          //favorites will now be an array with objects containing {plantName: ..., notes: ...}
             console.log('favorites', favorites);
-            if(verification === true) {
-              setLoginStatus(true);
-              setLoginName(userNameVal.value);
-              //or an array of arrays with two elements in each array
-            //favorites will now be an array with objects containing {plantName: ..., notes: ...}
-              console.log('favorites', favorites);
-              setFavorites(favorites);
-            }
-            else{
-              setFailMessage(<p id="failed-login-message">Error: invalid username or password</p>);
-            };
-          });
-          }}>Log In</button> 
-        </div>
-        {failMessage}
+            setFavorites(favorites);
+          };
+        });
+        
+   
+        }}>Log In</button> 
       </div>
     )
   }
