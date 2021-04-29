@@ -65,7 +65,7 @@ app.use((err, req, res, next) => {
 });
 
 // listener:
-const server = app.use(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Connected, listening on port ${PORT}`);
 });
 
