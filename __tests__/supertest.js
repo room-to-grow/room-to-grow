@@ -7,13 +7,13 @@ const request = require('supertest');
 const fs = require('fs');
 const path = require('path');
 const server = require('../server/server');
-
+import regeneratorRuntime from "regenerator-runtime";
 /**
  * Read the docs! https://www.npmjs.com/package/supertest
  */
 
 describe('Server Side Functionality', () => {
-  // TEST FOR ROOT
+  // TEST FOR ROOT - THIS DEFINITLEY WORKS
   describe('Testing the root path', () => {
     describe('GET', () => {
       it('responds with 200 status and text/html content type',
@@ -27,11 +27,11 @@ describe('Server Side Functionality', () => {
   // TEST FOR BUILD
   describe('Testing the build path', () => {
     describe('GET', () => {
-      it('responds with 200 status and application/json content type',
+      it('responds with 200 status and text/html content type',
         () => {
           request(server)
             .get('/build')
-            .expect('Content-Type', /application\/json/)
+            .expect('Content-Type', /text\/html/)
             .expect(200);
         });
 
@@ -51,14 +51,14 @@ describe('Server Side Functionality', () => {
     describe('GET', () => {
       it('responds with 200 status and text/html content type',
         () => request(server)
-          .get('/location')
+          .get('/location/Delaware')
           .expect('Content-Type', /application\/json/)
           .expect(200));
     });
   });
 
   // TEST FOR USER
-  describe('Testing the user path', () => {
+  xdescribe('Testing the user path', () => {
     describe('GET', () => {
       it('responds with 200 status and text/html content type',
         () => request(server)
@@ -67,4 +67,5 @@ describe('Server Side Functionality', () => {
           .expect(200));
     });
   });
+
 });
