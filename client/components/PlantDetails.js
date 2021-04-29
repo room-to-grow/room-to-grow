@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/jsx-curly-newline */
 /* eslint-disable max-len */
 /* eslint-disable jsx-a11y/alt-text */
@@ -83,52 +84,55 @@ const PlantDetails = (props) => {
         <li>
           <form>
 
-            <input id = 'notes-input' className = "fav-input" type="text" name="notes" placeholder="Write notes here"></input>
-            <button className = "fav-button" type="submit" onClick = {(e) => {
-              e.preventDefault()
-              const notes = document.getElementById('notes-input');
-              // const notesvalue = notes.value;
-              const favorite = JSON.stringify({plantname: plantDetails.common_name, note: notes.value})
+            <input id="notes-input" className="fav-input" type="text" name="notes" placeholder="Write notes here" />
+            <button
+              className="fav-button"
+              type="submit"
+              onClick={(e) => {
+                e.preventDefault();
+                const notes = document.getElementById('notes-input');
+                // const notesvalue = notes.value;
+                const favorite = JSON.stringify({ plantname: plantDetails.common_name, note: notes.value });
 
-              console.log('adding note to favorites');
+                console.log('adding note to favorites');
 
-              //fetch request to input to notes
-              fetch(`/user/addfavorites/${loginName}`, {
-                method: 'POST',
-                headers: {'Content-Type': 'Application/JSON'},
-                body: favorite
-              })
-              .then(data => data.json())
-              .then(newfav => {
-                console.log(newFav)
-              })
+                // fetch request to input to notes
+                fetch(`/user/addfavorites/${loginName}`, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'Application/JSON' },
+                  body: favorite,
+                })
+                  .then((data) => data.json())
+                  .then((newfav) => {
+                    console.log(newFav);
+                  });
 
-              //{username: , plantname: , note}
+                // {username: , plantname: , note}
 
                 // this response is from the database
                 // server gets body
                 // models.favorites.create(req.body)
                 // res.locals.favorites = models.favorites.find({})
                 // res.send(res.locals.favorites)
-              
-              // response
-            //  const response =  fetch(`/db`, {
-            //     // method
-            //     method: 'POST',
-            //     // headers
-            //     headers: {
-            //       'Content-Type': 'application/json'
-            //     },
-            
-            //     // body
-            //     body: { plants : plantDetails,
-            //             user_id : loginName,
-            //             plant_id : plantDetials.scientific_name,
-            //             notes : ' '}
-            //   }
-            //   )
-              //const notes = document.getElementById('fav-input')              
-            }
+
+                // response
+                //  const response =  fetch(`/db`, {
+                //     // method
+                //     method: 'POST',
+                //     // headers
+                //     headers: {
+                //       'Content-Type': 'application/json'
+                //     },
+
+                //     // body
+                //     body: { plants : plantDetails,
+                //             user_id : loginName,
+                //             plant_id : plantDetials.scientific_name,
+                //             notes : ' '}
+                //   }
+                //   )
+                // const notes = document.getElementById('fav-input')
+              }
             // setFavorites({response.json())
             }
             >

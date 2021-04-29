@@ -27,17 +27,15 @@ const SearchContainer = (props) => {
   // const didMount = useDidMount();
 
   useEffect(() => {
-
     if (document.getElementById('map-svg')) {
       const map = document.getElementById('map-svg');
       const prevStateTag = map.getElementById(prevState);
       prevStateTag.style.fill = '#373737';
-      setPrevState(gState.name)
+      setPrevState(gState.name);
       const state = map.getElementById(gState.name);
       state.style.fill = 'orange';
     }
-
-  }, [gState.name])
+  }, [gState.name]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,10 +48,10 @@ const SearchContainer = (props) => {
 
           // setZipError("render")
         } else {
-          setGState({ name: results[0].city_states[0].state, slug: null })
+          setGState({ name: results[0].city_states[0].state, slug: null });
           setZipError(null);
         }
-      })
+      });
   };
 
   return (

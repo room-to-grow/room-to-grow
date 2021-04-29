@@ -12,16 +12,16 @@ const cookieController = require('../controllers/cookieController');
 //   return res.status(200).send(welcomeToUserAuth);
 // })
 
-router.get("/verifySession", 
+router.get('/verifySession',
   cookieController.sessionValidation,
   (req, res) => {
   // error handler
   // handle if username is already taken
   // upon successful signup do the following:
-  console.log("Attempting to check session");
-  res.status(200).json(res.locals);
-  console.log("User successfully registered!");
-});
+    console.log('Attempting to check session');
+    res.status(200).json(res.locals);
+    console.log('User successfully registered!');
+  });
 
 //  THIS SHOULD BE FOR SIGN-UP
 router.post('/signup',
@@ -31,49 +31,48 @@ router.post('/signup',
   // error handler
   // handle if username is already taken
   // upon successful signup do the following:
-  console.log("Attempting to create user");
-  res.status(200).json({message: 'successful'});
-  console.log("User successfully registered!");
-});
-
+    console.log('Attempting to create user');
+    res.status(200).json({ message: 'successful' });
+    console.log('User successfully registered!');
+  });
 
 //  >>  UPDATE LOGIN WHEN WE HAVE USER DB SET  <<
-router.post("/login",
+router.post('/login',
   userController.verifyUser,
   cookieController.createSessionCookie,
   (req, res) => {
     res.status(200).json(res.locals);
-});
+  });
 
-router.get("/logout/:ssid",
+router.get('/logout/:ssid',
   userController.logout,
   (req, res) => {
-    res.status(200).json({message: 'Logged Out!'});
-});
-    
-  
+    res.status(200).json({ message: 'Logged Out!' });
+  });
+
 router.get(
-  "/favorites/:ssid",
+  '/favorites/:ssid',
   cookieController.getUserFromSSID,
-  favesController.getFaves, 
+  favesController.getFaves,
   (req, res, next) => {
     console.log("Router preparing to fetch user's saved plants");
-    res.status(200).json(res.locals.faves);}
+    res.status(200).json(res.locals.faves);
+  },
 );
 
-//what does the req body for favorites look like?
+// what does the req body for favorites look like?
 // what should this endpoint be?
 router.post(
-  "/addfavorites/:ssid",
+  '/addfavorites/:ssid',
   cookieController.getUserFromSSID,
-  //favesController.addPlant,
+  // favesController.addPlant,
   favesController.addFave,
   (req, res) => {
     console.log('Attempting to save selection');
     // what goes in the response?
     res.status(200).json(res.locals.newfav);
-    console.log("Saved fave!");
-  }
+    console.log('Saved fave!');
+  },
 );
 
 module.exports = router;

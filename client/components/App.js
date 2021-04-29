@@ -1,3 +1,5 @@
+/* eslint-disable no-shadow */
+/* eslint-disable consistent-return */
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable no-console */
@@ -14,14 +16,14 @@ const App = () => {
   const [info, setInfo] = useState(null);
   const [session] = useState(null);
 
-  useEffect (() => {
+  useEffect(() => {
     fetch('/user/verifySession')
-    .then(data => data.json()
-    .then(data => {
-      if (data.message) return;
-      if (data.ssid) setLoginName(data.ssid)
-    }))
-  }, [session])
+      .then((data) => data.json()
+        .then((data) => {
+          if (data.message) return;
+          if (data.ssid) setLoginName(data.ssid);
+        }));
+  }, [session]);
 
   /** NOT NEEDED/ SECURITY FLAW TO STORE USER PASSWORD IN STATE * */
   /** REQUEST SHOULD BE SENT DIRECTLY WITH USERNAME/PASSWORD ON SUBMIT * */
@@ -35,35 +37,35 @@ const App = () => {
     const pswdInput = document.getElementById('password');
     const username = nameInput.value;
     const password = pswdInput.value;
-    
-    if (username==='') return setInfo('Username field empty!')
-    if (password==='') return setInfo('You must type in your password!')
 
-    const user = JSON.stringify({ username: username, password: password });
-    
-    console.log('about to login', user)
+    if (username === '') return setInfo('Username field empty!');
+    if (password === '') return setInfo('You must type in your password!');
+
+    const user = JSON.stringify({ username, password });
+
+    console.log('about to login', user);
 
     fetch('/user/login', {
       method: 'POST',
-      headers: {'Content-Type': 'Application/JSON'},
-      body: user
+      headers: { 'Content-Type': 'Application/JSON' },
+      body: user,
     })
-    .then(response => response.json())
-    .then(data => {
-      console.log
-      if (data.message === "usernameNoMatch") {
-        setInfo('Not an existing user!')
-      } else if (data.message === "passwordNoMatch") {
-        pswdInput.value = '';
-        setInfo('Wrong password!')
-      } else if (data.ssid) {
-        setInfo(<div className="greenText">Logged in!</div>);
-        setTimeout(() => setLoginName(data.ssid), 750);
-      }
-    })
-    .catch((error) => {
-      console.error('Error when POST-fetching for login: ', error);
-    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log;
+        if (data.message === 'usernameNoMatch') {
+          setInfo('Not an existing user!');
+        } else if (data.message === 'passwordNoMatch') {
+          pswdInput.value = '';
+          setInfo('Wrong password!');
+        } else if (data.ssid) {
+          setInfo(<div className="greenText">Logged in!</div>);
+          setTimeout(() => setLoginName(data.ssid), 750);
+        }
+      })
+      .catch((error) => {
+        console.error('Error when POST-fetching for login: ', error);
+      });
   }
 
   function onUserRegistration() {
@@ -72,12 +74,12 @@ const App = () => {
     const newPswdconfirm = document.getElementById('newPswdconfirm');
     const newUserval = newUsername.value;
     const newPswdval = newPswd.value;
-    const newPswdconfval = newPswdconfirm.value
+    const newPswdconfval = newPswdconfirm.value;
 
-    if (newUserval==='') return setInfo('Username field empty!')
-    if (newPswdval==='') return setInfo('You must type in a password!')
-    if (newPswdconfval==='') return setInfo('Please confirm your password!')
-    if (newPswdval!==newPswdconfval) {
+    if (newUserval === '') return setInfo('Username field empty!');
+    if (newPswdval === '') return setInfo('You must type in a password!');
+    if (newPswdconfval === '') return setInfo('Please confirm your password!');
+    if (newPswdval !== newPswdconfval) {
       newPswd.value = '';
       newPswdconfirm.value = '';
       setInfo('Passwords don\'t match!');
@@ -87,26 +89,26 @@ const App = () => {
 
     fetch('/user/signup', {
       method: 'POST',
-      headers: {'Content-Type': 'Application/JSON'},
-      body: newUser
+      headers: { 'Content-Type': 'Application/JSON' },
+      body: newUser,
     })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-      if (data.message === "usernameInUse") {
-        newUsername.value = '';
-        setInfo('Username already exists!')
-      } else if (data.message === "successful") {
-        setInfo(<div className="greenText">Account created!</div>);
-        setTimeout(() => {
-          setInfo(null);
-          setRegistrationState(false);
-        }, 1000);
-      }
-    })
-    .catch((error) => {
-      console.error('Error when POST-fetching for signup: ', error);
-    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.message === 'usernameInUse') {
+          newUsername.value = '';
+          setInfo('Username already exists!');
+        } else if (data.message === 'successful') {
+          setInfo(<div className="greenText">Account created!</div>);
+          setTimeout(() => {
+            setInfo(null);
+            setRegistrationState(false);
+          }, 1000);
+        }
+      })
+      .catch((error) => {
+        console.error('Error when POST-fetching for signup: ', error);
+      });
   }
 
   // until loginName value is delcared (default of null), show the login page
