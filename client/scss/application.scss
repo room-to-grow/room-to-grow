@@ -98,6 +98,20 @@ ul {
   list-style-type: none;
 }
 
+.deleteFav-btn {
+  display: inline-block;
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 5px 10px; 
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 15px;
+  font-family: inherit;
+}
+
 .fav-button {
   margin-top : 10px;
   margin-left : 10px;
@@ -110,6 +124,19 @@ ul {
   font-size: 2em;
 
   font-family: 'Amatic SC', monospace;
+
+}
+
+.notesContainer {
+  display: flex;
+      // I commented out line 133 because the note-boxes were appearing in plantlist pop-up
+  // position: relative;
+  width: 10%;
+  height: 5%;
+  border: 2px solid black;
+}
+
+.Notespopup-box {
 
 }
 
@@ -190,6 +217,8 @@ ul {
 }
 
 .familyList-plantList-container {
+  font-family: 'Amatic SC', monospace;
+  color: 5dbb63; 
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
@@ -204,8 +233,9 @@ ul {
   background-color: #04AA6D;
   color: white;
   border-radius: 5px;
-  padding: 16px;
-  font-size: 16px;
+  margin-top: 6px;
+  padding: 12px;
+  font-size: 14px;
   border: none;
 }
 
@@ -365,6 +395,7 @@ ul {
 
 .details-field {
   color: lighten( $primaryGreen, 80% );
+  font-size: 32px; 
 }
 
 .detail-img {

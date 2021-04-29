@@ -16,6 +16,25 @@ const App = () => {
   const [loginStatus, setLoginStatus] = useState(null);
   const [loginName, setLoginName] = useState(null);
   const [failMessage, setFailMessage] = useState(<div></div>);
+  const [modalState, setModalState] = useState({open: false, position: {}, id: null});
+
+
+
+  function openModal (position, id) {
+    setModalState({
+      ...modalState,
+      open: true,
+      position,
+      id,
+    })
+  }
+  // Delete Favorites 
+  const deleteFav = async (name) => {
+    await fetch( '/signup/editfaves', {
+      method: 'DELETE'
+    } )
+    setFavorites(favorites.filter((favorite) => name !== favorite[0]));
+  }
 
   // This should only run once -- when the loginname is input
   // then fetch for the US State data and will then render the USMap
@@ -31,7 +50,7 @@ const App = () => {
   // until loginName value is delcared (default of null), show the login page
   // sets the loginName (w/o password) to send to backend
   // to associate a user's favorites with their login name
-  if (!loginName) {
+   if (!loginName) {
    return(
       
    <div id="formContainer">
@@ -92,7 +111,6 @@ const App = () => {
           },
           body: JSON.stringify(bodyData)
         }).then((res) => {
-          console.log('res', res);
           return res.json();
         }).then((res) => {
           const { favorites, verification } = res;
@@ -166,6 +184,9 @@ const App = () => {
         <Favorites 
           favorites={favorites} 
            loginName={loginName}
+           deleteFav={deleteFav}
+           setModalState={setModalState}
+           openModa={openModal}
         />
       </div>
     </div>

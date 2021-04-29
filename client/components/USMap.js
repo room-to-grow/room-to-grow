@@ -6,6 +6,7 @@ const USMap = (props) => {
   const { setFamily } = props;
   const { setPlant } = props;
   const { setPlantDetails } = props;
+  const { setFavoritesChosen } = props; 
 
   return (
     <svg id="map-svg" viewBox="0 0 960 600" width="95%">
@@ -27,6 +28,7 @@ const USMap = (props) => {
               setFamily(null);
               setPlant(null);
               setPlantDetails(null);
+              setFavoritesChosen(false); 
             }
           }
           onMouseOut={(event) => {
