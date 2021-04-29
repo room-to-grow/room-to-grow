@@ -40,7 +40,7 @@ const UserPage = (props) => {
   // If there is no statesData yet, show a loading indicator.
   let map = <div>Loading states map...</div>;
   if (statesData) {
-    map = [<USMap id="us-map" statesData={statesData} setGState={setGState} setFamily={setFamily} setPlant={setPlant} setPlantDetails={setPlantDetails} />];
+    map = [<USMap id="us-map" statesData={statesData} gState={gState} setGState={setGState} setFamily={setFamily} setPlant={setPlant} setPlantDetails={setPlantDetails} />];
   }
 
   let currentContent;

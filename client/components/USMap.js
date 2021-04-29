@@ -4,6 +4,7 @@ import React from 'react';
 
 const USMap = (props) => {
   const { statesData } = props;
+  const { gState } = props;
   const { setGState } = props;
   const { setFamily } = props;
   const { setPlant } = props;
@@ -23,7 +24,6 @@ const USMap = (props) => {
           strokeWidth="3px"
           d={stateData.shape}
           onMouseOver={(event) => {
-            console.log(event.target);
             event.target.style.fill = '#7dc882';
 
           }}
@@ -37,7 +37,9 @@ const USMap = (props) => {
             }
           }
           onMouseOut={(event) => {
-            event.target.style.fill = '#373737';
+            if (gState.name !== stateData.name) {
+              event.target.style.fill = '#373737';
+            }
           }}
         />
       ))}
