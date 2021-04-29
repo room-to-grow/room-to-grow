@@ -3,16 +3,6 @@ const db = require("../models/plantModel");
 
 const cookieController = {};
 
-// cookieController.sessionHandler = (req, res, next) => {
-//     // extracting the user id from the session
-//     let userCookie  = getUserId(req, res);
-
-//     //if no userId, create a new one
-//     if (!userCookie || !cookieController[userCookie]) {
-//         userId = (/*cookie creator we already have*/)
-//     }
-// }
-
 cookieController.createCookie = (req, res, next) => {
    const { username } = req.body;
    console.log('in createCookie')
@@ -36,7 +26,6 @@ cookieController.startSession = async (req, res, next) => {
   console.log('in the body in start session')
   console.log(req.body)
   const { rtgssid } = res.locals;
-  console.log('res locals', rtgssid);
   const createSessionQuery = {
     text: 'INSERT INTO sessions (cookieid, userid) VALUES ($1, $1)',
     values: [rtgssid],
