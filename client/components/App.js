@@ -5,7 +5,6 @@ import UserPage from './UserMenu'
 const App = () => {
   // the collection of all of the states
   const [loginName, setLoginName] = useState(null);
-  const [zip, setZip] = useState('');
   const [registrationState, setRegistrationState] = useState(false);
   const [info, setInfo] = useState(null);
 
@@ -20,38 +19,36 @@ const App = () => {
 
     const nameInput = document.getElementById('userName');
     const pswdInput = document.getElementById('password');
-
     const username = nameInput.value;
     const password = pswdInput.value;
+    
+    if (username==='') return setInfo('Username field empty!')
+    if (password==='') return setInfo('You must type in your password!')
 
-    nameInput.value = '';
-    pswdInput.value = '';
+    const user = JSON.stringify({ username: username, password: password });
+    
+    console.log('about to login', user)
 
-    console.log(username, password);
-    setLoginName(username);
-
-    fetch('/users/login', {
+    fetch('/user/login', {
       method: 'POST',
       headers: {'Content-Type': 'Application/JSON'},
-      body: newUser
-    }) //POST
-                    //query for SELECT users.username.*
-                    //req.body.json()
-                    //send users.username in array form
-                    //if (newPswd.value === newPswdconfirm.value &&)
+      body: user
+    })
     .then(response => response.json())
     .then(data => {
-      if (data.message === "usernameInUse") {
-        newUser.value = '';
-        setInfo('Username already exists!')
-      } 
-      else if (data.message === "successful") {
-        setInfo(<div className="greenText">Account created!</div>);
-        setTimeout(() => setRegistrationState(false), 3000);
+      console.log
+      if (data.message === "usernameNoMatch") {
+        setInfo('Not an existing user!')
+      } else if (data.message === "passwordNoMatch") {
+        pswdInput.value = '';
+        setInfo('Wrong password!')
+      } else if (data.ssid) {
+        setInfo(<div className="greenText">Logged in!</div>);
+        setTimeout(() => setLoginName(ssid), 1500);
       }
     })
     .catch((error) => {
-      console.error('Error when POST-fetching for signup: ', error);
+      console.error('Error when POST-fetching for login: ', error);
     })
   }
 
@@ -60,10 +57,13 @@ const App = () => {
     const newUsername = document.getElementById('newUsername');
     const newPswd = document.getElementById('newPswd');
     const newPswdconfirm = document.getElementById('newPswdconfirm');
-
     const newUserval = newUsername.value;
     const newPswdval = newPswd.value;
     const newPswdconfval = newPswdconfirm.value
+
+    if (newUserval==='') return setInfo('Username field empty!')
+    if (newPswdval==='') return setInfo('You must type in a password!')
+    if (newPswdconfval==='') return setInfo('Please confirm your password!')
     if (newPswdval!==newPswdconfval) {
       newPswd.value = '';
       newPswdconfirm.value = '';
@@ -76,16 +76,8 @@ const App = () => {
       method: 'POST',
       headers: {'Content-Type': 'Application/JSON'},
       body: newUser
-    }) //POST
-                    //query for SELECT users.username.*
-                    //req.body.json()
-                    //send users.username in array form
-                    //if (newPswd.value === newPswdconfirm.value &&)
-    .then(response => {
-      console.log(response);
-      return response.json();
     })
-
+    .then(response => response.json())
     .then(data => {
       console.log(data);
       if (data.message === "usernameInUse") {
@@ -93,7 +85,8 @@ const App = () => {
         setInfo('Username already exists!')
       } else if (data.message === "successful") {
         setInfo(<div className="greenText">Account created!</div>);
-        setTimeout(() => setRegistrationState(false), 3000);
+        setInfo(null);
+        setTimeout(() => setRegistrationState(false), 1500);
       }
     })
     .catch((error) => {
@@ -167,6 +160,8 @@ const App = () => {
         <button className="fav-button"
           onClick={() => setRegistrationState(true)}
         >Register</button>
+
+        <div>{info}</div>
 
       </div>
     )

@@ -19,23 +19,23 @@ const cookieController = require("../controllers/cookieController");
 router.post("/signup", 
   userController.verifyExisting, 
   userController.encryptPswd,
+  cookieController.setSSIDCookie,
   (req, res) => {
   // error handler
   // handle if username is already taken
   // upon successful signup do the following:
   console.log("Attempting to create user");
   res.status(200).json({message: 'successful'});
-  console.log("User successfully signed in!");
+  console.log("User successfully registered!");
 });
 
 
 //  >>  UPDATE LOGIN WHEN WE HAVE USER DB SET  <<
-router.post(
-  "/login", 
-  userController.logIn,
-  cookieController.setSSIDCookie,
+router.post("/login",
+  userController.verifyUser,
+  cookieController.createSessionCookie,
   (req, res) => {
-    res.status(200).redirect("/user");
+    res.status(200).json(res.locals);
   });
     
   

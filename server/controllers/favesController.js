@@ -50,7 +50,7 @@ favesController.addFave = (req, res, next) => {
   const { plants } = req.body;
 
   const favesString =
-    "INSERT INTO public.faves VALUES (user_id, plant_id, notes)";
+    "INSERT INTO faves VALUES (user_id, plant_id, notes)";
   const newFave = db.query(queryString);
   newFave.then(() => next());
 };
