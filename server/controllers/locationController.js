@@ -81,9 +81,11 @@ locationController.getPlants = async (req, res, next) => {
       image_url: data[i].image_url,
       favorites : num_favs.rows[0][0]
     };
-    randoPlants.push(data[i]);
-    console.log(plant);
+    randoPlants.push(plant);
+    //console.log(plant);
+    //console.log(plant.favorites)
   }
+  
   res.locals.plants = {
     plants: randoPlants,
     family: req.params.famName,

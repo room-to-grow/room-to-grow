@@ -4,28 +4,49 @@ const favesController = {};
 
 // this middleware retrieves a user's favorited plants
 favesController.getFaves = async (req, res, next) => {
-  
+
   const userQueryString = {
     text : 'SELECT plants.common_name FROM plants JOIN(SELECT plant_id FROM favorites WHERE user_id = $1) AS favs ON plants._id = favs.plant_id',
     //text : 'SELECT plant_id FROM favorites WHERE user_id = $1',
-    values : ['28'],
+    values : [res.locals.user_id],
     rowMode : 'array'
   }
 
   const fav_plants = await db.query(userQueryString);
+
   res.locals.favorites = fav_plants.rows;
+  console.log('in getFaves')
+  console.log(res.locals.favorites)
   next();
  
 };
 
 
 // this middleware checks to see if a plant already exists in our plant table and if it doesn't, inserts the selected plant
-favesController.addPlant = (req, res, next) => {
+favesController.addPlant = async (req, res, next) => {
   const { plants } = req.body;
-  console.log('in add plant');
-  console.log('plants obj', plants);
   
-  const insertQuery = 'INSERT INTO plants (common_name) VALUES ($1)'
+  console.log('in add plant');
+  //console.log('plants obj', 
+
+  // async function find () {
+  const find_query = {
+    text: 'SELECT * FROM plants WHERE plants.scientific_name = ($1)',
+    values: [
+      plants.scientific_name,
+    ],
+    rowMode: 'array',
+  }
+
+  const find_result = await db.query(find_query);
+  console.log('getting result of find_query')
+  console.log(find_result);
+  // } find().catch(e => e.stack)
+  if(find_result.rows.length !== 0){
+    return next();
+  }
+ 
+ 
   
   console.log('plants.scientific_name', plants.scientific_name);
   const plantTemp = ['attempt'];
@@ -61,10 +82,8 @@ favesController.addPlant = (req, res, next) => {
         ],
         rowMode: 'array',
       }
-  
-    db
-    .query(query)
-    .then((res) => next());
+    const result = await db.query(query)
+    next();
 };
 
 // this middleware adds the selected plant's id (scientific name) to the faves table along with the user id and the user's notes for the plant
@@ -72,7 +91,7 @@ favesController.addFave = async (req, res, next) => {
   
  
   const { user_id, plant_id, notes } = req.body;
-
+  
   console.log(user_id)
   console.log(plant_id)
   const userQueryString = {
@@ -88,19 +107,18 @@ favesController.addFave = async (req, res, next) => {
 
   const user_result = await db.query(userQueryString);
   const plant_result = await db.query(plantQueryString);
-
+  console.log(user_result);
+  console.log(plant_result);
   const addQueryString = {
-    text : 'INSERT INTO favorites (plant_id, user_id) VALUES ($1 $2)',
-    values : [plant_result.row[0][0], user_result.row[0][0]],
+    text : 'INSERT INTO favorites (plant_id, user_id) VALUES ($1, $2)',
+    values : [plant_result.rows[0][0], user_result.rows[0][0]],
     rowMode : 'array'
   }
-
-  
 
 
   const favorites_result = await db.query(addQueryString);
   
-  res.locals.user_id = user_result.row[0][0];
+  res.locals.user_id = user_result.rows[0][0];
   next();
 
 };

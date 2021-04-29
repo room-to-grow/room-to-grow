@@ -19,12 +19,13 @@ router.post("/new", userController.createUser, cookieController.createCookie, co
   res.status(200).send("signed up");
 });
 
-router.post("/login", userController.verifyUser, cookieController.createCookie, cookieController.clearSessions, cookieController.startSession, (req, res) => {
+router.post("/login", userController.verifyUser, cookieController.createCookie, cookieController.clearSessions, cookieController.startSession, favesController.getFaves, (req, res) => {
   // error handler
   // handle if username is already taken
   // upon successful signup do the following:
   console.log(req.body)
-  res.status(200).send(res.locals.verification);
+  const { verification, favorites } = res.locals
+  res.status(200).json({verification: verification, favorites: favorites});
 });
 
 //what does the req body for favorites look like?
@@ -38,7 +39,7 @@ router.post(
   (req, res) => {
     console.log("Attempting to save selection");
     // what goes in the response?
-    res.sendStatus(200).json(res.locals.favorites);
+    res.status(200).send(res.locals.favorites);
     console.log("Saved fave!");
   }
 );

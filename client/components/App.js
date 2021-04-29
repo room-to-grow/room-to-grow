@@ -54,7 +54,7 @@ const App = () => {
                       body: JSON.stringify(bodyData)
                   }) 
                   setLoginStatus(true);
-                  setLoginName(userNameVal);
+                  setLoginName(userNameVal.value);
                   }} >
        {/* <label for="userName">Input User Name:</label> */}
        <input className="fav-input"
@@ -90,16 +90,19 @@ const App = () => {
           },
           body: JSON.stringify(bodyData)
         }).then((res) => {
+          console.log('res', res);
           return res.json();
         }).then((res) => {
-          console.log('type of json respnse', typeof res);
-          if(res === true) {
+          const { favorites, verification } = res;
+          if(verification === true) {
             setLoginStatus(true);
-            setLoginName(userNameVal);
+            setLoginName(userNameVal.value);
+            //or an array of arrays with two elements in each array
+          //favorites will now be an array with objects containing {plantName: ..., notes: ...}
+            console.log('favorites', favorites);
+            setFavorites(favorites);
           };
-          console.log('Login Status after verification', loginStatus);
         });
-        // setLoginName(userNameVal);
         
    
         }}>Log In</button> 
@@ -156,7 +159,7 @@ const App = () => {
       <div id = "favorites-container"> 
         <Favorites 
           favorites={favorites} 
-          // loginName={loginName}
+           loginName={loginName}
         />
       </div>
     </div>

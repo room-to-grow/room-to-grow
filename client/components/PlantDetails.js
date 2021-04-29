@@ -10,6 +10,10 @@ const PlantDetails = props => {
   const { favorites } = props;
   const { loginName } = props;
 
+function revertDetailStates () {
+  setPlantDetails(null)
+}
+
   useEffect(
     () => {
       if (gState.name === null || family === null || plant === null) return;
@@ -41,99 +45,111 @@ const PlantDetails = props => {
   if (plantDetails === null) return (<div></div>)
 
   else return (
-    <div id="detailsContainer">
-      <ul id="detailsList">
-        <img className="detail-img" src={`${plantDetails.image_url}`}></img>
-        <li className="details-element">
-          <span className="details-field">Name:</span> {plantDetails.common_name}
-       
-        </li>
-        <li className="details-element">
-        <span className="details-field">Scientific Name:</span> {plantDetails.scientific_name}
-        </li>
-        <li className="details-element">
-        <span className="details-field">Edible:</span> {`${plantDetails.edible}`}
-        </li>
-        <li className="details-element">
-        <span className="details-field">Average Height:</span> {plantDetails.average_height}
-        </li>
-        <li className="details-element">
-        <span className="details-field">Growth Habit:</span> {plantDetails.growth_habit}
-        </li>
-        <li className="details-element">
-        <span className="details-field">Growth Rate:</span> {plantDetails.growth_rate}
-        </li>
-        <li>
-          <form onSubmit = {(e) => {
-                e.preventDefault();
-                const bodyData = { 
-                  plants : plantDetails,
-                  user_id : 'loginName',
-                  plant_id : plantDetails.scientific_name,
-                  notes : ' '}; 
-              try {
-    
-                console.log('in try block')
-                fetch('/signup/faves', {
-                // method
-                method: 'POST',
-                // headers
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-            
-                // body
-                body: JSON.stringify(bodyData)
-              }
-              )
-              }
-              catch (err) {
-                console.log(err);
-              }
+    <div className='popup-box'>
+        <div className='plantDetails-box'>
+          <span className='close-icon' onClick={() => {revertDetailStates()}}>x</span>
+            <div id="detailsContainer">
+              <ul id="detailsList">
+                <img className="detail-img" src={`${plantDetails.image_url}`}></img>
+                <li className="details-element">
+                  <span className="details-field">Name:</span> {plantDetails.common_name}
+              
+                </li>
+                <li className="details-element">
+                <span className="details-field">Scientific Name:</span> {plantDetails.scientific_name}
+                </li>
+                <li className="details-element">
+                <span className="details-field">Edible:</span> {`${plantDetails.edible}`}
+                </li>
+                <li className="details-element">
+                <span className="details-field">Average Height:</span> {plantDetails.average_height}
+                </li>
+                <li className="details-element">
+                <span className="details-field">Growth Habit:</span> {plantDetails.growth_habit}
+                </li>
+                <li className="details-element">
+                <span className="details-field">Growth Rate:</span> {plantDetails.growth_rate}
+                </li>
+                <li>
+                  <form onSubmit = {(e) => {
+                        e.preventDefault();
+                        console.log("this is login name ", loginName)
+                        const bodyData = { 
+                          plants : plantDetails,
+                          user_id : loginName,
+                          plant_id : plantDetails.scientific_name,
+                          notes : ' '}; 
+                          console.log(bodyData)
+              
+                        console.log('in try block')
+                        fetch('/signup/faves', {
+                        // method
+                        method: 'POST',
+                        // headers
+                        headers: {
+                          'Content-Type': 'application/json'
+                        },
+                    
+                        // body
+                        body: JSON.stringify(bodyData)
+                      }
+                      ).then(result => result.json())
+                        .then(data => {
+                          const notes = document.getElementById('notes-input');
+                          console.log('in the date:', data)
+                          setFavorites(data)})
+                      .catch(e => console.log('in the catch', e.stack))
+                      
+                       
+                      console.log('posting to db...');
+                      //console.log(result)
+                     // setFavorites([...favorites, {name : plantDetails.common_name, notes : notes.value}])
+                      
+                   
 
-              
-              const notes = document.getElementById('notes-input');
-              console.log('posting to db...');
-              setFavorites([...favorites, {name : plantDetails.common_name, notes : notes.value}])
-          }}>
-            <input id = 'notes-input' className = "fav-input" type="text" name="notes" placeholder="Write notes here"></input>
-            <button className = "fav-button" type="submit" onClick = {(e) => {
-    
+                      
 
-              // this response is from the database
-                // server gets body
-                // models.favorites.create(req.body)
-                  //res.locals.favorites = models.favorites.find({})
-                // res.send(res.locals.favorites)
-              
-              // response
-            //  const response =  fetch(`/db`, {
-            //     // method
-            //     method: 'POST',
-            //     // headers
-            //     headers: {
-            //       'Content-Type': 'application/json'
-            //     },
+                  }}>
+                    <input id = 'notes-input' className = "fav-input" type="text" name="notes" placeholder="Write notes here"></input>
+                    <button className = "fav-button" type="submit" onClick = {(e) => {
             
-            //     // body
-            //     body: { plants : plantDetails,
-            //             user_id : loginName,
-            //             plant_id : plantDetials.scientific_name,
-            //             notes : ' '}
-            //   }
-            //   )
-              //const notes = document.getElementById('fav-input')
+
+                      // this response is from the database
+                        // server gets body
+                        // models.favorites.create(req.body)
+                          //res.locals.favorites = models.favorites.find({})
+                        // res.send(res.locals.favorites)
+                      
+                      // response
+                    //  const response =  fetch(`/db`, {
+                    //     // method
+                    //     method: 'POST',
+                    //     // headers
+                    //     headers: {
+                    //       'Content-Type': 'application/json'
+                    //     },
+                    
+                    //     // body
+                    //     body: { plants : plantDetails,
+                    //             user_id : loginName,
+                    //             plant_id : plantDetials.scientific_name,
+                    //             notes : ' '}
+                    //   }
+                    //   )
+                      //const notes = document.getElementById('fav-input')
+                      
+                      
+                    }
+                    // setFavorites({response.json())
+                    }
+                  > Favorite</button>
+                </form>
+                </li>
+              </ul>
               
-              
-            }
-            // setFavorites({response.json())
-            }
-           > Favorite</button>
-        </form>
-        </li>
-      </ul>
-      
-    </div>
+            </div>
+          </div>
+        </div>
     
   );
 }
