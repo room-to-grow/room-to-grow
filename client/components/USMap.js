@@ -16,6 +16,7 @@ const USMap = (props) => {
     <svg id="map-svg" viewBox="0 0 960 600" width="95%">
       {statesData.map((stateData, index) => (
         <path
+          stateIdNum={index}
           className="renderedMap"
           style={{ cursor: 'pointer', fill: '#373737' }}
           key={index}
@@ -24,6 +25,7 @@ const USMap = (props) => {
           strokeWidth="3px"
           d={stateData.shape}
           onMouseOver={(event) => {
+            console.log(event.target);
             event.target.style.fill = '#7dc882';
 
           }}

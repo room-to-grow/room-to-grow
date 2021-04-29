@@ -4,8 +4,10 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable no-undef */
 const request = require('supertest');
+const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const runtime = require('regenerator-runtime');
 const server = require('../server/server');
 import regeneratorRuntime from "regenerator-runtime";
 /**
@@ -34,16 +36,16 @@ describe('Server Side Functionality', () => {
             .expect('Content-Type', /text\/html/)
             .expect(200);
         });
-
-      xit('markets from "DB" json are in body of response',
-        async () => {
-          await fs.writeFile(path.join(__dirname, './../server/db/markets.test.json'), JSON.stringify([{ location: 'here', cards: 11 }]), (err) => {
-            if (err) throw err;
-          });
-          const gtRequest = await request(server).get('/markets');
-          expect(gtRequest.body).toEqual(JSON.parse(fs.readFileSync(path.join(__dirname, './../server/db/markets.test.json'))));
-        });
     });
+
+    it('markets from "DB" json are in body of response',
+      async () => {
+        // await fs.writeFile(path.join(__dirname, './../server/db/markets.test.json'), JSON.stringify([{ location: 'here', cards: 11 }]), (err) => {
+        //   if (err) throw err;
+        // });
+        const gtRequest = await request(server).get('/build');
+        expect(gtRequest.body).toEqual(express.static(path.join(__dirname, '../build')));
+      });
   });
 
   // TEST FOR lOCATION
@@ -56,6 +58,7 @@ describe('Server Side Functionality', () => {
           .expect(200));
     });
   });
+});
 
   // TEST FOR USER
   xdescribe('Testing the user path', () => {
@@ -67,5 +70,4 @@ describe('Server Side Functionality', () => {
           .expect(200));
     });
   });
-
 });
