@@ -38,11 +38,6 @@ body {
   margin-top: 50px;
 }
 
-#login {
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-
 #map-container {
   display: flex;
   flex-direction: column;
@@ -408,7 +403,14 @@ ul {
   margin-left : 50px;
 }
 
+#failed-login-message {
+  color: red;
+}
 
+#button-div {
+  display: flex;
+  flex-direction: row;
+}
 // .family-container{
 //     max-width: 200px;
 //     display : flex;

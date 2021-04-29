@@ -54,30 +54,7 @@ const App = () => {
    return(
       
    <div id="formContainer">
-     <div id="failed-login">
-      {failMessage}
-     </div>
     {/* // this is where the login will go */}
-     <form id="loginForm" onSubmit={() => {
-      //onClick={() => {method}}
-                      const userNameVal = document.getElementById("userName");
-                      const pwVal = document.getElementById("password");
-                      const bodyData = {username: userNameVal.value, password: pwVal.value};
-                    
-                      fetch('/signup/new', {
-                      // method
-                      method: 'POST',
-                      // headers
-                      headers: {
-                        // 'Content-Type': 'application/x-www-form-urlencoded'
-                        'Content-Type': 'application/json'
-      
-                      },
-                      body: JSON.stringify(bodyData)
-                  }) 
-                  setLoginStatus(true);
-                  setLoginName(userNameVal.value);
-                  }} >
        {/* <label for="userName">Input User Name:</label> */}
        <input className="fav-input"
          type="text" 
@@ -91,45 +68,65 @@ const App = () => {
          name="password"
          placeholder="Enter password here"
        ></input>
-       <button className="fav-button"
-         type="submit"
-         id='submit'
-         name='submit' 
-        >Sign Up</button>
-      </form><br></br>
-      <button className="fav-button" id="logIn" onClick={() => {
-        const userNameVal = document.getElementById("userName");
-        const pwVal = document.getElementById("password");
-        const bodyData = {username: userNameVal.value, password: pwVal.value};
-        fetch('/signup/login', {
-          // method
-          method: 'POST',
-          // headers
-          headers: {
-            // 'Content-Type': 'application/x-www-form-urlencoded'
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(bodyData)
-        }).then((res) => {
-          return res.json();
-        }).then((res) => {
-          const { favorites, verification } = res;
-          console.log('favorites', favorites);
-          if(verification === true) {
+      <div id="button-div">
+        <button className="fav-button"
+          id='submit'
+          name='submit' 
+          onClick={() => {
+              //onClick={() => {method}}
+                const userNameVal = document.getElementById("userName");
+                const pwVal = document.getElementById("password");
+                const bodyData = {username: userNameVal.value, password: pwVal.value};
+              
+                fetch('/signup/new', {
+                // method
+                method: 'POST',
+                // headers
+                headers: {
+                  // 'Content-Type': 'application/x-www-form-urlencoded'
+                  'Content-Type': 'application/json'
+
+                },
+                body: JSON.stringify(bodyData)
+            }) 
             setLoginStatus(true);
             setLoginName(userNameVal.value);
-            //or an array of arrays with two elements in each array
-          //favorites will now be an array with objects containing {plantName: ..., notes: ...}
+            }}
+          >Sign Up</button>
+        <button className="fav-button" id="logIn" onClick={() => {
+          const userNameVal = document.getElementById("userName");
+          const pwVal = document.getElementById("password");
+          const bodyData = {username: userNameVal.value, password: pwVal.value};
+          fetch('/signup/login', {
+            // method
+            method: 'POST',
+            // headers
+            headers: {
+              // 'Content-Type': 'application/x-www-form-urlencoded'
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(bodyData)
+          }).then((res) => {
+            console.log('res', res);
+            return res.json();
+          }).then((res) => {
+            const { favorites, verification } = res;
             console.log('favorites', favorites);
-            setFavorites(favorites);
-          }
-          else{
-            setFailMessage(<p id="failed-login-message">Error: invalid username or password</p>);
-          };
-        });
-        
-   
-        }}>Log In</button> 
+            if(verification === true) {
+              setLoginStatus(true);
+              setLoginName(userNameVal.value);
+              //or an array of arrays with two elements in each array
+            //favorites will now be an array with objects containing {plantName: ..., notes: ...}
+              console.log('favorites', favorites);
+              setFavorites(favorites);
+            }
+            else{
+              setFailMessage(<p id="failed-login-message">Error: invalid username or password</p>);
+            };
+          });
+          }}>Log In</button> 
+        </div>
+        {failMessage}
       </div>
     )
   }

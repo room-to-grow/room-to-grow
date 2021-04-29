@@ -75,28 +75,9 @@ const Favorites = props => {
             //also need to make a closeModal
             // <button
             //add delete button that calls a function that sends a post request to backend with a body of loginName and plantName
-            
               //reset setFavorites with new favorites array
             //see notes button that will be a modal that will render the notes
               //
-
-              // const openDetailsModal = (e, type, id) => {
-              //   const top = e.pageY;
-              //   const left = e.pageX;
-              //   openModal(type, { top, left }, id);
-              // };
-
-              // openModal(type, position, id) {
-              //   this.setState({
-              //     modalState: {
-              //       ...this.state.modalState,
-              //       open: true,
-              //       type,
-              //       position,
-              //       id
-              //     }
-              //   });
-              // }
           )
         })}
       </ul>
