@@ -9,6 +9,8 @@ const USMap = (props) => {
   const { setPlant } = props;
   const { setPlantDetails } = props;
 
+
+
   return (
     <svg id="map-svg" viewBox="0 0 960 600" width="95%">
       {statesData.map((stateData, index) => (
@@ -17,10 +19,13 @@ const USMap = (props) => {
           style={{ cursor: 'pointer', fill: '#373737' }}
           key={index}
           stroke="#5DBB63"
+          id={stateData.name}
           strokeWidth="3px"
           d={stateData.shape}
           onMouseOver={(event) => {
+            console.log(event.target);
             event.target.style.fill = '#7dc882';
+
           }}
           onClick={
             () => {
