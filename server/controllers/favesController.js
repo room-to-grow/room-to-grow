@@ -31,7 +31,7 @@ favesController.addPlant = async (req, res, next) => {
 
   // async function find () {
   const find_query = {
-    text: 'SELECT * FR,OM plants WHERE plants.scientific_name = ($1)',
+    text: 'SELECT * FROM plants WHERE plants.scientific_name = ($1)',
     values: [
       plants.scientific_name,
     ],
@@ -98,21 +98,21 @@ favesController.addFave = async (req, res, next) => {
   //console.log('plants obj', 
 
   // async function find () {
-  const find_query = {
-    text: 'SELECT * FROM plants WHERE plants.scientific_name = ($1)',
-    values: [
-      plants.scientific_name,
-    ],
-    rowMode: 'array',
-  }
+  // const find_query = {
+  //   text: 'SELECT * FROM plants WHERE plants.scientific_name = ($1)',
+  //   values: [
+  //     plants.scientific_name,
+  //   ],
+  //   rowMode: 'array',
+  // }
 
-  const find_result = await db.query(find_query);
-  console.log('getting result of find_query')
-  console.log(find_result);
-  // } find().catch(e => e.stack)
-  if(find_result.rows.length !== 0){
-    return next();
-  }
+  // const find_result = await db.query(find_query);
+  // console.log('getting result in ADD FAVE')
+  // console.log(find_result);
+  // // } find().catch(e => e.stack)
+  // if(find_result.rows.length !== 0){
+  //   return next();
+  // }
   
   console.log(user_id)
   console.log(plant_id)

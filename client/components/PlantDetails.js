@@ -84,6 +84,7 @@ function revertDetailStates () {
                           console.log(bodyData)
               
                         console.log('in try block')
+                        console.log(bodyData)
                         fetch('/signup/faves', {
                         // method
                         method: 'POST',
