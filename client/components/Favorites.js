@@ -38,8 +38,8 @@ const Favorites = props => {
           return (
             <li id ="favorite-list-el" key={index}>
               <span className="details-field">{fav[0]}:</span> 
+              <span className='icon' onClick={(e) => {openDetailsModal(e, 'film', film.id)}}></span>
             </li>
-            <span className='icon' onClick={(e) => {openDetailsModal(e, 'film', film.id)}}/></span>
             //need a button to that will call function openDetailsModal w/ params of e, 'fav', plant_id
               //openDetailsModal will declare two constants top and left that will equal e.pageX and e.pageY
                 //openDetailsModal will now call openModal passing in params of type, { top, left }, id
