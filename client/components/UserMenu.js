@@ -62,14 +62,27 @@ const UserPage = (props) => {
                 <button id="viewPlantsButton" className="fav-input" onClick={() => {
                     if (renderView !== 'plants') setRenderView('plants');
                 }}>View Plants</button>
-
+                                                                
                 <button id="viewFavoritesButton" className="fav-input" onClick={() => {
+                    const ssid = JSON.stringify({ssid: props.loginName});
+                    //fetch to the sessions table using the SSID to find username
+                    //sessions contains uncrypted username
+                    //use username to access userData
+                    //use userData to fill in favorites render, returns 
+                    fetch(`/user/favorites/${props.loginName}`)
+                    .then(data => data.json())
+                    .then(console.log("================= fetching user favorite =================="))
+                    .then(favorites => setFavorites(favorites))
                     if (renderView !== 'favorites') setRenderView('favorites');
                 }}>View Favorites</button>
 
                 <button id="logout" className="fav-input"  onClick={() => {
-                    setRenderView('plants');
-                    props.logout(null);
+                    fetch(`/user/logout/${props.loginName}`)
+                    .then(data => data.json())
+                    .then(() => {
+                        setRenderView('plants');
+                        props.logout(null);
+                    })
                 }}>Logout</button>
 
                 {currentContent}

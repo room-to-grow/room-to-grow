@@ -7,6 +7,16 @@ const App = () => {
   const [loginName, setLoginName] = useState(null);
   const [registrationState, setRegistrationState] = useState(false);
   const [info, setInfo] = useState(null);
+  const [session] = useState(null);
+
+  useEffect (() => {
+    fetch('/user/verifySession')
+    .then(data => data.json()
+    .then(data => {
+      if (data.message) return;
+      if (data.ssid) setLoginName(data.ssid)
+    }))
+  }, [session])
 
   /** NOT NEEDED/ SECURITY FLAW TO STORE USER PASSWORD IN STATE **/
   /** REQUEST SHOULD BE SENT DIRECTLY WITH USERNAME/PASSWORD ON SUBMIT **/
@@ -44,7 +54,7 @@ const App = () => {
         setInfo('Wrong password!')
       } else if (data.ssid) {
         setInfo(<div className="greenText">Logged in!</div>);
-        setTimeout(() => setLoginName(ssid), 1500);
+        setTimeout(() => setLoginName(data.ssid), 750);
       }
     })
     .catch((error) => {
@@ -85,8 +95,10 @@ const App = () => {
         setInfo('Username already exists!')
       } else if (data.message === "successful") {
         setInfo(<div className="greenText">Account created!</div>);
-        setInfo(null);
-        setTimeout(() => setRegistrationState(false), 1500);
+        setTimeout(() => {
+          setInfo(null);
+          setRegistrationState(false);
+        }, 1000);
       }
     })
     .catch((error) => {

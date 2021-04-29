@@ -7,11 +7,23 @@ const favesController = {};
 
 // this middleware retrieves a user's favorited plants
 favesController.getFaves = (req, res, next) => {
-  const queryString = "SELECT faves.* FROM faves";
-  const userFaves = db.query(queryString);
-  userFaves
-    .then((data) => (res.locals.faves = data.rows))
-    .then(console.log("fetching user's favorite plants NOW!"))
+  let currentUser = res.locals.username;
+  console.log(currentUser)
+  const query = {
+  text: `SELECT name, notes FROM faves WHERE username=$1`,
+  values: [currentUser]
+    
+}
+  console.log('retrieving user favorites')
+
+  db.query(query)
+    .then(data => {
+      res.locals.faves = data.rows
+      console.log(data.rows);
+      return data.rows;
+    })
+    //{username: , plantname: , note: }
+    .then(() => console.log("fetching user's favorite plants NOW!: "))
     .then(() => next());
 };
 
@@ -43,16 +55,22 @@ favesController.addPlant = (req, res, next) => {
 
 // this middleware adds the selected plant's id (scientific name) to the faves table along with the user id and the user's notes for the plant
 favesController.addFave = (req, res, next) => {
-  const { user_id, plant_id, notes } = req.body;
+  const { plantname, note } = req.body
   //   req.body.plants = {...plant details....}
   //
   //req.user_id
-  const { plants } = req.body;
+  let currentUsername = res.locals.username; 
 
-  const favesString =
-    "INSERT INTO faves VALUES (user_id, plant_id, notes)";
-  const newFave = db.query(queryString);
-  newFave.then(() => next());
+  let query = {
+    text: "INSERT INTO faves VALUES ($1, $2, $3) RETURNING *",
+    values:  [currentUsername, plantname, note]
+  }
+  
+  db.query(query)
+  .then(data => {
+    res.locals.newfav = data.rows[0];
+    return next();
+  });
 };
 
 

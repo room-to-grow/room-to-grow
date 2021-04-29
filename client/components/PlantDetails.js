@@ -69,7 +69,24 @@ const PlantDetails = props => {
             <button className = "fav-button" type="submit" onClick = {(e) => {
               e.preventDefault()
               const notes = document.getElementById('notes-input');
-              console.log('posting to db...');
+              // const notesvalue = notes.value;
+              const favorite = JSON.stringify({plantname: plantDetails.common_name, note: notes.value})
+
+              console.log('adding note to favorites');
+
+              //fetch request to input to notes
+              fetch(`/user/addfavorites/${loginName}`, {
+                method: 'POST',
+                headers: {'Content-Type': 'Application/JSON'},
+                body: favorite
+              })
+              .then(data => data.json())
+              .then(newfav => {
+                console.log(newFav)
+              })
+
+              //{username: , plantname: , note}
+              
 
               // this response is from the database
                 // server gets body
@@ -93,9 +110,7 @@ const PlantDetails = props => {
             //             notes : ' '}
             //   }
             //   )
-              //const notes = document.getElementById('fav-input')
-              setFavorites([...favorites, {name : plantDetails.common_name, notes : notes.value}])
-              
+              //const notes = document.getElementById('fav-input')              
             }
             // setFavorites({response.json())
             }
