@@ -95,9 +95,16 @@ const App = () => {
 
                 },
                 body: JSON.stringify(bodyData)
-            }) 
-            setLoginStatus(true);
-            setLoginName(userNameVal.value);
+            }).then((res) => res.json()
+            ).then((res) => {
+              if(Array.isArray(res) && res[0] === 'ERROR: username already exits'){
+                setFailMessage(<p id="failed-login-message">ERROR: username already exists</p>);
+              }
+              else{
+                setLoginStatus(true);
+                setLoginName(userNameVal.value);
+              }
+            })
             }}
           >Sign Up</button>
         <button className="fav-button" id="logIn" onClick={() => {
