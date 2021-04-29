@@ -32,6 +32,7 @@ body {
 
 #formContainer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 50px;
@@ -375,6 +376,8 @@ ul {
 #detailsContainer{
   margin-left : 50px;
 }
+
+
 // .family-container{
 //     max-width: 200px;
 //     display : flex;

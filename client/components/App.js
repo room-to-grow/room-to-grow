@@ -15,7 +15,7 @@ const App = () => {
   const [favorites, setFavorites] = useState([]);
   const [loginStatus, setLoginStatus] = useState(null);
   const [loginName, setLoginName] = useState(null);
-  
+  const [failMessage, setFailMessage] = useState(<div></div>);
 
   // This should only run once -- when the loginname is input
   // then fetch for the US State data and will then render the USMap
@@ -28,13 +28,16 @@ const App = () => {
     })();
   }, [loginName]);
 
-
   // until loginName value is delcared (default of null), show the login page
   // sets the loginName (w/o password) to send to backend
   // to associate a user's favorites with their login name
   if (!loginName) {
    return(
+      
    <div id="formContainer">
+     <div id="failed-login">
+      {failMessage}
+     </div>
     {/* // this is where the login will go */}
      <form id="loginForm" onSubmit={() => {
       //onClick={() => {method}}
@@ -86,7 +89,6 @@ const App = () => {
           headers: {
             // 'Content-Type': 'application/x-www-form-urlencoded'
             'Content-Type': 'application/json'
-
           },
           body: JSON.stringify(bodyData)
         }).then((res) => {
@@ -94,6 +96,7 @@ const App = () => {
           return res.json();
         }).then((res) => {
           const { favorites, verification } = res;
+          console.log('favorites', favorites);
           if(verification === true) {
             setLoginStatus(true);
             setLoginName(userNameVal.value);
@@ -101,6 +104,9 @@ const App = () => {
           //favorites will now be an array with objects containing {plantName: ..., notes: ...}
             console.log('favorites', favorites);
             setFavorites(favorites);
+          }
+          else{
+            setFailMessage(<p id="failed-login-message">Error: invalid username or password</p>);
           };
         });
         
