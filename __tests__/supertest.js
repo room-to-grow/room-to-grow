@@ -52,7 +52,7 @@ describe('Server Side Functionality', () => {
       it('responds with 200 status and text/html content type',
         () => request(server)
           .get('/location')
-          .expect('Content-Type', /text\/html/)
+          .expect('Content-Type', /application\/json/)
           .expect(200));
     });
   });

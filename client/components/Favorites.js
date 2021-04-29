@@ -1,8 +1,10 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable react/prop-types */
 import React from 'react';
 // import React, { useEffect, useState } from 'react';
 
-
-const Favorites = props => {
+const Favorites = (props) => {
   const { favorites } = props;
   // const { favorites }
 
@@ -14,16 +16,19 @@ const Favorites = props => {
         Favorites
       </h2>
       <ul>
-        {favorites.map((fav, index) => {
-          return (
-            <li id="favorite-list-el" key={index}>
-              <span className="details-field">{fav.name}:</span> {fav.notes}
-            </li>
-          )
-        })}
+        {favorites.map((fav, index) => (
+          <li id="favorite-list-el" key={index}>
+            <span className="details-field">
+              {fav.name}
+              :
+            </span>
+            {' '}
+            {fav.notes}
+          </li>
+        ))}
       </ul>
     </div>
-  )
-}
+  );
+};
 
 export default Favorites;
