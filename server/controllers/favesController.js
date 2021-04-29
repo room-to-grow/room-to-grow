@@ -26,7 +26,7 @@ favesController.getFaves = async (req, res, next) => {
 favesController.addPlant = async (req, res, next) => {
   const { plants } = req.body;
   
-  console.log('in add plant');
+
   //console.log('plants obj', 
 
   // async function find () {
@@ -91,6 +91,28 @@ favesController.addFave = async (req, res, next) => {
   
  
   const { user_id, plant_id, notes } = req.body;
+
+  const { plants } = req.body;
+  
+
+  //console.log('plants obj', 
+
+  // async function find () {
+  const find_query = {
+    text: 'SELECT * FROM plants WHERE plants.scientific_name = ($1)',
+    values: [
+      plants.scientific_name,
+    ],
+    rowMode: 'array',
+  }
+
+  const find_result = await db.query(find_query);
+  console.log('getting result of find_query')
+  console.log(find_result);
+  // } find().catch(e => e.stack)
+  if(find_result.rows.length !== 0){
+    return next();
+  }
   
   console.log(user_id)
   console.log(plant_id)
@@ -125,6 +147,32 @@ favesController.addFave = async (req, res, next) => {
 
 favesController.deleteFav = async (req, res, next) => {
     // similar to addFav
+    const { user_id, plant_id, notes } = req.body;
+  
+    console.log(user_id)
+    console.log(plant_id)
+    const userQueryString = {
+      text : 'SELECT _id from users WHERE users.username = $1',
+      values : [user_id],
+      rowMode : 'array'
+    }
+    const plantQueryString = {
+      text : 'SELECT _id from plants WHERE plants.scientific_name = $1',
+      values : [plant_id],
+      rowMode : 'array'
+    }
+
+    const user_result = await db.query(userQueryString);
+    const plant_result = await db.query(plantQueryString);
+
+    const deleteQueryString = {
+      text : 'DELETE FROM favorites WHERE favorites.plant_id = $1 AND  favorites.user_id = $2',
+      values : [plant_result.rows[0][0], user_result.rows[0][0]],
+      rowMode : 'array'
+    }
+    const favorites_result = await db.query(deleteQueryString);
+    res.locals.user_id = user_result.rows[0][0];
+    next();
     
 }
 
