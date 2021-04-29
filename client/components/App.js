@@ -30,10 +30,17 @@ const App = () => {
   }
   // Delete Favorites 
   const deleteFav = async (name) => {
-    await fetch( '/signup/editfaves', {
-      method: 'DELETE'
-    } )
-    setFavorites(favorites.filter((favorite) => name !== favorite[0]));
+    const bodyData = {username : loginName, plantName : name}
+    const deleteFetch = await fetch( '/signup/editfaves', {
+      method: 'POST', 
+      headers: {
+        // 'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(bodyData)
+    })
+    console.log(deleteFetch);
+    setFavorites(favorites.filter((favorite) => name !== favorite[1]));
   }
 
   // This should only run once -- when the loginname is input
@@ -111,7 +118,7 @@ const App = () => {
             return res.json();
           }).then((res) => {
             const { favorites, verification } = res;
-            console.log('favorites', favorites);
+            console.log('favorites : ', favorites);
             if(verification === true) {
               setLoginStatus(true);
               setLoginName(userNameVal.value);

@@ -44,7 +44,7 @@ router.post(
   }
 );
 
-router.post("/editFaves",
+router.post("/editfaves",
   favesController.deleteFav,
   favesController.getFaves,
   (req, res) => {

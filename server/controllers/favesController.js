@@ -4,9 +4,9 @@ const favesController = {};
 
 // this middleware retrieves a user's favorited plants
 favesController.getFaves = async (req, res, next) => {
-
+  console.log('in get faves')
   const userQueryString = {
-    text : 'SELECT plants.common_name FROM plants JOIN(SELECT plant_id FROM favorites WHERE user_id = $1) AS favs ON plants._id = favs.plant_id',
+    text : 'SELECT plants.common_name, plants.scientific_name FROM plants JOIN(SELECT plant_id FROM favorites WHERE user_id = $1) AS favs ON plants._id = favs.plant_id',
     //text : 'SELECT plant_id FROM favorites WHERE user_id = $1',
     values : [res.locals.user_id],
     rowMode : 'array'
@@ -31,7 +31,7 @@ favesController.addPlant = async (req, res, next) => {
 
   // async function find () {
   const find_query = {
-    text: 'SELECT * FROM plants WHERE plants.scientific_name = ($1)',
+    text: 'SELECT * FR,OM plants WHERE plants.scientific_name = ($1)',
     values: [
       plants.scientific_name,
     ],
@@ -147,18 +147,18 @@ favesController.addFave = async (req, res, next) => {
 
 favesController.deleteFav = async (req, res, next) => {
     // similar to addFav
-    const { user_id, plant_id, notes } = req.body;
-  
-    console.log(user_id)
-    console.log(plant_id)
+    const { username, plantName } = req.body;
+  console.log(req.body)
+    console.log(username)
+    console.log(plantName)
     const userQueryString = {
       text : 'SELECT _id from users WHERE users.username = $1',
-      values : [user_id],
+      values : [username],
       rowMode : 'array'
     }
     const plantQueryString = {
       text : 'SELECT _id from plants WHERE plants.scientific_name = $1',
-      values : [plant_id],
+      values : [plantName],
       rowMode : 'array'
     }
 

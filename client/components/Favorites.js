@@ -44,16 +44,18 @@ const Favorites = props => {
       </h3>
       <ul>
         {favorites.map((fav, index) => {
+          console.log('scinetific name')
+          console.log(fav[1])
           return (
             <li id ="favorite-list-el" key={index}>
               
               <span className="details-field">{fav[0]}:</span> 
               
-              <button className="deleteFav-btn" onClick={() => deleteFav(fav[0])}>Delete</button>
+              <button className="deleteFav-btn" onClick={() => deleteFav(fav[1])}>Delete</button>
 
               <div className='notesContainer'>
               {!notesIsOpen ? (
-              <button onClick={() => toggleNotes(true)}>See Notes:</button>
+              <button className='seeNote-btn' onClick={() => toggleNotes(true)}>See Notes:</button>
               ) : (
                 <div className='Notespopup-box'>
                   <div className='notes-box'>
