@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import FamilyList from './FamilyList';
+import USMap from './USMap';
 
 const PlantDetails = props => {
-  const { gState } = props;
+  const { gState, setGState } = props;
   const { family } = props;
   const { plant } = props;
   const { plantDetails } = props;
   const { setPlantDetails } = props;
-  const { setFavorites } = props;
-  const { favorites } = props;
+  const { favorites, setFavorites } = props;
   const { loginName } = props;
+  // const { familiesData, setFamiliesData } = props; 
 
 function revertDetailStates () {
-  setPlantDetails(null)
+  setPlantDetails(null);
 }
+
 
   useEffect(
     () => {
@@ -42,8 +45,7 @@ function revertDetailStates () {
     // [plant]
   );
 
-  if (plantDetails === null) return (<div></div>)
-
+  if (plantDetails === null) return (<div></div>) 
   else return (
     <div className='popup-box'>
         <div className='plantDetails-box'>
@@ -96,53 +98,16 @@ function revertDetailStates () {
                       ).then(result => result.json())
                         .then(data => {
                           const notes = document.getElementById('notes-input');
-                          console.log('in the date:', data)
-                          setFavorites(data)})
-                      .catch(e => console.log('in the catch', e.stack))
-                      
-                       
-                      console.log('posting to db...');
-                      //console.log(result)
-                     // setFavorites([...favorites, {name : plantDetails.common_name, notes : notes.value}])
-                      
-                   
-
-                      
-
+                          console.log('in the date:', data);
+                          setFavorites(data);
+                          revertDetailStates ()
+                        })
+                      .catch(e => console.log('in the catch', e.stack))           
+                      console.log('posting to db...');    
                   }}>
                     <input id = 'notes-input' className = "fav-input" type="text" name="notes" placeholder="Write notes here"></input>
-                    <button className = "fav-button" type="submit" onClick = {(e) => {
-            
-
-                      // this response is from the database
-                        // server gets body
-                        // models.favorites.create(req.body)
-                          //res.locals.favorites = models.favorites.find({})
-                        // res.send(res.locals.favorites)
-                      
-                      // response
-                    //  const response =  fetch(`/db`, {
-                    //     // method
-                    //     method: 'POST',
-                    //     // headers
-                    //     headers: {
-                    //       'Content-Type': 'application/json'
-                    //     },
-                    
-                    //     // body
-                    //     body: { plants : plantDetails,
-                    //             user_id : loginName,
-                    //             plant_id : plantDetials.scientific_name,
-                    //             notes : ' '}
-                    //   }
-                    //   )
-                      //const notes = document.getElementById('fav-input')
-                      
-                      
-                    }
-                    // setFavorites({response.json())
-                    }
-                  > Favorite</button>
+                    <button className = "fav-button" type="submit" 
+                  > Add to Favorites</button>
                 </form>
                 </li>
               </ul>
@@ -168,4 +133,36 @@ function revertDetailStates () {
     shape_and_orientation: data.specifications.shape_and_orientation,
     average_height: data.specifications.average_height.cm
  */
+/*
+    onClick = {(e) => {
+        
+      // this response is from the database
+        // server gets body
+        // models.favorites.create(req.body)
+          //res.locals.favorites = models.favorites.find({})
+        // res.send(res.locals.favorites)
+      
+      // response
+    //  const response =  fetch(`/db`, {
+    //     // method
+    //     method: 'POST',
+    //     // headers
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    
+    //     // body
+    //     body: { plants : plantDetails,
+    //             user_id : loginName,
+    //             plant_id : plantDetials.scientific_name,
+    //             notes : ' '}
+    //   }
+    //   )
+      //const notes = document.getElementById('fav-input')
+      
+      
+    }
+    // setFavorites({response.json())
+    }
+    */
 export default PlantDetails;
