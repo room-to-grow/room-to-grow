@@ -1,5 +1,11 @@
-const fetch = require("node-fetch");
-const db = require("../models/plantModel");
+/* eslint-disable linebreak-style */
+/* eslint-disable no-use-before-define */
+/* eslint-disable max-len */
+/* eslint-disable no-unused-vars */
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-console */
+const fetch = require('node-fetch');
+const db = require('../models/plantModel');
 
 // QUERY BUILDING by Aki
 // Trefle uses the q parameter on the 'v1/distributions/search' endpoint to search through distributions
@@ -9,9 +15,9 @@ const db = require("../models/plantModel");
 // do not forget to attach 'search' between {TREFLE_DIST} and {TOKEN_QUERY} when building your search url
 
 // Connection URLs:
-const TOKEN = "9dp4rcwCMuudpX55TiiVU0HDQCh3OmOcRJXePNUW2_w";
-const TREFLE = "https://trefle.io/api/v1";
-const TREFLE_DIST = "https://trefle.io/api/v1/distributions";
+const TOKEN = '9dp4rcwCMuudpX55TiiVU0HDQCh3OmOcRJXePNUW2_w';
+const TREFLE = 'https://trefle.io/api/v1';
+const TREFLE_DIST = 'https://trefle.io/api/v1/distributions';
 
 const locationController = {};
 
@@ -19,33 +25,33 @@ const locationController = {};
 // the key is 'family_name_common'
 // formerly known as 'fetchDistro'
 locationController.familyNames = async (req, res, next) => {
-  console.log("HERE COMES THE LOCNAME");
-  console.log(req.params)
+  console.log('HERE COMES THE LOCNAME');
+  console.log(req.params);
   console.log(req.params.locName);
   const response = await fetch(
-    `${TREFLE_DIST}?token=${TOKEN}&q=${req.params.locName}`
+    `${TREFLE_DIST}?token=${TOKEN}&q=${req.params.locName}`,
   );
   const json = await response.json();
-  console.log("HERE COMES THE JSON")
+  console.log('HERE COMES THE JSON');
   console.log(json);
 
-  //const json = await response.json();
-  //console.log(`${TREFLE_DIST}/${location}/plants?filter%5Bestablishment%5D=native&token=${TOKEN}`)
-  const slug = json.data[0].slug;
+  // const json = await response.json();
+  // console.log(`${TREFLE_DIST}/${location}/plants?filter%5Bestablishment%5D=native&token=${TOKEN}`)
+  const { slug } = json.data[0];
   const url = `${TREFLE_DIST}/${slug}/plants?filter%5Bestablishment%5D=native&token=${TOKEN}`;
   const newResponse = await fetch(url);
   const jsonRes = await newResponse.json();
-  const data = jsonRes.data;
+  const { data } = jsonRes;
   const obj = {};
   data.forEach((plant) => {
-    obj[plant["family_common_name"]] = true;
+    obj[plant.family_common_name] = true;
   });
 
-  console.log(obj)
-  //res.locals.families = Object.keys(obj);
+  console.log(obj);
+  // res.locals.families = Object.keys(obj);
   res.locals.families = {
     families: Object.keys(obj),
-    slug: slug,
+    slug,
   };
   // console.log(res.locals.families)
   return next();
@@ -60,7 +66,7 @@ locationController.getPlants = async (req, res, next) => {
   const url = `${TREFLE_DIST}/${req.params.locName}/plants?filter%5Bestablishment%5D=native&filter[family_common_name]=${req.params.famName}&token=${TOKEN}`;
   const newResponse = await fetch(url);
   const jsonRes = await newResponse.json();
-  const data = jsonRes.data;
+  const { data } = jsonRes;
 
   const randoPlants = [];
 
@@ -73,7 +79,7 @@ locationController.getPlants = async (req, res, next) => {
   //     return randomizer(max, count + 1);
   //   }
   // randomizer(5);
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 20; i += 1) {
     const plant = {
       common_name: data[i].common_name,
       scientific_name: data[i].scientific_name,
@@ -92,19 +98,19 @@ locationController.getPlants = async (req, res, next) => {
 
 // this middleware will return a more detailed plant object
 locationController.getDetails = async (req, res, next) => {
-  //req.params.plantName will be the scientific name of the plant as a string
+  // req.params.plantName will be the scientific name of the plant as a string
 
   // `${TREFLE_DIST}/tex/plants?filter%5Bestablishment%5D=native&filter[family_common_name]=Rose Family&filter[scientific_name]=Prunus serotina&token=${TOKEN}`
 
   // const response = await fetch(`${TREFLE}/plants?token=${TOKEN}&filter[scientific_name]=${req.params.plantName}`);
   const response = await fetch(
-    `${TREFLE_DIST}/${req.params.locName}/plants?filter%5Bestablishment%5D=native&filter[family_common_name]=${req.params.famName}&filter[scientific_name]=${req.params.plantName}&token=${TOKEN}`
+    `${TREFLE_DIST}/${req.params.locName}/plants?filter%5Bestablishment%5D=native&filter[family_common_name]=${req.params.famName}&filter[scientific_name]=${req.params.plantName}&token=${TOKEN}`,
   );
   const json = await response.json();
   const url = `http://trefle.io${json.data[0].links.self}?token=${TOKEN}`;
   const newResponse = await fetch(url);
   const jsonRes = await newResponse.json();
-  const data = jsonRes.data;
+  const { data } = jsonRes;
   const resultObj = {
     common_name: data.common_name,
     scientific_name: data.scientific_name,
@@ -117,7 +123,7 @@ locationController.getDetails = async (req, res, next) => {
     growth_form: data.specifications.growth_form,
     growth_rate: data.specifications.growth_rate,
     shape_and_orientation: data.specifications.shape_and_orientation,
-    average_height: data.specifications.average_height.cm / 100 + " meters",
+    average_height: `${data.specifications.average_height.cm / 100} meters`,
   };
   console.log(resultObj);
   res.locals.plantInfo = resultObj;
