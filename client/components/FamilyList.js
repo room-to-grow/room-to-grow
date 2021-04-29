@@ -10,22 +10,18 @@ const FamilyList = props => {
   const [familyListIsOpen, setfamilyListIsOpen] = useState(null);
 //useState:
 //const [default state, method that changes state] = useState(null)
+  const { gState, setGState } = props;
+  const { family, setFamily } = props;
+  const { plant, setPlant } = props; 
+  const { plantDetails, setPlantDetails } = props;
+  const { favorites } = props;
+  const { loginName } = props;
+ 
+
   function revertStates() {
     setFamiliesData(null);
     setGState({ name: null, slug: null })
   }
-
-  const { gState } = props;
-  const { setGState } = props;
-  const { family } = props;
-  const { setFamily } = props;
-  const { plant } = props;
-  const { setPlant } = props;
-  const { plantDetails } = props;
-  const { setPlantDetails } = props;
-  const { favorites } = props;
-  const { loginName } = props;
- 
   // families receives object
   // first k-v pair 
   // have to get the slug and pass back to backend with the family name
@@ -104,6 +100,7 @@ const FamilyList = props => {
                       <li key={index}>
                         <button
                           className = "list-buttons"
+                          revertStates={revertStates}
                           // color = "#5dbb63"
                           onClick={
                             () => {
