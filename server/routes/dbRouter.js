@@ -44,6 +44,15 @@ router.post(
   }
 );
 
+router.post("/editfaves",
+  favesController.deleteFav,
+  favesController.getFaves,
+  (req, res) => {
+    console.log("Attempting to save selection");
+    res.status(200).send(res.locals.favorites);
+    console.log("Saved fave!");
+  })
+
 
 
 module.exports = router;
